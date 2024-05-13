@@ -16,9 +16,9 @@
               square variant="outline" />
             <template #panel>
               <div class="p-6 flex flex-col items-center justify-center space-y-2">
-                <UIcon class="text-4xl text-orange-500" name="i-heroicons-user" />
+                <UIcon class="text-2xl text-orange-500" name="i-heroicons-user" />
                 <h2>Your name:</h2>
-                <UInput v-model="userName"/>
+                <UInput v-model="userStore.userName"/>
               </div>
             </template>
           </UPopover>
@@ -64,11 +64,18 @@ const toggleSidebar = () => {
 };
 
 // Add name component
-import { useLocalStorage } from '@vueuse/core';
+import { useUserStore } from '@/stores/user';
 
-const userName = ref(useLocalStorage('userName', ''));
+const userStore = useUserStore();
 
-watch(userName, (newValue) => {
-  useLocalStorage('userName', newValue);
-});
+// Load the username from local storage when the component is created
+
+// Watch for changes in the username and save to local storage
+watch(
+  () => userStore.username,
+  (newUsername) => {
+    userStore.setUsername(newUsername);
+  }
+);
+
 </script>
