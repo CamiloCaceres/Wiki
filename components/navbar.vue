@@ -61,6 +61,8 @@ const links = [
   { text: 'Conditions', to: '/conditions' },
   { text: 'Email templates', to: '/email-templates' },
   { text: 'AP templates', to: '/ap-templates' },
+  { text: 'Knowledge Base', to: '/knowledge-base' },
+
 
 ];
 
