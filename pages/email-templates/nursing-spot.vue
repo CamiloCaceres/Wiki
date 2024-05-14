@@ -90,6 +90,13 @@ const state = reactive({
     program: undefined
 })
 
+const trimesters = reactive({
+    name: "",
+    code: "",
+    startDate: "",
+    end: "",
+})
+
 const modalVisible = ref(false)
 const editor = useEditor({
     editable: false,
