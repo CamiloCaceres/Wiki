@@ -1,6 +1,11 @@
 <template>
     <div>
-        <h2 class="font-bold text-xl mb-4">Select Conditions</h2>
+        <h2 class="font-bold text-xl mb-4">Nursing Conditions:</h2>
+        <div class="flex items-center space-x-4">
+        <UButton color="primary" @click="copyDipNurse">Dip. Nurse Conditions</UButton>
+        <UButton color="primary" @click="copyBachNurse">Bach. Nurse Conditions</UButton>
+    </div>
+        <h2 class="font-bold text-xl my-4">Select Conditions</h2>
         <div>
             <div v-for="condition in conditions" :key="condition.id"
                 class="flex items-center justify-between py-2 border-b-2">
@@ -40,9 +45,28 @@ const { copy } = useClipboard();
 const showingConditions = ref(false);
 const selectedConditions = ref<Condition[]>([]);
 
-const toggleCondition = (condition: Condition) => {
-    condition.checked = !condition.checked;
-};
+const copyDipNurse = () => {
+    const text = `This offer is conditional upon:
+- Providing signed Nursing and Midwifery Board of Australia English Language Skills Declaration (NMBA) Form
+- Passing the Numeracy Component of the Language, Literacy and Numeracy (LLN) assessment. LLN assessment log in details has been sent to the student directly.
+- Limited capacity at campus. Enrolment with the University is subject to space availability. COE will confirm enrolment once issued, subject to visa grant.`;
+copy(text)
+alert('Dip Nurse Conditions copied to clipboard!');
+
+}
+
+const copyBachNurse = () => {
+    const text = `This offer is conditional upon:
+- Successful completion of Diploma of Nursing at Think education.
+- Active AHPRA registration at the time of the course start date
+- Providing complete NMBA form
+- Upon completing Diploma of Nursing, course credits, duration and tuition fee will be revised and adjusted accordingly.
+- Limited capacity at campus. Enrolment with University is subject to space availability and student must have AHPRA registration to be considered for COE. COE will confirm enrolment once issued, subject to Visa grant.
+`;
+copy(text)
+alert('Bach Nurse Conditions copied to clipboard!');
+
+}
 
 const generateConditions = () => {
     selectedConditions.value = conditions.filter(condition => condition.checked);
