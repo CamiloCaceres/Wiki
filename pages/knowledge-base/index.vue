@@ -1,27 +1,15 @@
-
 <template>
-      <h1 class="font-bold text-2xl mb-4">Knowledge Base</h1>
-      <h2 class="font-semibold text-xl mb-4">New Visa information for Onshore students</h2>
-
-<div v-for="visa in visas">
+  <h1 class="font-bold text-2xl mb-4">Knowledge Base</h1>
   <UCard>
-        <template #header>
-            <h2 class="font-semibold text-xl mb-4">Onshore Students on Visa {{ visa.visaNumber }}</h2>
+    <h2 class="font-semibold text-xl">Visa information:</h2>
+    <template #footer>
+      <UButton>
+        <NuxtLink to="/knowledge-base/visas"> Go to Visas </NuxtLink>
+      </UButton>
     </template>
-    <p>{{ visa.text }}</p>
-   
-      </UCard>
-</div>
-   
-
-  </template>
+  </UCard>
+</template>
 
 <script setup>
-const visas = reactive([
-  {
-    visaNumber: "500",
-    text: "",
-  }
-])
 
 </script>
