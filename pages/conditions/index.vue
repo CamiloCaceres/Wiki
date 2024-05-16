@@ -1,6 +1,7 @@
 <template>
   <div>
     <h2 class="font-bold text-xl mb-4">Nursing Conditions:</h2>
+    <Condition class="mb-4" />
     <div class="flex items-center space-x-4">
       <UButton color="primary" @click="copyDipNurse"
         >Dip. Nurse Conditions</UButton
