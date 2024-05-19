@@ -1,10 +1,12 @@
 <template>
-    <h2 class="font-bold text-xl mb-4">Useful links: </h2>
+  <h2 class="font-bold text-xl mb-4">Useful links: </h2>
+  <div class="flex flex-col space-y-2">
     <div v-for="link in links">
-        <Link v-bind="link" />
+      <LinkCard v-bind="link" />
 
     </div>
-    <LinkCard />
+  </div>
+
 </template>
 
 <script setup lang="ts">

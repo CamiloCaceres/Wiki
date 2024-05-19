@@ -1,27 +1,20 @@
 <template>
-    <div class="rounded-md p-4 flex items-center justify-between border-2">
-        <h4>{{ props.name }}</h4>
-          <UButton
-          @click="handleClick(props.link)"
-    :icon="copied ? 'i-heroicons-check' : 'i-heroicons-clipboard-document'"
-    size="md"
-    color="primary"
-    square
-    variant="outline"
-  />
+  <div class="rounded-md p-4 flex items-center justify-between border-2 transition">
+    <h4>{{ props.name }}</h4>
+    <UPopover mode="hover">
+      <UButton :to="props.link" target="_blank" size="md" color="primary" square variant="outline" icon="i-heroicons-arrow-top-right-on-square" />
+      <template #panel>
+        <div class="p-2">
+          <p class="text-xs text-gray-400">{{ props.link }}</p>
+        </div>
+      </template>
+    </UPopover>
 
-    </div>
+
+  </div>
 </template>
 
 <script setup lang="ts">
-import { useClipboardItems } from '@vueuse/core'
-
-const { copy, copied } = useClipboardItems()
-
-const handleClick = (text:any) => {
-    copy(text)
-}
-
 const props = defineProps({
   name: String,
   id: Number,
