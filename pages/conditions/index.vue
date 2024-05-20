@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 class="font-bold text-xl my-4">Conditions:</h1>
-    <UPopover class="h-full" v-model:open="copied" :popper="{ placement: 'top-end' }">
+    <UPopover class="h-full" v-model:open="copied" :popper="{ placement: 'top' }">
       <div class="flex w-full mb-6">
       <div class="whitespace-pre-line grow text-gray-600 rounded p-2 h-40 overflow-auto">{{ outputText }}</div>
 
