@@ -31,7 +31,7 @@ export const conditionsFile: Condition[] = [
   {
     id: 4,
     name: 'GSR',
-    text: 'Meeting Genuine Temporary Entrant (GTE) requirements. No Confirmation of Enrolment (COE) will be issued until a successful GTE outcome has been recorded.',
+    text: 'Meeting the Genuine Student (GS) Requirement. No Confirmation of Enrolment (CoE) will be issued until a successful GS outcome has been recorded.',
     isNursing: false,
     isSelected: false,
   },
