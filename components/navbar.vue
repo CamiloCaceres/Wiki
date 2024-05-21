@@ -105,6 +105,8 @@ const links = [
   { text: "AP templates", to: "/ap-templates" },
   { text: "Knowledge Base", to: "/knowledge-base" },
   { text: "Useful links", to: "/useful-links" },
+  { text: "Trimester calculator", to: "/trimester-calculator" },
+
 ];
 
 const toggleSidebar = () => {

@@ -1,19 +1,11 @@
-interface Trimester {
+export interface Trimester {
     name: string;
     code: string;
     startDate: Date;
     endDate: Date;
   }
   
-  const trimesters: Trimester[] = [
-    { name: "Trimester 1, 2022", code: "223100", startDate: new Date("2022-02-14"), endDate: new Date("2022-05-08") },
-    { name: "Trimester 2, 2022", code: "223200", startDate: new Date("2022-05-30"), endDate: new Date("2022-08-21") },
-    { name: "Trimester 3, 2022", code: "223300", startDate: new Date("2022-09-12"), endDate: new Date("2022-12-04") },
-    
-    { name: "Trimester 1, 2023", code: "233100", startDate: new Date("2023-02-20"), endDate: new Date("2023-05-14") },
-    { name: "Trimester 2, 2023", code: "233200", startDate: new Date("2023-06-05"), endDate: new Date("2023-08-27") },
-    { name: "Trimester 3, 2023", code: "233300", startDate: new Date("2023-09-18"), endDate: new Date("2023-12-10") },
-    
+  export const trimestersFile: Trimester[] = [
     { name: "Trimester 1, 2024", code: "243100", startDate: new Date("2024-02-19"), endDate: new Date("2024-05-12") },
     { name: "Trimester 2, 2024", code: "243200", startDate: new Date("2024-06-03"), endDate: new Date("2024-08-25") },
     { name: "Trimester 3, 2024", code: "243300", startDate: new Date("2024-09-16"), endDate: new Date("2024-12-08") },
