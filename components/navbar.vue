@@ -10,7 +10,10 @@
             @click="isSidebarOpen = true"
           />
           <div class="ml-4">
-            <NuxtLink class="text-gray-800 dark:text-gray-200 text-2xl font-bold" to="/">
+            <NuxtLink
+              class="text-gray-800 dark:text-gray-200 text-2xl font-bold"
+              to="/"
+            >
               🦘 AdmissionsWiki
             </NuxtLink>
           </div>
@@ -25,30 +28,9 @@
         </div>
         <div class="flex items-center space-x-4">
           <DarkModeButton />
+          <User />
 
-          <UPopover>
-            <UButton
-              :ui="{ rounded: 'rounded-full' }"
-              icon="i-heroicons-user-circle-solid"
-              size="sm"
-              color="primary"
-              square
-              variant="outline"
-            />
-            <template #panel>
-              <div
-                class="p-6 flex flex-col items-center justify-center space-y-2"
-              >
-                <UIcon
-                  class="text-2xl text-orange-500"
-                  name="i-heroicons-user"
-                />
-                <h2>Your name:</h2>
-                <UInput />
-              </div>
-            </template>
-          </UPopover>
-
+          
         </div>
       </div>
     </div>
@@ -63,7 +45,10 @@
       >
         <template #header>
           <div class="flex items-center justify-between">
-            <NuxtLink class="text-gray-800 dark:text-gray-200 text-2xl font-bold" to="/">
+            <NuxtLink
+              class="text-gray-800 dark:text-gray-200 text-2xl font-bold"
+              to="/"
+            >
               🦘 AdmissionsWiki
             </NuxtLink>
             <UButton
@@ -110,25 +95,11 @@ const links = [
   { text: "Knowledge Base", to: "/knowledge-base" },
   { text: "Useful links", to: "/useful-links" },
   { text: "Trimester calculator", to: "/trimester-calculator" },
-
 ];
 
 const toggleSidebar = () => {
   isSidebarOpen.value = !isSidebarOpen.value;
 };
 
-// Add name component
-import { useUserStore } from "@/stores/user";
 
-const userStore = useUserStore();
-
-// Load the username from local storage when the component is created
-
-// Watch for changes in the username and save to local storage
-watch(
-  () => userStore.username,
-  (newUsername) => {
-    userStore.setUsername(newUsername);
-  }
-);
 </script>
