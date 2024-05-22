@@ -1,5 +1,5 @@
 <template>
-  <nav class="bg-gray-100 sticky top-0 z-50 shadow-md">
+  <nav class="bg-gray-100 dark:bg-gray-800 sticky top-0 z-50 shadow-md">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
         <div class="flex space-x-16 items-center">
@@ -10,7 +10,7 @@
             @click="isSidebarOpen = true"
           />
           <div class="ml-4">
-            <NuxtLink class="text-gray-800 text-2xl font-bold" to="/">
+            <NuxtLink class="text-gray-800 dark:text-gray-200 text-2xl font-bold" to="/">
               🦘 AdmissionsWiki
             </NuxtLink>
           </div>
@@ -23,7 +23,9 @@
             placeholder="Search..."
           />
         </div>
-        <div>
+        <div class="flex items-center space-x-4">
+          <DarkModeButton />
+
           <UPopover>
             <UButton
               :ui="{ rounded: 'rounded-full' }"
@@ -42,10 +44,11 @@
                   name="i-heroicons-user"
                 />
                 <h2>Your name:</h2>
-                <UInput v-model="userStore.userName" />
+                <UInput />
               </div>
             </template>
           </UPopover>
+
         </div>
       </div>
     </div>
@@ -60,7 +63,7 @@
       >
         <template #header>
           <div class="flex items-center justify-between">
-            <NuxtLink class="text-gray-800 text-2xl font-bold" to="/">
+            <NuxtLink class="text-gray-800 dark:text-gray-200 text-2xl font-bold" to="/">
               🦘 AdmissionsWiki
             </NuxtLink>
             <UButton
@@ -78,7 +81,8 @@
           <li v-for="link in links" :key="link.text" class="py-2 px-4">
             <NuxtLink
               :to="link.to"
-              class="text-gray-700 hover:text-gray-900 pl-4 hover:underline transition"
+              @click="toggleSidebar"
+              class="text-gray-700 hover:text-gray-900 dark:text-gray-200 pl-4 hover:underline transition"
             >
               {{ link.text }}
             </NuxtLink>
