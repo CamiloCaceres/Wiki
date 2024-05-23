@@ -1,125 +1,124 @@
-<!-- NursingSpotApproval.vue -->
 <template>
-    <UForm :schema="schema" :state="state" class="space-y-4" @submit="onSubmit">
-       name: {{ userName }}
-        <UFormGroup label="Student Name" name="studentName">
-            <UInput v-model="state.studentName" />
-        </UFormGroup>
+  <h1 class="font-bold text-2xl mb-4">Request Nursing Spot</h1>
+  <UForm :schema="schema" :state="state" class="space-y-4" @submit="onSubmit">
+    <div class="flex items-center space-x-4">
+      <UFormGroup label="Student Name" name="studentName">
+        <UInput v-model="state.studentName" />
+      </UFormGroup>
 
-        <UFormGroup label="Student ID" name="studentId">
-            <UInput v-model="state.studentId" />
-        </UFormGroup>
+      <UFormGroup label="Student ID" name="studentId">
+        <UInput v-model="state.studentId" />
+      </UFormGroup>
+    </div>
+    <div class="flex items-center space-x-8">
+      <UFormGroup label="Campus" name="campus">
+        <USelect v-model="state.campus" :options="campuses" />
+      </UFormGroup>
 
-        <UFormGroup label="Intake" name="intake">
-            <UInput v-model="state.intake" />
-        </UFormGroup>
+      <UFormGroup label="Mode" name="program">
+        <USelect v-model="state.program" :options="programs" />
+      </UFormGroup>
+      <UFormGroup v-if="state.program === 'EN'" label="Intake" name="intake">
+        <USelect v-model="state.intake" :options="ENIntakes" />
+      </UFormGroup>
+      <UFormGroup v-if="state.program === 'BN'" label="Intake" name="intake">
+        <USelect v-model="state.intake" :options="BNIntakes" />
+      </UFormGroup>
+    </div>
+    <div class="flex"></div>
 
-        <UFormGroup label="Campus" name="campus">
-            <UInput v-model="state.campus" />
-        </UFormGroup>
+    <UButton type="submit"> Generate Email </UButton>
+  </UForm>
 
-        <UFormGroup label="EN or BN" name="program">
-            <USelect v-model="state.program"  :options="programs"/>
-        </UFormGroup>
+  <UModal v-model="modalVisible">
+    <UCard>
+      <template #header>
+        <div class="text-xl">Generated Email</div>
+      </template>
+      <pre class="whitespace-pre-wrap">{{ requestSpotEmail }}</pre>
 
-        <UButton type="submit">
-            Generate Email 
-        </UButton>
-    </UForm>
-
-    <UModal v-model="modalVisible">
-        <UCard>
-            <template #header>
-                <div class="text-xl">
-                    Generated Email
-                </div>
-            </template>
-            <EditorContent :editor="editor" />
-
-            <template #footer>
-                <UButton v-if="isSupported" @click="copyToClipboard">
-                    Copy to Clipboard
-                </UButton>
-            </template>
-        </UCard>
-    </UModal>
+      <template #footer>
+        <div class="flex justify-end">
+          <UButton
+            :icon="
+              copied
+                ? 'i-heroicons-clipboard-document-check'
+                : 'i-heroicons-clipboard-document'
+            "
+            @click="copyToClipboard"
+          >
+            Copy to Clipboard
+          </UButton>
+        </div>
+      </template>
+    </UCard>
+  </UModal>
 </template>
 
 <script setup lang="ts">
-import { z } from 'zod'
-import { useEditor, EditorContent } from '@tiptap/vue-3'
-import StarterKit from '@tiptap/starter-kit'
-import { useClipboardItems } from '@vueuse/core'
+import { z } from "zod";
+import { useClipboard } from "@vueuse/core";
 
+const programs = ["EN", "BN"];
+const campuses = ["Adelaide", "Surry Hills", "Flinders St.", "Brisbane"];
+const BNIntakes = ["T1, 2025", "T1, 2026", "T1, 2027"];
+const ENIntakes = [
+  "T3, 2024",
+  "T1, 2025",
+  "T3, 2025",
+  "T1, 2026",
+  "T3, 2026",
+  "T1, 2027",
+];
+const userName = ref("");
+onMounted(() => {
+  let userNameIsStored = window.localStorage.getItem("localUserName");
+  if (userNameIsStored) {
+    userName.value = userNameIsStored;
+  }
+});
 
-const { copy, isSupported } = useClipboardItems()
-
-const copyToClipboard = async () => {
-    const html = editor.value?.getHTML()
-    if (html) {
-        try {
-            await copy([
-                new ClipboardItem({
-                    'text/html': new Blob([html], { type: 'text/html' }),
-                })
-            ])
-            console.log('Email copied to clipboard!')
-        } catch (error) {
-            console.error('Failed to copy email to clipboard:', error)
-        }
-    }
-}
+const modalVisible = ref(false);
+const state = reactive({
+  studentName: undefined,
+  studentId: undefined,
+  intake: undefined,
+  campus: undefined,
+  program: undefined,
+});
 
 const schema = z.object({
-    studentName: z.string().min(1, 'Student name is required'),
-    studentId: z.string().min(1, 'Student ID is required'),
-    intake: z.string().min(1, 'Intake is required'),
-    campus: z.string().min(1, 'Campus is required'),
-    program: z.enum(['EN', 'BN'])
-})
+  studentName: z.string().min(1, "Student name is required"),
+  studentId: z.string().min(1, "Student ID is required"),
+  intake: z.string().min(1, "Intake is required"),
+  campus: z.string().min(1, "Campus is required"),
+  program: z.enum(["EN", "BN"]),
+});
 
-type Schema = z.output<typeof schema>
+const requestSpotEmail = computed(
+  () => `
+  Hi Saki, hope you are well!
+  
+  Kindly requesting your approval on a Bachelor of Nursing spot for the following student:
+  
+    1. Student Name: ${state.studentName}
+    2. Student ID: ${state.studentId}
+    3. Intake: ${state.intake}
+    4. Campus: ${state.campus}
+    5. Mode: ${state.program}
+  
+  Kind regards,
+  ${userName.value}
+  `
+);
 
-const programs = ['EN', 'BN']
-
-const state = reactive({
-    studentName: undefined,
-    studentId: undefined,
-    intake: undefined,
-    campus: undefined,
-    program: undefined
-})
-
-const trimesters = reactive({
-    name: "",
-    code: "",
-    startDate: "",
-    end: "",
-})
-
-const modalVisible = ref(false)
-const editor = useEditor({
-    editable: false,
-    content: '',
-    extensions: [
-        StarterKit,
-    ],
-})
-
-async function onSubmit(event) {
-    const emailContent = `
-      <p>Hi Saki, hope you are well!</p>
-      <p>Kindly requesting your approval on a Bachelor of Nursing spot for the following student:</p>
-      <ol>
-        <li>Student Name: <strong>${state.studentName}</strong></li>
-        <li>Student ID: <strong>${state.studentId}</strong></li>
-        <li>Intake: <strong>${state.intake}</strong></li>
-        <li>Campus: <strong>${state.campus}</strong></li>
-        <li>${state.program === 'EN' ? 'EN' : 'BN'}</li>
-      </ol>
-      <p>Kind regards,</p>
-    `
-    editor.value?.commands.setContent(emailContent)
-    modalVisible.value = true
+async function onSubmit() {
+  modalVisible.value = true;
 }
+
+const { copy, copied } = useClipboard();
+
+const copyToClipboard = async () => {
+  await copy(requestSpotEmail.value);
+};
 </script>

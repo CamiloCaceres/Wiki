@@ -75,7 +75,6 @@
         </ul>
 
         <template #footer>
-          <Placeholder class="h-8" />
         </template>
       </UCard>
     </USlideover>
