@@ -29,27 +29,39 @@
     :options="options"
     class="mb-4"
   />
-
-  <div class="grid grid-cols-3 gap-x-12 gap-y-4">
-    <div v-for="trimester in trimesters">
-      <div
-        class="border-2 border-orange-500 transition rounded-xl flex flex-col items-center py-2 px-4 w-full cursor-pointer"
-        @click="getCourseEndDate(trimester.code)"
-      >
-        <h2 class="text-lg font-semibold text-orange-600">{{ trimester.name }}</h2>
-        <h5 class="text-sm text-gray-600">
-          {{ convertToDateString(trimester.startDate) }} -
-          {{ convertToDateString(trimester.endDate) }}
-        </h5>
+  <h1 class="font-bold text-lg mb-4">Select the starting Trimester:</h1>
+  <UTabs :items="items">
+    <template #item="{ item }">
+      <div class="grid grid-cols-3 gap-x-12 gap-y-4">
+        <div v-for="trimesterTab in item.content" :key="trimesterTab.code">
+          <div
+            class="border-2 border-orange-500 transition rounded-xl flex flex-col items-center py-2 px-4 w-full cursor-pointer"
+            @click="getCourseEndDate(trimesterTab.code)"
+          >
+            <h2 class="text-lg font-semibold text-orange-600">
+              {{ trimesterTab.name }}
+            </h2>
+            <h5 class="text-sm text-gray-600">
+              {{ convertToDateString(trimesterTab.startDate) }} -
+              {{ convertToDateString(trimesterTab.endDate) }}
+            </h5>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
+    </template>
+  </UTabs>
+
 </template>
 
 <script setup lang="ts">
 import { trimestersFile, type Trimester } from "@/utils/trimesters";
+import { trimestersByYear } from "@/utils/trimesterTabs";
 import { useClipboard } from "@vueuse/core";
 
+const items = trimestersByYear.map(({ label, trimestersInfo }) => ({
+  label: label.toString(),
+  content: trimestersInfo,
+}));
 const { copy, copied } = useClipboard();
 
 const copyToClipboard = () => {
