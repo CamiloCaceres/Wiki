@@ -1,5 +1,7 @@
 <template>
+  
   <div>
+    
     <h1 class="font-bold text-xl my-4">Conditions:</h1>
     <UPopover
       class="h-full"
@@ -33,6 +35,34 @@
       </template>
     </UPopover>
   </div>
+  <h2 class="font-bold text-lg my-4">Actions</h2>
+
+  <div class="flex items-center space-x-4">
+  <UButton
+    @click="deselectAllConditions"
+    class="mb-4"
+    color="primary"
+    variant="solid"
+    icon="i-heroicons-trash"
+  >
+  </UButton>
+  <UButton
+    @click="addBNConditions"
+    class="mb-4"
+    color="primary"
+    variant="solid"
+  >
+    Add BN Conditions
+  </UButton>
+  <UButton
+    @click="addDoNConditions"
+    class="mb-4"
+    color="primary"
+    variant="solid"
+  >
+    Add DoN Conditions
+  </UButton>
+</div>
   <h2 class="font-bold text-lg mb-4">Select conditions:</h2>
   <div class="grid grid-cols-4 gap-4 mb-4">
     <div
@@ -58,35 +88,8 @@
       />
     </div>
   </div>
-  <h2 class="font-bold text-lg my-4">Actions</h2>
 
-<div class="flex items-center space-x-4">
-  <UButton
-    @click="deselectAllConditions"
-    class="mb-4"
-    color="primary"
-    variant="outline"
-    icon="i-heroicons-trash"
-  >
-    Deselect All Conditions
-  </UButton>
-  <UButton
-    @click="addBNConditions"
-    class="mb-4"
-    color="primary"
-    variant="solid"
-  >
-    Add BN Conditions
-  </UButton>
-  <UButton
-    @click="addDoNConditions"
-    class="mb-4"
-    color="primary"
-    variant="solid"
-  >
-    Add DoN Conditions
-  </UButton>
-</div>
+
 </template>
 
 <script setup lang="ts">
