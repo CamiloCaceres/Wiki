@@ -94,7 +94,7 @@ export const conditionsFile: Condition[] = [
   {
     id: 13,
     name: 'APRHA',
-    text: 'Providing certified copy of the passport.',
+    text: 'Active AHPRA registration at the time of the course start date',
     isNursing: true,
     isSelected: false,
   },

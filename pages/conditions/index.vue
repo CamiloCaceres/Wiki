@@ -100,10 +100,7 @@ import { useClipboard } from "@vueuse/core";
 const { copy, copied } = useClipboard();
 
 const conditions = reactive(conditionsFile);
-/* 
-const nursingConditions = computed(() => conditions.value.filter((condition) => condition.isNursing));
-const nonNursingConditions = computed(() => conditions.value.filter((condition) => !condition.isNursing));
- */
+
 const selectedConditions = computed(() =>
   conditions.filter((condition) => condition.isSelected)
 );
