@@ -51,7 +51,7 @@ Use this template to send a new Offer Letter.
     id: 2,
     name: "Request nursing spot",
     description: `
-Use this template to request a new nursing spot to Saki. 
+Use this template to request a new nursing spot to Saifon. 
       `,
     route: "/email-templates/nursing-spot",
   },
