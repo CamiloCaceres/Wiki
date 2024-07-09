@@ -35,7 +35,7 @@
       <template #header>
         <div class="text-xl">Generated Email</div>
       </template>
-      <pre class="whitespace-pre-wrap">{{ requestSpotEmail }}</pre>
+      <pre class="whitespace-pre-wrap">{{ generatedEmail }}</pre>
 
       <template #footer>
         <div class="flex justify-end">
@@ -58,6 +58,7 @@
 <script setup lang="ts">
 import { z } from "zod";
 import { useClipboard } from "@vueuse/core";
+import { requestSpotEmail } from "@/utils/templates/nursingSpot";
 
 const programs = ["EN", "BN"];
 const campuses = ["Adelaide", "Surry Hills", "Flinders St.", "Brisbane"];
@@ -65,7 +66,7 @@ const BNIntakes = ["T1, 2025", "T1, 2026", "T1, 2027"];
 const ENIntakes = [
   "T3, 2024",
   "T1, 2025",
-  "T3, 2025",
+  "T3, 2025", 
   "T1, 2026",
   "T3, 2026",
   "T1, 2027",
@@ -80,11 +81,11 @@ onMounted(() => {
 
 const modalVisible = ref(false);
 const state = reactive({
-  studentName: undefined,
-  studentId: undefined,
-  intake: undefined,
-  campus: undefined,
-  program: undefined,
+  studentName: "",
+  studentId: "",
+  intake: "",
+  campus: "",
+  program: "",
 });
 
 const schema = z.object({
@@ -95,21 +96,15 @@ const schema = z.object({
   program: z.enum(["EN", "BN"]),
 });
 
-const requestSpotEmail = computed(
-  () => `
-  Hi Saki, hope you are well!
-  
-  Kindly requesting your approval on a Bachelor of Nursing spot for the following student:
-  
-    1. Student Name: ${state.studentName}
-    2. Student ID: ${state.studentId}
-    3. Intake: ${state.intake}
-    4. Campus: ${state.campus}
-    5. Mode: ${state.program}
-  
-  Kind regards,
-  ${userName.value}
-  `
+const generatedEmail = computed(() =>
+  requestSpotEmail(
+    state.studentName,
+    state.studentId,
+    state.intake,
+    state.campus,
+    state.program,
+    userName.value
+  )
 );
 
 async function onSubmit() {
@@ -119,6 +114,6 @@ async function onSubmit() {
 const { copy, copied } = useClipboard();
 
 const copyToClipboard = async () => {
-  await copy(requestSpotEmail.value);
+  await copy(generatedEmail.value);
 };
 </script>
