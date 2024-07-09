@@ -1,4 +1,4 @@
-interface CreditTransferTemplate {
+export interface CreditTransferTemplate {
     title: string;
     content: (userName: string) => string;
     process: string;

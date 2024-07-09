@@ -30,7 +30,7 @@
     </div>
   </div>
 
-  <UModal v-model="isOpen" >
+  <UModal v-model="isOpen">
     <UCard
       :ui="{
         ring: '',
@@ -38,18 +38,18 @@
       }"
     >
       <template #header>
-        <h3 class="font-semibold text-xl mb-2">{{ selectedTemplate.title }}</h3>
+        <h3 class="font-semibold text-xl mb-2">{{ selectedTemplate?.title ?? '' }}</h3>
       </template>
 
       <div class="p-4">
-        <pre class="text-wrap">{{ selectedTemplate.content(userName) }}</pre>
+        <pre class="text-wrap">{{ selectedTemplate?.content(userName) ?? '' }}</pre>
       </div>
 
       <template #footer>
         <div class="flex justify-end">
           <UButton
             color="primary"
-            @click="copyToClipboard(selectedTemplate.content(userName))"
+            @click="copyToClipboard(selectedTemplate?.content(userName) ?? '')"
             >Copy</UButton
           >
         </div>
@@ -60,10 +60,13 @@
 
 <script setup lang="ts">
 import { useClipboard } from "@vueuse/core";
-import { creditTransferTemplates } from "@/utils/templates/creditTransfer";
+import {
+  creditTransferTemplates,
+  type CreditTransferTemplate,
+} from "@/utils/templates/creditTransfer";
 
 const isOpen = ref(false);
-const selectedTemplate = ref(null);
+const selectedTemplate = ref<CreditTransferTemplate>();
 
 //Read username from local storage
 const userName = ref("");
@@ -74,7 +77,7 @@ onMounted(() => {
   }
 });
 
-const openPreview = (template) => {
+const openPreview = (template: CreditTransferTemplate) => {
   selectedTemplate.value = template;
   isOpen.value = true;
 };
@@ -82,7 +85,7 @@ const openPreview = (template) => {
 //Clipboard Handler
 const { copy, copied } = useClipboard();
 
-const copyToClipboard = async (content) => {
+const copyToClipboard = async (content: string) => {
   await copy(content);
 };
 </script>
