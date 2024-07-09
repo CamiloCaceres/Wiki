@@ -6,7 +6,7 @@ interface CreditTransferTemplate {
   }
   
   const requestDocumentsTemplate: CreditTransferTemplate = {
-    title: 'Request Documents for Credit Transfer',
+    title: 'Request Documents',
     content: (userName: string) => `
   Hi team,
   
