@@ -1,26 +1,14 @@
 <template>
   <div>
     <h2 class="font-semibold text-3xl mb-4">Browse Templates</h2>
-
-    <div class="grid grid-cols-4 gap-4">
-      <div
-        v-for="(template, index) in templates"
-        :key="index"
-        class="col-span-4 md:col-span-2 lg:col-span-2"
-      >
-        <UCard>
-          <template #header>
-            <h3 class="font-semibold text-xl mb-2">{{ template.name }}</h3>
-          </template>
-          <p>{{ template.description }}</p>
-          <template #footer>
-            <div class="flex justify-end space-x-4">
-              <UButton color="primary" @click="router.push(template.route)"
-                >Go to template</UButton
-              >
-            </div>
-          </template>
-        </UCard>
+    <div class="flex flex-col space-y-6">
+      <div v-for="(template, index) in templates" :key="index">
+        <div class="rounded-md p-4 flex items-center justify-between border-2">
+          <h3 class="font-semibold text-lg mb-2">{{ template.name }}</h3>
+          <UButton color="primary" @click="router.push(template.route)"
+            >Go to template</UButton
+          >
+        </div>
       </div>
     </div>
   </div>
