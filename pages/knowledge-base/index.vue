@@ -5,7 +5,7 @@
     <template #footer>
       <div class="flex justify-end">
         <UButton>
-          <NuxtLink :to="page.to"> Go to Visas </NuxtLink>
+          <NuxtLink :to="page.to"> Go </NuxtLink>
         </UButton>
       </div>
     </template>
@@ -20,7 +20,7 @@ const pages = [
   },
   {
     name: "Credit Transfer",
-    to: "/knowledge-base/credit-transfer",
+    to: "/knowledge-base/credit-transfer-guide",
   },
 ];
 </script>
