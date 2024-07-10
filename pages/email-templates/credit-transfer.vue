@@ -20,7 +20,7 @@
         <div class="flex justify-between space-x-2">
           <UButton
             color="primary"
-            variant="outline"
+            variant="soft"
             @click="openPreview(template)"
             >Preview</UButton
           >
@@ -98,7 +98,7 @@ const { copy, copied } = useClipboard();
 const copyToClipboard = async (content: string) => {
   await copy(content);
   if(copied){
-    toast.add({ title: 'Template Copied' })
+    toast.add({ title: 'Template Copied',  icon: "i-heroicons-check-circle", color: 'green'})
   }
 };
 
