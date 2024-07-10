@@ -1,35 +1,39 @@
 <template>
-  <h1 class="font-bold text-2xl mb-4">Credfit Transfer Templates</h1>
-  <div class="grid grid-cols-4 gap-4">
-    <div
-      v-for="(template, index) in creditTransferTemplates"
-      :key="index"
-      class="col-span-4 md:col-span-2 lg:col-span-2"
-    >
-      <UCard class="h-full">
-        <template #header>
-          <h3 class="font-semibold text-xl mb-2">{{ template.title }}</h3>
-        </template>
+  <h1 class="font-bold text-2xl mb-4">Credit Transfer Templates</h1>
 
-        <template #footer>
-          <div class="flex justify-end space-x-4">
-            <UButton
-              color="primary"
-              variant="outline"
-              @click="openPreview(template)"
-              >Preview</UButton
-            >
-            <UButton
-              color="primary"
-              @click="copyToClipboard(template.content(userName))"
-              >Go to template</UButton
+  <div class="flex flex-col space-y-6">
+    <div v-for="(template, index) in creditTransferTemplates" :key="index">
+      <div class="rounded-md p-4 flex items-center justify-between border-2">
+        <div>
+          <h3 class="font-semibold text-lg mb-2">{{ template.title }}</h3>
+          <div class="flex">
+            <UBadge color="orange" variant="soft" size="xs">{{
+              template.process
+            }}</UBadge>
+            <UBadge
+              :color="template.category === 'Email' ? 'green' : 'red'"
+              variant="soft"
+              >{{ template.category }}</UBadge
             >
           </div>
-        </template>
-      </UCard>
+        </div>
+        <div class="flex justify-between space-x-2">
+          <UButton
+            color="primary"
+            variant="outline"
+            @click="openPreview(template)"
+            >Preview</UButton
+          >
+
+          <UButton
+            color="primary"
+            @click="copyToClipboard(template.content(userName))"
+            >Copy Template</UButton
+          >
+        </div>
+      </div>
     </div>
   </div>
-
   <UModal v-model="isOpen">
     <UCard
       :ui="{
@@ -38,11 +42,15 @@
       }"
     >
       <template #header>
-        <h3 class="font-semibold text-xl mb-2">{{ selectedTemplate?.title ?? '' }}</h3>
+        <h3 class="font-semibold text-xl mb-2">
+          {{ selectedTemplate?.title ?? "" }}
+        </h3>
       </template>
 
       <div class="p-4">
-        <pre class="text-wrap">{{ selectedTemplate?.content(userName) ?? '' }}</pre>
+        <pre class="text-wrap font-sans">{{
+          selectedTemplate?.content(userName) ?? ""
+        }}</pre>
       </div>
 
       <template #footer>
@@ -65,7 +73,6 @@ import {
   type CreditTransferTemplate,
 } from "@/utils/templates/creditTransfer";
 
-const isOpen = ref(false);
 const selectedTemplate = ref<CreditTransferTemplate>();
 
 //Read username from local storage
@@ -77,15 +84,22 @@ onMounted(() => {
   }
 });
 
+const isOpen = ref(false);
 const openPreview = (template: CreditTransferTemplate) => {
   selectedTemplate.value = template;
   isOpen.value = true;
 };
 
+
+const toast = useToast()
+
 //Clipboard Handler
 const { copy, copied } = useClipboard();
-
 const copyToClipboard = async (content: string) => {
   await copy(content);
+  if(copied){
+    toast.add({ title: 'Template Copied' })
+  }
 };
+
 </script>
