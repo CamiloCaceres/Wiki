@@ -39,6 +39,7 @@
     <li>Check if Credits were applied correctly in enrolled subjects (they should appear as Credit Transfer)</li>
     <li>If they were not applied, check the file left by PD and manually change the approved subjects to "Credit Transfer"</li>
     <li>Change course duration, total sudy periods and finalization date</li>
+    <li>Add HEP code and RPL basis in CRM</li>
     <li>Issue offer letter, check if credits appear on the OL and send new email with credits.</li>
   </ol>
   <UButton to="/email-templates/credit-transfer">Go to CT templates</UButton>
