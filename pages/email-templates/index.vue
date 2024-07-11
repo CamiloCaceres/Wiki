@@ -51,5 +51,12 @@ Use this template to request a new nursing spot to Saifon.
 All credit Transfer templates      `,
     route: "/email-templates/credit-transfer",
   },
+  {
+    id: 4,
+    name: "Generic templates",
+    description: `
+All generic templates      `,
+    route: "/email-templates/generic-templates",
+  },
 ];
 </script>
