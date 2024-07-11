@@ -53,9 +53,24 @@ export interface CreditTransferTemplate {
     process: 'Credit Transfer',
     category: 'AP',
   };
+
+  const creditTransferRejectedTemplate: CreditTransferTemplate = {
+    title: 'Credit Transfer Rejected',
+    content: (userName: string) => `
+  Dear team,
+  
+  The Credit Transfer request has been rejected; therefore, the offer letter will remain without credits.
+  
+  Best regards,
+  ${userName}
+  `,
+    process: 'Credit Transfer',
+    category: 'Email',
+  };
   
   export const creditTransferTemplates: CreditTransferTemplate[] = [
     requestDocumentsTemplate,
     creditsSubmittedTemplate,
     requestCreditTransferTemplate,
+    creditTransferRejectedTemplate
   ];
