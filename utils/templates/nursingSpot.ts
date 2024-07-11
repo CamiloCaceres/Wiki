@@ -6,9 +6,11 @@ export const requestSpotEmail = (
     program: string,
     userName: string
   ) => `
-  Hi Saifon, hope you are well!
+  Hi Saifon, 
   
-  Kindly requesting your approval on a Bachelor of Nursing spot for the following student:
+  I hope you are well,
+  
+  I'm seeking spot approval on a Bachelor of Nursing spot for the following student:
   
     1. Student Name: ${studentName}
     2. Student ID: ${studentId}
