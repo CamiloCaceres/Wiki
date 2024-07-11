@@ -37,6 +37,7 @@
   <h3 class="text-lg font-semibold mb-2">Once approved</h3>
   <ol class="list-disc list-inside mb-4">
     <li>Check if Credits were applied correctly in enrolled subjects (they should appear as Credit Transfer)</li>
+    <li>If there was already an approved CoE, create new enrollment and CoE</li>
     <li>If they were not applied, check the file left by PD and manually change the approved subjects to "Credit Transfer"</li>
     <li>Change course duration, total sudy periods and finalization date</li>
     <li>Add HEP code and RPL basis in CRM</li>
