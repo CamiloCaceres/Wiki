@@ -1,9 +1,4 @@
-export interface Trimester {
-    name: string;
-    code: string;
-    startDate: Date;
-    endDate: Date;
-  }
+import { type Trimester } from "~/types/trimester";
   
   export const trimestersFile: Trimester[] = [
     { name: "Trimester 1, 2024", code: "243100", startDate: new Date("2024-02-19"), endDate: new Date("2024-05-12") },

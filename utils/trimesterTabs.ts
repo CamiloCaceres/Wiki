@@ -1,9 +1,4 @@
-export interface Trimester {
-    name: string;
-    code: string;
-    startDate: Date;
-    endDate: Date;
-  }
+import { type Trimester } from "~/types/trimester";
   
 export  const trimestersByYear: { label: number; trimestersInfo: Trimester[] }[] = [
     {

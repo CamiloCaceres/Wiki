@@ -1,4 +1,4 @@
-import {type Template} from './'
+import {type Template } from "~/types/template";
 
 const genericRejection: Template = {
     title: 'Generic Rejection',

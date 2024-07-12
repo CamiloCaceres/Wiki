@@ -1,11 +1,6 @@
-export interface CreditTransferTemplate {
-    title: string;
-    content: (userName: string) => string;
-    process: string;
-    category: 'AP' | 'Email';
-  }
-  
-  const requestDocumentsTemplate: CreditTransferTemplate = {
+  import {type Template } from "~/types/template";
+
+  const requestDocumentsTemplate: Template = {
     title: 'Request Documents',
     content: (userName: string) => `
   Hi team,
@@ -22,9 +17,10 @@ export interface CreditTransferTemplate {
   `,
     process: 'Credit Transfer',
     category: 'Email',
+    isInternal: false
   };
   
-  const creditsSubmittedTemplate: CreditTransferTemplate = {
+  const creditsSubmittedTemplate: Template = {
     title: 'Credit Transfer Submitted',
     content: (userName: string) => `
   Hi team,
@@ -38,9 +34,10 @@ export interface CreditTransferTemplate {
   `,
     process: 'Credit Transfer',
     category: 'Email',
+    isInternal: false
   };
   
-  const requestCreditTransferTemplate: CreditTransferTemplate = {
+  const ransferTemplate: Template = {
     title: 'Credit Transfer AP',
     content: (userName: string) => `
   Hi Team,
@@ -52,9 +49,10 @@ export interface CreditTransferTemplate {
   `,
     process: 'Credit Transfer',
     category: 'AP',
+    isInternal: false
   };
 
-  const creditTransferRejectedTemplate: CreditTransferTemplate = {
+  const creditTransferRejectedTemplate: Template = {
     title: 'Credit Transfer Rejected',
     content: (userName: string) => `
   Dear team,
@@ -66,11 +64,12 @@ export interface CreditTransferTemplate {
   `,
     process: 'Credit Transfer',
     category: 'Email',
+    isInternal: false
   };
   
-  export const creditTransferTemplates: CreditTransferTemplate[] = [
+  export const creditTransferTemplates: Template[] = [
     requestDocumentsTemplate,
     creditsSubmittedTemplate,
-    requestCreditTransferTemplate,
+    ransferTemplate,
     creditTransferRejectedTemplate
   ];

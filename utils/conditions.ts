@@ -1,10 +1,4 @@
-export interface Condition {
-  id: number;
-  name: string;
-  text: string;
-  isNursing: boolean;
-  isSelected: boolean;
-}
+import { type Condition } from "~/types/condition";
 
 export const conditionsFile: Condition[] = [
   {
