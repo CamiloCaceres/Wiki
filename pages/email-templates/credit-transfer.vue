@@ -18,10 +18,7 @@
           </div>
         </div>
         <div class="flex justify-between space-x-2">
-          <UButton
-            color="primary"
-            variant="soft"
-            @click="openPreview(template)"
+          <UButton color="primary" variant="soft" @click="openPreview(template)"
             >Preview</UButton
           >
 
@@ -68,12 +65,10 @@
 
 <script setup lang="ts">
 import { useClipboard } from "@vueuse/core";
-import {
-  creditTransferTemplates,
-  type CreditTransferTemplate,
-} from "@/utils/templates/creditTransfer";
+import { creditTransferTemplates } from "@/utils/templates/creditTransfer";
+import { type Template } from "~/types/template";
 
-const selectedTemplate = ref<CreditTransferTemplate>();
+const selectedTemplate = ref<Template>();
 
 //Read username from local storage
 const userName = ref("");
@@ -85,21 +80,23 @@ onMounted(() => {
 });
 
 const isOpen = ref(false);
-const openPreview = (template: CreditTransferTemplate) => {
+const openPreview = (template: Template) => {
   selectedTemplate.value = template;
   isOpen.value = true;
 };
 
-
-const toast = useToast()
+const toast = useToast();
 
 //Clipboard Handler
 const { copy, copied } = useClipboard();
 const copyToClipboard = async (content: string) => {
   await copy(content);
-  if(copied){
-    toast.add({ title: 'Template Copied',  icon: "i-heroicons-check-circle", color: 'green'})
+  if (copied) {
+    toast.add({
+      title: "Template Copied",
+      icon: "i-heroicons-check-circle",
+      color: "green",
+    });
   }
 };
-
 </script>

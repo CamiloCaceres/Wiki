@@ -93,8 +93,8 @@
 </template>
 
 <script setup lang="ts">
-import { conditionsFile, type Condition } from "@/utils/conditions";
-import { ref } from "vue";
+import { conditionsFile } from "@/utils/conditions";
+import { type Condition } from "~/types/condition";
 import { useClipboard } from "@vueuse/core";
 
 const { copy, copied } = useClipboard();

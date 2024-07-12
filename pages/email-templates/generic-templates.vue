@@ -71,7 +71,7 @@
   import {
     genericTemplates,
   } from "@/utils/templates/genericTemplates";
-  import {type Template} from "@/utils/templates/"
+  import { type Template } from "~/types/template";
   
   const selectedTemplate = ref<Template>();
   

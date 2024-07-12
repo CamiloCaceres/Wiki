@@ -54,7 +54,8 @@
 </template>
 
 <script setup lang="ts">
-import { trimestersFile, type Trimester } from "@/utils/trimesters";
+import { trimestersFile } from "@/utils/trimesters";
+import { type Trimester } from "~/types/trimester";
 import { trimestersByYear } from "@/utils/trimesterTabs";
 import { useClipboard } from "@vueuse/core";
 
