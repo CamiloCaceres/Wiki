@@ -44,7 +44,7 @@ const copyToClipboard = async (content: string) => {
   <div class="rounded-md p-4 flex items-center justify-between border-2">
     <div>
       <h3 class="font-semibold text-lg mb-2">{{ props.template.title }}</h3>
-      <div class="flex">
+      <div class="flex space-x-1">
         <UBadge color="orange" variant="soft" size="xs">{{
           props.template.process
         }}</UBadge>
@@ -53,6 +53,7 @@ const copyToClipboard = async (content: string) => {
           variant="soft"
           >{{ props.template.category }}</UBadge
         >
+        <UBadge v-if="props.template.isInternal" color="red" variant="soft" size="xs">Internal</UBadge>
       </div>
     </div>
     <div class="flex justify-between space-x-2">
