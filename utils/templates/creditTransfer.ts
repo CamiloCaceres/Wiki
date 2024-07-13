@@ -37,7 +37,7 @@
     isInternal: false
   };
   
-  const ransferTemplate: Template = {
+  const creditTransferTemplateAP: Template = {
     title: 'Credit Transfer AP',
     content: (userName: string) => `
   Hi Team,
@@ -70,6 +70,6 @@
   export const creditTransferTemplates: Template[] = [
     requestDocumentsTemplate,
     creditsSubmittedTemplate,
-    ransferTemplate,
+    creditTransferTemplateAP,
     creditTransferRejectedTemplate
   ];
