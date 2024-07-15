@@ -66,10 +66,28 @@
     category: 'Email',
     isInternal: false
   };
+
+  const approvedCreditTransferTemplate: Template = {
+    title: 'Approved Credit Transfer',
+    content: (userName: string) => `
+  Hi team,
+  
+  The Credit Transfer request was approved. Attached to this email you will find the revised offer letter with credits and the duration revised.
+  
+  Please let us know if there is anything else we can assist you with,
+  
+  Kind regards,
+  ${userName}
+    `,
+    process: 'Credit Transfer',
+    category: 'Email',
+    isInternal: false
+  };
   
   export const creditTransferTemplates: Template[] = [
     requestDocumentsTemplate,
     creditsSubmittedTemplate,
     creditTransferTemplateAP,
-    creditTransferRejectedTemplate
+    creditTransferRejectedTemplate,
+    approvedCreditTransferTemplate
   ];
