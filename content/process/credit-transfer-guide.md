@@ -1,9 +1,9 @@
 ---
 title: 'Credit Transfer Guide'
-description: 'meta description of the page'
+description: 'Guide on how to process Credit transfers'
 ---
 
-## Credit Transfer Guide
+# Credit Transfer Guide
 
 ### Requirements
 
@@ -21,6 +21,10 @@ The credit transfer requires:
 4. Select [Program Director](https://laureateaus-my.sharepoint.com/:x:/r/personal/aphillipou_torrens_edu_au/_layouts/15/doc2.aspx?sourcedoc=%7BF5C2120C-FEAA-4E7F-951D-1D8E5D577ECF%7D&file=Program%20Director%20Master%20file%2C%20AP%20assessment.xlsx&action=default&mobileredirect=true&DefaultItemOpen=1)
 5. Fill Overview and Recommendation (from template)
 6. Click "Submit for Approval"
+
+### Forms
+- <a href="https://torrens.blackboard.com/bbcswebdav/xid-4652141_1" target="_blank">Credit transfer form postgraduate</a>
+- <a href="https://torrens.blackboard.com/bbcswebdav/xid-4652142_1" target="_blank">Credit transfer form undergraduate</a>
 
 ### After submitting AP
 
