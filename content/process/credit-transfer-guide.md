@@ -50,4 +50,11 @@ The credit transfer requires:
 | 90 credits | 3 |
 | 100 credits | 4 |
 
+### If CoE was already issued
+1. In the existing enrollment, adjust the duration
+2. Mark the existing CoE as "to be revised"
+3. Send a new offer letter to the student
+4. Once the student returns the signed offer update the CoE by adding a variation in PRISMS
+5. Update CRM with revised CoE and send new CoE to agent and SO
+
 [Go to CT templates](/email-templates/credit-transfer)
