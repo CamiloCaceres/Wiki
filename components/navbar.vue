@@ -90,7 +90,7 @@ const links = [
   { text: "Home", to: "/" },
   { text: "Conditions", to: "/conditions" },
   { text: "Email templates", to: "/email-templates" },
-  { text: "AP templates", to: "/ap-templates" },
+  { text: "Processes", to: "/process" },
   { text: "Knowledge Base", to: "/knowledge-base" },
   { text: "Useful links", to: "/useful-links" },
   { text: "Trimester calculator", to: "/trimester-calculator" },
