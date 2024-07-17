@@ -67,7 +67,7 @@ export const conditionsFile: Condition[] = [
   {
     id: 10,
     name: 'LLN',
-    text: 'Passing the Numeracy Component of the Language, Literacy and Numeracy (LLN) assessment. LLN assessment log in details has been sent to the student ',
+    text: 'This offer is conditional on passing the Numeracy Component of the Language, Literacy and Numeracy (LLN) assessment, LLN assessment login details will be provided directly to the applicant',
     isNursing: true,
     isSelected: false,
   },
