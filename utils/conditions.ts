@@ -106,4 +106,11 @@ export const conditionsFile: Condition[] = [
     isNursing: true,
     isSelected: false,
   },
+  {
+    id: 16,
+    name: 'GSR Form B',
+    text: 'Enrolment is conditional on providing GSR form (part B) prior to COE issuance',
+    isNursing: false,
+    isSelected: false,
+  },
 ];
