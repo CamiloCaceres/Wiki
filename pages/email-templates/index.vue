@@ -27,14 +27,14 @@ interface Template {
 }
 
 const templates: Template[] = [
-  {
+/*   {
     id: 1,
     name: "Send Offer Letter",
     description: `
 Use this template to send a new Offer Letter. 
       `,
     route: "/email-templates/offer-email",
-  },
+  }, */
   {
     id: 2,
     name: "Request nursing spot",
