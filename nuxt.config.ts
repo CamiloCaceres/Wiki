@@ -1,5 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ["@nuxt/ui", "nuxt-tiptap-editor", '@pinia/nuxt', "@nuxt/content"],
+  modules: [
+    "@nuxt/ui",
+    "nuxt-tiptap-editor",
+    '@pinia/nuxt',
+    "@nuxt/content",
+    "@nuxt/image"
+  ],
 })
