@@ -44,7 +44,7 @@ const releaseRequired: Template = {
   isInternal: true,
 };
 const specialEntry: Template = {
-  title: "Special Entry",
+  title: "Academic Alternative Entry",
   content: (userName: string) => `Dear team,
   
   Thank you for your application to Torrens University Australia. 
