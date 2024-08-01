@@ -1,13 +1,15 @@
 <template>
   <UPopover>
-    <UButton
-      :ui="{ rounded: 'rounded-full' }"
-      icon="i-heroicons-user-circle-solid"
-      size="sm"
-      color="primary"
-      square
-      variant="outline"
-    />
+    <UChip color="red" :show="userName == ''">
+      <UButton
+        :ui="{ rounded: 'rounded-full' }"
+        icon="i-heroicons-user-circle-solid"
+        size="sm"
+        color="primary"
+        square
+        variant="outline"
+      />
+    </UChip>
     <template #panel>
       <div class="p-6 flex flex-col items-center justify-center space-y-2">
         <UIcon class="text-2xl text-orange-500" name="i-heroicons-user" />
@@ -17,7 +19,6 @@
     </template>
   </UPopover>
 </template>
-
 
 <script setup lang="ts">
 const userName = ref("");
