@@ -13,7 +13,9 @@
   import {
     genericTemplates,
   } from "@/utils/templates/genericTemplates";
-  
+  definePageMeta({
+  layout: 'templates'
+})
   
   </script>
   

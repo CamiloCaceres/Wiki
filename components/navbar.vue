@@ -19,6 +19,7 @@
           </div>
 
           <UInput
+            v-if="false"
             icon="i-heroicons-magnifying-glass-20-solid"
             size="sm"
             color="white"
@@ -90,9 +91,11 @@ const links = [
   { text: "Home", to: "/" },
   { text: "Conditions", to: "/conditions" },
   { text: "Templates", to: "/email-templates" },
-  { text: "Processes", to: "/process" },
+  { text: "CRM Processes", to: "/process" },
+  { text: "Studylink processes", to: "/studylink" },
   { text: "Useful links", to: "/useful-links" },
   { text: "Trimester calculator", to: "/trimester-calculator" },
+  { text: "Notes", to: "/notes" },
 ];
 
 const toggleSidebar = () => {

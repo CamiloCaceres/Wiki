@@ -116,4 +116,7 @@ const { copy, copied } = useClipboard();
 const copyToClipboard = async () => {
   await copy(generatedEmail.value);
 };
+definePageMeta({
+  layout: 'templates'
+})
 </script>

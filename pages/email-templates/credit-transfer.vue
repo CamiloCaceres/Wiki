@@ -10,4 +10,7 @@
 
 <script setup lang="ts">
 import { creditTransferTemplates } from "@/utils/templates/creditTransfer";
+definePageMeta({
+  layout: 'templates'
+})
 </script>

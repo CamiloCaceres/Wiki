@@ -5,6 +5,9 @@ import { useEditor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
 import { useClipboardItems } from '@vueuse/core'
 
+definePageMeta({
+  layout: 'templates'
+})
 
 const { copy, isSupported } = useClipboardItems()
 
