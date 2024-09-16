@@ -61,10 +61,11 @@
         </div>
 
         <div class="flex justify-between items-center border-b border-t border-gray-200 py-2">
-            <h2 class="font-semibold text-lg">GSR forms</h2>
+            <h2 class="font-semibold text-lg">Others</h2>
             <div class="flex items-center gap-2">
-                <UCheckbox v-model="formState.formA" label="GSR form part A" />
-                <UCheckbox v-model="formState.formB" label="GSR form part B" />
+                <UCheckbox v-model="formState.gsr.formA" label="GSR form part A" />
+                <UCheckbox v-model="formState.gsr.formB" label="GSR form part B" />
+                <UCheckbox v-model="formState.releaseCondition" label="Release required" />
             </div>
         </div>
       <UTextarea :rows="6" v-model="note" class="w-full py-2" />
@@ -102,8 +103,13 @@ const formState = reactive({
   },
   visaType: "500",
   visaExpiryDate: "",
-  formA: false,
-  formB: false,
+  gsr: {
+    formA: false,
+    formB: false,
+  },
+  
+  releaseCondition: false,
+
 
 });
 
@@ -122,8 +128,8 @@ const note = computed(() => {
 - Visa Type: ${formState.visaType}${
     formState.visaExpiryDate ? ", Expiry Date: " + formState.visaExpiryDate : ""
   }
-- ${formState.formA ? "Received GSR form part A" : "Awaiting GSR A to issue OL"}
-- ${formState.formB ? "Accepted GSR form part B" : "Pending GSR form part B"}
+- ${formState.gsr.formA ? "Received GSR form part A" : "Awaiting GSR A to issue OL"}
+- ${formState.gsr.formB ? "Accepted GSR form part B" : "Pending GSR form part B"}
   `;
 
   return note.trim();
