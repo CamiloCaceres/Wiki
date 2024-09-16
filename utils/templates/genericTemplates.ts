@@ -56,9 +56,17 @@ ${userName}`,
   isInternal: false,
 };
 
+const llnCreated: Template = {
+  title: "LLN created",
+  content: (userName: string) => `We have already sent the login details for the L&N test to the student's personal email. Kindly let us know when the student completes the test so we can assess the result.`,
+  process: "Generic",
+  category: "Email",
+  isInternal: false,
+};
 export const genericTemplates: Template[] = [
   genericRejection,
   confirmDecline,
   releaseRequired,
   specialEntry,
+  llnCreated,
 ];
