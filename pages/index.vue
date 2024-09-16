@@ -36,5 +36,6 @@ const links = [
   { text: "Useful links", to: "/useful-links" },
   { text: "Trimester calculator", to: "/trimester-calculator" },
   { text: "Notes", to: "/notes" },
+  { text: "COE", to: "/coe" },
 ];
 </script>
