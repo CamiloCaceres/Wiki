@@ -63,10 +63,24 @@ const llnCreated: Template = {
   category: "Email",
   isInternal: false,
 };
+
+const gsrCondition: Template = {
+  title: "GSR condition",
+  content: (userName: string) => `Please note that to proceed with the GSR assessment at this stage we will need:  
+•	Proof of how they will be financing her studies and stay in Australia: 3 months bank statement as a minimum showing transactions and/or Fixed deposits less than a year old, renewed accepted if the original provided. 
+•	If this is through a financial sponsor, we will also require proof of relationship - e.g. birth certificate or family card. 
+•	Source of income- e.g. employment contracts, tax return or pay slip - this must show the evidence of where the funds have come from.    
+
+Upon successful completion of GSR screening the student can then progress to payment of the deposit`,
+  process: "Generic",
+  category: "Email",
+  isInternal: false,
+};
 export const genericTemplates: Template[] = [
   genericRejection,
   confirmDecline,
   releaseRequired,
   specialEntry,
   llnCreated,
+  gsrCondition,
 ];
