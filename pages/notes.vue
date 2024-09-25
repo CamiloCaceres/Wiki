@@ -5,6 +5,16 @@
         <h1 class="font-bold text-2xl mb-4">Notes</h1>
       </template>
 
+      <UAlert
+        v-if="showVisaExpiryAlert"
+        title="Visa Expiry Warning"
+        description="The visa will expire within 6 months of February 17, 2025 (T1 start date). Please consider a GSR condition."
+        color="yellow"
+        variant="soft"
+        icon="i-heroicons-exclamation-triangle"
+        class="mb-4"
+      />
+
       <UForm :state="formState" class="space-y-4 mt-2">
         <div class="flex justify-between items-center border-b border-gray-200 pb-2">
           <h2 class="font-semibold text-lg">Academic Transcript</h2>
@@ -55,7 +65,7 @@
             </UFormGroup>
 
             <UFormGroup label="Visa Expiry Date" name="visaExpiryDate">
-              <UInput v-model="formState.visaExpiryDate" type="text" />
+              <UInput autocomplete="off" v-model="formState.visaExpiryDate" type="text" />
             </UFormGroup>
           </div>
         </div>
@@ -70,7 +80,15 @@
         </div>
       <UTextarea :rows="6" v-model="note" class="w-full py-2" />
 
-        <div class="flex justify-end">
+        <div class="flex justify-end gap-2">
+          <UButton
+            class="mt-2"
+            icon="i-heroicons-arrow-path"
+            color="gray"
+            @click="resetForm"
+          >
+            Reset
+          </UButton>
           <UButton
             class="mt-2"
             icon="i-heroicons-clipboard"
@@ -115,21 +133,23 @@ const formState = reactive({
 
 const note = computed(() => {
   let note = `- Academic Transcript: ${
-    formState.academicTranscript.received ? "Received" : "Not Received"
+    formState.academicTranscript.received ? "Received" : ""
   }, ${
-    formState.academicTranscript.certified ? "Certified" : "Not Certified"
-  }, ${formState.academicTranscript.meets ? "Meets" : "Does not meet"}
-- English: ${formState.english.received ? "Received" : "Not Received"}, ${
-    formState.english.meets ? "Meets" : "Does not meet"
+    formState.academicTranscript.certified && formState.academicTranscript.received ? "Certified" : "Not Certified"
+  }, ${formState.academicTranscript.meets && formState.academicTranscript.received ? "Meets" : "Does not meet"}
+- English: ${formState.english.received ? "Received" : ""}, ${
+    formState.english.meets && formState.english.received ? "Meets" : "Does not meet"
   }
 - Passport: ${formState.passport.received ? "Received" : "Not Received"}, ${
-    formState.passport.certified ? "Certified" : "Not Certified"
+    formState.passport.certified && formState.passport.received ? "Certified" : "Not Certified"
   }
 - Visa Type: ${formState.visaType}${
     formState.visaExpiryDate ? ", Expiry Date: " + formState.visaExpiryDate : ""
   }
+
 - ${formState.gsr.formA ? "Received GSR form part A" : "Awaiting GSR A to issue OL"}
 - ${formState.gsr.formB ? "Accepted GSR form part B" : "Pending GSR form part B"}
+- ${formState.releaseCondition ? "Approval to issue OL with release condition required" : ""}
   `;
 
   return note.trim();
@@ -137,6 +157,19 @@ const note = computed(() => {
 
 const { copy } = useClipboard();
 const toast = useToast();
+
+const baseDate = new Date(2025, 1, 17); // February 17, 2025 - start of T1
+const sixMonthsFromBaseDate = new Date(baseDate);
+sixMonthsFromBaseDate.setMonth(sixMonthsFromBaseDate.getMonth() + 6);
+
+const showVisaExpiryAlert = computed(() => {
+  if (!formState.visaExpiryDate) return false;
+  
+  const expiryDate = parseDate(formState.visaExpiryDate);
+  if (!expiryDate) return false;
+  
+  return expiryDate <= sixMonthsFromBaseDate;
+});
 
 function copyToClipboard() {
   copy(note.value)
@@ -167,5 +200,29 @@ function transformDate(dateString: string): string {
       month.slice(1, 3).toLowerCase();
     return `${day}-${transformedMonth}-${year}`;
   } else return "";
+}
+
+function parseDate(dateString: string): Date | null {
+  const [day, month, year] = dateString.split(' ');
+  const monthIndex = [
+    'January', 'February', 'March', 'April', 'May', 'June',
+    'July', 'August', 'September', 'October', 'November', 'December'
+  ].indexOf(month);
+  
+  if (monthIndex === -1) return null;
+  
+  return new Date(parseInt(year), monthIndex, parseInt(day));
+}
+
+function resetForm() {
+  Object.assign(formState, {
+    academicTranscript: { received: false, certified: false, meets: false },
+    english: { received: false, meets: false },
+    passport: { received: false, certified: false },
+    visaType: "500",
+    visaExpiryDate: "",
+    gsr: { formA: false, formB: false },
+    releaseCondition: false,
+  });
 }
 </script>
