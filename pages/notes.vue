@@ -8,7 +8,7 @@
       <UAlert
         v-if="showVisaExpiryAlert"
         title="Visa Expiry Warning"
-        description="The visa will expire within 6 months of February 17, 2025 (T1 start date). Please consider a GSR condition."
+        :description="visaExpiryAlertDescription"
         color="yellow"
         variant="soft"
         icon="i-heroicons-exclamation-triangle"
@@ -158,9 +158,13 @@ const note = computed(() => {
 const { copy } = useClipboard();
 const toast = useToast();
 
-const baseDate = new Date(2025, 1, 17); // February 17, 2025 - start of T1
-const sixMonthsFromBaseDate = new Date(baseDate);
-sixMonthsFromBaseDate.setMonth(sixMonthsFromBaseDate.getMonth() + 6);
+const t4StartDate = new Date(2024, 10, 4); // November 4, 2024
+const sixMonthsFromT4Start = new Date(t4StartDate);
+sixMonthsFromT4Start.setMonth(sixMonthsFromT4Start.getMonth() + 6);
+
+const t1StartDate = new Date(2025, 1, 17); // February 17, 2025
+const sixMonthsFromT1Start = new Date(t1StartDate);
+sixMonthsFromT1Start.setMonth(sixMonthsFromT1Start.getMonth() + 6);
 
 const showVisaExpiryAlert = computed(() => {
   if (!formState.visaExpiryDate) return false;
@@ -168,7 +172,26 @@ const showVisaExpiryAlert = computed(() => {
   const expiryDate = parseDate(formState.visaExpiryDate);
   if (!expiryDate) return false;
   
-  return expiryDate <= sixMonthsFromBaseDate;
+  return expiryDate <= sixMonthsFromT4Start || expiryDate <= sixMonthsFromT1Start;
+});
+
+const visaExpiryAlertDescription = computed(() => {
+  if (!formState.visaExpiryDate) return '';
+  
+  const expiryDate = parseDate(formState.visaExpiryDate);
+  if (!expiryDate) return '';
+  
+  const warningMessages = [];
+  
+  if (expiryDate <= sixMonthsFromT4Start) {
+    warningMessages.push("The visa will expire within 6 months from the start of T4 (November 4, 2024).");
+  }
+  
+  if (expiryDate <= sixMonthsFromT1Start) {
+    warningMessages.push("The visa will expire within 6 months from the start of T1 (February 17, 2025).");
+  }
+  
+  return warningMessages.join(' ') + 'If the applicant is applying for this intake, please consider a GSR condition.';
 });
 
 function copyToClipboard() {
