@@ -76,6 +76,26 @@ Upon successful completion of GSR screening the student can then progress to pay
   category: "Email",
   isInternal: false,
 };
+
+const handwrittenSignature: Template = {
+  title: "Handwritten Signature Required",
+  content: (userName: string) => `Dear team,
+
+Thank you for sharing the document.
+To proceed with the CoE, we kindly request a handwritten signature on the offer letter. Unfortunately, we're unable to process typed, pasted, or computer-made signatures.
+Could you please ask the student to:
+1.	Print the offer letter
+2.	Sign it by hand with a pen
+3.	Scan and return the signed document
+We appreciate your help with this, and I look forward to receiving the updated document.
+
+Kind regards,
+${userName}`,
+  process: "Generic",
+  category: "Email",
+  isInternal: false,
+};
+
 export const genericTemplates: Template[] = [
   genericRejection,
   confirmDecline,
@@ -83,4 +103,5 @@ export const genericTemplates: Template[] = [
   specialEntry,
   llnCreated,
   gsrCondition,
+  handwrittenSignature,
 ];
