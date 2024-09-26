@@ -16,40 +16,58 @@
       />
 
       <UForm :state="formState" class="space-y-4 mt-2">
-        <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+        <div
+          class="flex justify-between items-center border-b border-gray-200 pb-2"
+        >
           <h2 class="font-semibold text-lg">Academic Transcript</h2>
-          <div class="flex items-center gap-2">
-            <UCheckbox
-              v-model="formState.academicTranscript.received"
-              label="Received"
-            />
-            <UCheckbox
-              v-model="formState.academicTranscript.certified"
-              label="Certified"
-            />
-            <UCheckbox
-              v-model="formState.academicTranscript.meets"
-              label="Meets"
-            />
+          <div class="flex items-center gap-6 justify-center">
+            <UFormGroup name="received">
+              <UCheckbox
+                v-model="formState.academicTranscript.received" label="Received"
+              />
+            </UFormGroup>
+            <UFormGroup v-if="formState.academicTranscript.received" label="Certified" name="certified">
+              <UToggle
+                v-model="formState.academicTranscript.certified"
+                label="Certified"
+                color="green"
+              />
+            </UFormGroup>
+            <UFormGroup v-if="formState.academicTranscript.received" label="Meets" name="meets">
+              <UToggle
+                v-model="formState.academicTranscript.meets"
+                label="Meets"
+                color="green"
+              />
+            </UFormGroup>
           </div>
         </div>
 
-        <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+        <div
+          class="flex justify-between items-center border-b border-gray-200 pb-2"
+        >
           <h2 class="font-semibold text-lg">English</h2>
-          <div class="flex items-center gap-2">
-            <UCheckbox v-model="formState.english.received" label="Received" />
-            <UCheckbox v-model="formState.english.meets" label="Meets" />
+          <div class="flex items-center gap-6">
+            <UFormGroup  name="received"> 
+              <UCheckbox v-model="formState.english.received" label="Received" />
+            </UFormGroup>
+            <UFormGroup v-if="formState.english.received" label="Meets" name="meets">
+              <UToggle  v-model="formState.english.meets" label="Meets" color="green" />
+            </UFormGroup>
           </div>
         </div>
 
-        <div class="flex justify-between items-center border-b border-gray-200 pb-2">
+        <div
+          class="flex justify-between items-center border-b border-gray-200 pb-2"
+        >
           <h2 class="font-semibold text-lg">Passport</h2>
-          <div class="flex items-center gap-2">
-            <UCheckbox v-model="formState.passport.received" label="Received" />
-            <UCheckbox
-              v-model="formState.passport.certified"
-              label="Certified"
-            />
+          <div class="flex items-center gap-6">
+            <UFormGroup name="received">
+              <UCheckbox v-model="formState.passport.received" label="Received" />
+            </UFormGroup>
+            <UFormGroup v-if="formState.passport.received" label="Certified" name="certified">
+              <UToggle v-model="formState.passport.certified" label="Certified" color="green" />
+            </UFormGroup>
           </div>
         </div>
 
@@ -65,20 +83,29 @@
             </UFormGroup>
 
             <UFormGroup label="Visa Expiry Date" name="visaExpiryDate">
-              <UInput autocomplete="off" v-model="formState.visaExpiryDate" type="text" />
+              <UInput
+                autocomplete="off"
+                v-model="formState.visaExpiryDate"
+                type="text"
+              />
             </UFormGroup>
           </div>
         </div>
 
-        <div class="flex justify-between items-center border-b border-t border-gray-200 py-2">
-            <h2 class="font-semibold text-lg">Others</h2>
-            <div class="flex items-center gap-2">
-                <UCheckbox v-model="formState.gsr.formA" label="GSR form part A" />
-                <UCheckbox v-model="formState.gsr.formB" label="GSR form part B" />
-                <UCheckbox v-model="formState.releaseCondition" label="Release required" />
-            </div>
+        <div
+          class="flex justify-between items-center border-b border-t border-gray-200 py-2"
+        >
+          <h2 class="font-semibold text-lg">Others</h2>
+          <div class="flex items-center gap-2">
+            <UCheckbox v-model="formState.gsr.formA" label="GSR form part A" />
+            <UCheckbox v-model="formState.gsr.formB" label="GSR form part B" />
+            <UCheckbox
+              v-model="formState.releaseCondition"
+              label="Release required"
+            />
+          </div>
         </div>
-      <UTextarea :rows="6" v-model="note" class="w-full py-2" />
+        <UTextarea :rows="6" v-model="note" class="w-full py-2" />
 
         <div class="flex justify-end gap-2">
           <UButton
@@ -125,31 +152,47 @@ const formState = reactive({
     formA: false,
     formB: false,
   },
-  
+
   releaseCondition: false,
-
-
 });
 
 const note = computed(() => {
   let note = `- Academic Transcript: ${
-    formState.academicTranscript.received ? "Received" : ""
-  }, ${
-    formState.academicTranscript.certified && formState.academicTranscript.received ? "Certified" : "Not Certified"
-  }, ${formState.academicTranscript.meets && formState.academicTranscript.received ? "Meets" : "Does not meet"}
-- English: ${formState.english.received ? "Received" : ""}, ${
-    formState.english.meets && formState.english.received ? "Meets" : "Does not meet"
+    formState.academicTranscript.received
+      ? `Received, ${
+          formState.academicTranscript.certified ? "Certified" : "Not Certified"
+        }, ${formState.academicTranscript.meets ? "Meets" : "Does not meet"}`
+      : "Not Received"
   }
-- Passport: ${formState.passport.received ? "Received" : "Not Received"}, ${
-    formState.passport.certified && formState.passport.received ? "Certified" : "Not Certified"
+- English: ${
+    formState.english.received
+      ? `Received, ${formState.english.meets ? "Meets" : "Does not meet"}`
+      : "Not Received"
+  }
+- Passport: ${
+    formState.passport.received
+      ? `Received, ${
+          formState.passport.certified ? "Certified" : "Not Certified"
+        }`
+      : "Not Received"
   }
 - Visa Type: ${formState.visaType}${
     formState.visaExpiryDate ? ", Expiry Date: " + formState.visaExpiryDate : ""
   }
 
-- ${formState.gsr.formA ? "Received GSR form part A" : "Awaiting GSR A to issue OL"}
-- ${formState.gsr.formB ? "Accepted GSR form part B" : "Pending GSR form part B"}
-- ${formState.releaseCondition ? "Approval to issue OL with release condition required" : ""}
+- ${
+    formState.gsr.formA
+      ? "Received GSR form part A"
+      : "Awaiting GSR A to issue OL"
+  }
+- ${
+    formState.gsr.formB ? "Accepted GSR form part B" : "Pending GSR form part B"
+  }
+- ${
+    formState.releaseCondition
+      ? "Approval to issue OL with release condition required"
+      : ""
+  }
   `;
 
   return note.trim();
@@ -168,30 +211,39 @@ sixMonthsFromT1Start.setMonth(sixMonthsFromT1Start.getMonth() + 6);
 
 const showVisaExpiryAlert = computed(() => {
   if (!formState.visaExpiryDate) return false;
-  
+
   const expiryDate = parseDate(formState.visaExpiryDate);
   if (!expiryDate) return false;
-  
-  return expiryDate <= sixMonthsFromT4Start || expiryDate <= sixMonthsFromT1Start;
+
+  return (
+    expiryDate <= sixMonthsFromT4Start || expiryDate <= sixMonthsFromT1Start
+  );
 });
 
 const visaExpiryAlertDescription = computed(() => {
-  if (!formState.visaExpiryDate) return '';
-  
+  if (!formState.visaExpiryDate) return "";
+
   const expiryDate = parseDate(formState.visaExpiryDate);
-  if (!expiryDate) return '';
-  
+  if (!expiryDate) return "";
+
   const warningMessages = [];
-  
+
   if (expiryDate <= sixMonthsFromT4Start) {
-    warningMessages.push("The visa will expire within 6 months from the start of T4 (November 4, 2024).");
+    warningMessages.push(
+      "The visa will expire within 6 months from the start of T4 (November 4, 2024)."
+    );
   }
-  
+
   if (expiryDate <= sixMonthsFromT1Start) {
-    warningMessages.push("The visa will expire within 6 months from the start of T1 (February 17, 2025).");
+    warningMessages.push(
+      "The visa will expire within 6 months from the start of T1 (February 17, 2025)."
+    );
   }
-  
-  return warningMessages.join(' ') + 'If the applicant is applying for this intake, please consider a GSR condition.';
+
+  return (
+    warningMessages.join(" ") +
+    "If the applicant is applying for this intake, please consider a GSR condition."
+  );
 });
 
 function copyToClipboard() {
@@ -226,14 +278,24 @@ function transformDate(dateString: string): string {
 }
 
 function parseDate(dateString: string): Date | null {
-  const [day, month, year] = dateString.split(' ');
+  const [day, month, year] = dateString.split(" ");
   const monthIndex = [
-    'January', 'February', 'March', 'April', 'May', 'June',
-    'July', 'August', 'September', 'October', 'November', 'December'
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
   ].indexOf(month);
-  
+
   if (monthIndex === -1) return null;
-  
+
   return new Date(parseInt(year), monthIndex, parseInt(day));
 }
 
