@@ -17,23 +17,23 @@
 
       <UForm :state="formState" class="space-y-4 mt-2">
         <div
-          class="flex justify-between items-center border-b border-gray-200 pb-2"
+          class="flex flex-col items-start gap-y-4 md:flex-row md:justify-between md:items-center border-b border-gray-200 pb-2"
         >
           <h2 class="font-semibold text-lg">Academic Transcript</h2>
           <div class="flex items-center gap-6 justify-center">
-            <UFormGroup name="received">
+            <UFormGroup name="received"  v-motion-fade-visible>
               <UCheckbox
                 v-model="formState.academicTranscript.received" label="Received"
               />
             </UFormGroup>
-            <UFormGroup v-if="formState.academicTranscript.received" label="Certified" name="certified">
+            <UFormGroup v-if="formState.academicTranscript.received" label="Certified" name="certified" v-motion-fade-visible>
               <UToggle
                 v-model="formState.academicTranscript.certified"
                 label="Certified"
                 color="green"
               />
             </UFormGroup>
-            <UFormGroup v-if="formState.academicTranscript.received" label="Meets" name="meets">
+            <UFormGroup v-if="formState.academicTranscript.received" label="Meets" name="meets" v-motion-fade-visible>
               <UToggle
                 v-model="formState.academicTranscript.meets"
                 label="Meets"
@@ -44,34 +44,34 @@
         </div>
 
         <div
-          class="flex justify-between items-center border-b border-gray-200 pb-2"
+          class="flex flex-col items-start gap-y-4 md:flex-row md:justify-between md:items-center border-b border-gray-200 pb-2"
         >
           <h2 class="font-semibold text-lg">English</h2>
           <div class="flex items-center gap-6">
-            <UFormGroup  name="received"> 
+            <UFormGroup name="received" v-motion-slide-right>
               <UCheckbox v-model="formState.english.received" label="Received" />
             </UFormGroup>
-            <UFormGroup v-if="formState.english.received" label="Meets" name="meets">
+            <UFormGroup v-if="formState.english.received" label="Meets" name="meets" v-motion-fade-visible>
               <UToggle  v-model="formState.english.meets" label="Meets" color="green" />
             </UFormGroup>
           </div>
         </div>
 
         <div
-          class="flex justify-between items-center border-b border-gray-200 pb-2"
+          class="flex flex-col items-start gap-y-4 md:flex-row md:justify-between md:items-center border-b border-gray-200 pb-2"
         >
           <h2 class="font-semibold text-lg">Passport</h2>
           <div class="flex items-center gap-6">
-            <UFormGroup name="received">
+            <UFormGroup name="received" v-motion-slide-right>
               <UCheckbox v-model="formState.passport.received" label="Received" />
             </UFormGroup>
-            <UFormGroup v-if="formState.passport.received" label="Certified" name="certified">
+            <UFormGroup v-if="formState.passport.received" label="Certified" name="certified" v-motion-fade-visible>
               <UToggle v-model="formState.passport.certified" label="Certified" color="green" />
             </UFormGroup>
           </div>
         </div>
 
-        <div class="flex gap-2 items-start justify-between">
+        <div class="flex flex-col items-start gap-y-4 md:flex-row md:justify-between md:items-center border-b border-gray-200 pb-2">
           <h2 class="font-semibold text-lg">Visa</h2>
 
           <div class="flex gap-2">
@@ -93,7 +93,7 @@
         </div>
 
         <div
-          class="flex justify-between items-center border-b border-t border-gray-200 py-2"
+          class="flex flex-col items-start gap-y-4 md:flex-row md:justify-between md:items-center border-b border-t border-gray-200 py-2"
         >
           <h2 class="font-semibold text-lg">Others</h2>
           <div class="flex items-center gap-2">
