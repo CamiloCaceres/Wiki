@@ -2,10 +2,10 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: [
-    "@nuxt/ui",
-    "nuxt-tiptap-editor",
+    '@nuxt/ui',
     '@pinia/nuxt',
-    "@nuxt/content",
-    "@nuxt/image"
+    '@nuxt/content',
+    '@nuxt/image',
+    '@vueuse/motion/nuxt'
   ],
 })

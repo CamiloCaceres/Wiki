@@ -157,45 +157,30 @@ const formState = reactive({
 });
 
 const note = computed(() => {
-  let note = `- Academic Transcript: ${
-    formState.academicTranscript.received
-      ? `Received, ${
-          formState.academicTranscript.certified ? "Certified" : "Not Certified"
-        }, ${formState.academicTranscript.meets ? "Meets" : "Does not meet"}`
-      : "Not Received"
-  }
-- English: ${
-    formState.english.received
-      ? `Received, ${formState.english.meets ? "Meets" : "Does not meet"}`
-      : "Not Received"
-  }
-- Passport: ${
-    formState.passport.received
-      ? `Received, ${
-          formState.passport.certified ? "Certified" : "Not Certified"
-        }`
-      : "Not Received"
-  }
-- Visa Type: ${formState.visaType}${
-    formState.visaExpiryDate ? ", Expiry Date: " + formState.visaExpiryDate : ""
-  }
+  let note = `📋 STUDENT APPLICATION STATUS
+==============================
 
-- ${
-    formState.gsr.formA
-      ? "Received GSR form part A"
-      : "Awaiting GSR A to issue OL"
-  }
-- ${
-    formState.gsr.formB ? "Accepted GSR form part B" : "Pending GSR form part B"
-  }
-- ${
-    formState.releaseCondition
-      ? "Approval to issue OL with release condition required"
-      : ""
-  }
-  `;
+📄 DOCUMENT CHECKLIST:
+----------------------
+📜 Academic Transcript:  ${formState.academicTranscript.received ? '✅ Received' : '❌ Not Received'}${formState.academicTranscript.received ? `  ${formState.academicTranscript.certified ? '✅ Certified' : '❌ Not Certified'}  ${formState.academicTranscript.meets ? '✅ Meets' : '❌ Does not meet'}` : ''}
+🔤 English Proficiency:  ${formState.english.received ? '✅ Received' : '❌ Not Received'}${formState.english.received ? `  ${formState.english.meets ? '✅ Meets' : '❌ Does not meet'}` : ''}
+🛂 Passport:             ${formState.passport.received ? '✅ Received' : '❌ Not Received'}${formState.passport.received ? `  ${formState.passport.certified ? '✅ Certified' : '❌ Not Certified'}` : ''}
 
-  return note.trim();
+🛄 VISA INFORMATION:
+--------------------
+Type: ${formState.visaType}
+${formState.visaExpiryDate ? `Expiry: ${formState.visaExpiryDate}` : ''}
+
+📝 GSR FORM:
+------------
+Part A: ${formState.gsr.formA ? '✅ Received' : '⏳ Awaiting'}
+Part B: ${formState.gsr.formB ? '✅ Accepted' : '⏳ Pending'}
+
+⚠️ ACTION REQUIRED:
+-------------------
+${formState.releaseCondition ? '[ ] Approval to issue OL with release condition' : '✅ No action required'}`;
+
+  return note;
 });
 
 const { copy } = useClipboard();

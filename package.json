@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@pinia/nuxt": "^0.5.1",
+    "@vueuse/motion": "^2.2.5",
     "zod": "^3.22.5"
   }
 }
