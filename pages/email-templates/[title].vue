@@ -1,12 +1,12 @@
 <template>
-  <UContainer v-if="template" class="py-8">
+  <UContainer v-if="template" class="py-8 max-w-4xl">
     <UCard>
       <template #header>
         <h1 class="text-2xl font-bold capitalize">{{ template.title }}</h1>
       </template>
 
       <pre
-        class="whitespace-pre-wrap dark:bg-gray-800 p-4 rounded-lg text-sm overflow-x-auto"
+        class="whitespace-pre-wrap font-sans dark:bg-gray-800 p-4 rounded-lg overflow-x-auto"
         >{{ renderedContent }}</pre
       >
 
@@ -61,9 +61,11 @@ const template = ref<Template | undefined>(
   templates.find((t) => t.slug.toLowerCase() === templateTitle.toLowerCase())
 );
 
+const { userName } = useUsername();
+
 const renderedContent = computed(() => {
   if (template.value) {
-    return renderTemplate(template.value, { userName: "Example User" });
+    return renderTemplate(template.value, { userName: userName.value });
   }
   return "";
 });
