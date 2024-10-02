@@ -6,9 +6,9 @@
       </div>
     </header>
     <main>
-      <div class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+      <UContainer class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <div class="px-4 py-6 sm:px-0">
-          <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          <div class="grid grid-cols-1 md:gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             <NuxtLink 
               v-for="item in menuItems" 
               :key="item.to" 
@@ -23,7 +23,7 @@
             </NuxtLink>
           </div>
         </div>
-      </div>
+      </UContainer>
     </main>
   </div>
 </template>
