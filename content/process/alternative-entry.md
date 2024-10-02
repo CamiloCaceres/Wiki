@@ -24,9 +24,8 @@ Academic Alternative Entry is a process that allows prospective students to appl
 2. Verify all required documents are present and properly filled out.
 3. In CRM, create AP for Academic Alternative Entry
 4. Approver is Program Director
-
-4. Change the Basis for New Admissions to "Work and Life Experience".
-10. Communicate the decision to the applicant.
+5. Change the Basis for New Admissions to "Work and Life Experience".
+6. Communicate the decision to the applicant.
 
 ### Important Notes
 - Ensure all sections of the Work/Life Experience Form have at least 4 sentences each.
