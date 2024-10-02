@@ -10,13 +10,8 @@ import { useClipboard } from "@vueuse/core";
 const selectedTemplate = ref<Template>();
 
 //Read username from local storage
-const userName = ref("");
-onMounted(() => {
-  let userNameIsStored = window.localStorage.getItem("localUserName");
-  if (userNameIsStored) {
-    userName.value = userNameIsStored;
-  }
-});
+const { userName } = useUsername()
+
 
 const isOpen = ref(false);
 const openPreview = (template: Template) => {
