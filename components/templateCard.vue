@@ -63,7 +63,7 @@ const copyToClipboard = async (content: string) => {
 
       <UButton
         color="primary"
-        @click="copyToClipboard(template.content(userName))"
+        @click="copyToClipboard(template.content({ userName: userName }))"
         >Copy Template</UButton
       >
     </div>
@@ -83,7 +83,7 @@ const copyToClipboard = async (content: string) => {
 
       <div class="p-4">
         <pre class="text-wrap font-sans">{{
-          selectedTemplate?.content(userName) ?? ""
+          selectedTemplate?.content({ userName: userName }) ?? ""
         }}</pre>
       </div>
 
@@ -91,7 +91,7 @@ const copyToClipboard = async (content: string) => {
         <div class="flex justify-end">
           <UButton
             color="primary"
-            @click="copyToClipboard(selectedTemplate?.content(userName) ?? '')"
+            @click="copyToClipboard(selectedTemplate?.content({ userName: userName }) ?? '')"
             >Copy</UButton
           >
         </div>
