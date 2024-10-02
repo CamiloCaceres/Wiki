@@ -1,6 +1,7 @@
 <template>
   <div>
     <h2 class="font-semibold text-3xl mb-4">Browse Templates</h2>
+    <SearchTemplates />
     <div class="flex flex-col space-y-6">
       <div v-for="(template, index) in templates" :key="index">
         <div class="rounded-md p-4 flex items-center justify-between border-2">
