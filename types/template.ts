@@ -5,6 +5,7 @@ export interface TemplateParams {
 
 export interface Template {
   title: string;
+  slug: string;
   content: (params: TemplateParams) => string;
   process: string;
   category: 'AP' | 'Email';
