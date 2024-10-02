@@ -2,22 +2,22 @@
   <nav class="bg-gray-100 dark:bg-gray-800 sticky top-0 z-50 shadow-md">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16">
-        <div class="flex space-x-16 items-center">
+        <div class="flex items-center">
           <UButton
-            size="xl"
+            size="lg"
             variant="ghost"
             icon="i-heroicons-bars-3"
             @click="isSidebarOpen = true"
+            class="mr-2 sm:mr-4"
           />
-          <div class="ml-4">
-            <NuxtLink
-              class="text-gray-800 dark:text-gray-200 text-2xl font-bold"
-              to="/"
-            >
-              🦘 AdmissionsWiki
-            </NuxtLink>
-          </div>
-
+          <NuxtLink
+            class="text-gray-800 dark:text-gray-200 text-xl sm:text-2xl font-bold truncate"
+            to="/"
+          >
+            🦘 AdmissionsWiki
+          </NuxtLink>
+        </div>
+        <div class="flex items-center space-x-2 sm:space-x-4">
           <UInput
             v-if="false"
             icon="i-heroicons-magnifying-glass-20-solid"
@@ -25,17 +25,14 @@
             color="white"
             :trailing="false"
             placeholder="Search..."
+            class="hidden sm:block"
           />
-        </div>
-        <div class="flex items-center space-x-4">
           <DarkModeButton />
           <User />
-
-          
         </div>
       </div>
     </div>
-    <USlideover v-model="isSidebarOpen" :overlay="false" side="left">
+    <USlideover v-model="isSidebarOpen" :overlay="true" side="left">
       <UCard
         class="flex flex-col flex-1"
         :ui="{
@@ -47,7 +44,7 @@
         <template #header>
           <div class="flex items-center justify-between">
             <NuxtLink
-              class="text-gray-800 dark:text-gray-200 text-2xl font-bold"
+              class="text-gray-800 dark:text-gray-200 text-xl sm:text-2xl font-bold"
               to="/"
             >
               🦘 AdmissionsWiki
@@ -55,7 +52,7 @@
             <UButton
               @click="toggleSidebar"
               icon="i-heroicons-x-mark"
-              size="xl"
+              size="lg"
               color="primary"
               square
               variant="ghost"
@@ -68,7 +65,7 @@
             <NuxtLink
               :to="link.to"
               @click="toggleSidebar"
-              class="text-gray-700 hover:text-gray-900 dark:text-gray-200 pl-4 hover:underline transition"
+              class="text-gray-700 hover:text-gray-900 dark:text-gray-200 pl-4 hover:underline transition block"
             >
               {{ link.text }}
             </NuxtLink>
@@ -101,6 +98,4 @@ const links = [
 const toggleSidebar = () => {
   isSidebarOpen.value = !isSidebarOpen.value;
 };
-
-
 </script>
