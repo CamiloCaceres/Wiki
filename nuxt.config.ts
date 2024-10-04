@@ -9,7 +9,6 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/ui',
     '@pinia/nuxt',
-    '@nuxt/content',
     '@nuxt/image',
     '@vueuse/motion/nuxt'
   ],
