@@ -1,12 +1,11 @@
 <template>
-  <div class="min-h-screen dark:bg-gray-900">
-    <header class="bg-white dark:bg-gray-800 ">
+  <div class="min-h-screen">
+    <header>
       <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
         <h1 class="text-3xl text-center font-bold text-gray-900 dark:text-white">Internal Wiki</h1>
       </div>
     </header>
     <main>
-      <UContainer class="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
         <div class="px-4 py-6 sm:px-0">
           <div class="grid grid-cols-1 md:gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             <NuxtLink 
@@ -23,7 +22,6 @@
             </NuxtLink>
           </div>
         </div>
-      </UContainer>
     </main>
   </div>
 </template>

@@ -1,6 +1,7 @@
 <template>
   <Navbar />
-  <div class="max-w-5xl mx-auto mt-10">
+  <UContainer class="max-w-4xl mx-auto mt-4 min-h-screen">
     <slot />
-  </div>
+  </UContainer>
+  <Footer />
 </template>
