@@ -11,6 +11,9 @@ dependencies:
   '@vueuse/motion':
     specifier: ^2.2.5
     version: 2.2.5(vue@3.5.7)
+  pocketbase:
+    specifier: ^0.21.5
+    version: 0.21.5
   zod:
     specifier: ^3.22.5
     version: 3.23.8
@@ -6627,6 +6630,10 @@ packages:
       confbox: 0.1.7
       mlly: 1.7.1
       pathe: 1.1.2
+
+  /pocketbase@0.21.5:
+    resolution: {integrity: sha512-bnI/uinnQps+ElSlzxkc4yvwuSFfKcoszDtXH/4QT2FhGq2mJVUvDlxn+rjRXVntUjPfmMG5LEPZ1eGqV6ssog==}
+    dev: false
 
   /popmotion@11.0.5:
     resolution: {integrity: sha512-la8gPM1WYeFznb/JqF4GiTkRRPZsfaj2+kCxqQgr2MJylMmIKUwBfWW8Wa5fml/8gmtlD5yI01MP1QCZPWmppA==}
