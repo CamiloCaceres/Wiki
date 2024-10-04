@@ -30,7 +30,7 @@
 const menuItems = [
   { text: "Conditions", to: "/conditions" },
   { text: "Templates", to: "/email-templates" },
-  { text: "CRM Processes", to: "/process" },
+  { text: "Procedures", to: "/procedures" },
   { text: "Studylink processes", to: "/studylink" },
   { text: "Useful links", to: "/useful-links" },
   { text: "Trimester calculator", to: "/trimester-calculator" },
@@ -42,7 +42,7 @@ const getIcon = (text) => {
   const iconMap = {
     "Conditions": "i-heroicons-book-open",
     "Templates": "i-heroicons-envelope",
-    "CRM Processes": "i-heroicons-arrow-path",
+    "Procedures": "i-heroicons-arrow-path",
     "Studylink processes": "i-heroicons-academic-cap",
     "Useful links": "i-heroicons-link",
     "Trimester calculator": "i-heroicons-calculator",
