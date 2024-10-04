@@ -1,9 +1,11 @@
 <template>
   <UButton
+    class="my-4"
     icon="i-heroicons-magnifying-glass"
     label="Search Templates"
     color="gray"
-    variant="soft"
+    variant="outline"
+    block
     @click="isOpen = true"
   />
   <UModal v-model="isOpen">
