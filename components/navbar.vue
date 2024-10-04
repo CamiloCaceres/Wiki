@@ -88,7 +88,7 @@ const links = [
   { text: "Home", to: "/" },
   { text: "Conditions", to: "/conditions" },
   { text: "Templates", to: "/email-templates" },
-  { text: "CRM Processes", to: "/process" },
+  { text: "Procedures", to: "/procedures" },
   { text: "Studylink processes", to: "/studylink" },
   { text: "Useful links", to: "/useful-links" },
   { text: "Trimester calculator", to: "/trimester-calculator" },

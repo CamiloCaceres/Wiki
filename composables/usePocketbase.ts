@@ -58,6 +58,29 @@ export function usePocketbase() {
       throw error;
     }
   };
+
+  //procedures
+  const getAllProcedures = async () => {
+    try {
+      const records = await pb.collection("procedures").getFullList();
+      return records;
+    } catch (error) {
+      console.error("Error fetching all procedures:", error);
+      throw error;
+    }
+  };
+
+  const getProcedureBySlug = async (slug: string) => {
+    try {
+      const record = await pb.collection("procedures").getFirstListItem(`slug="${slug}"`);
+      return record;
+    } catch (error) {
+      console.error("Error fetching procedure:", error);
+      throw error;
+    }
+  };
+
+  // others
   const getImageUrl = (item: any) => {
     if (item && item.image) {
       return pb.files.getUrl(item, item.image, { thumb: "800x0" });
@@ -73,5 +96,7 @@ export function usePocketbase() {
     getStudylinkBySlug,
     getImageUrl,
     searchStudylinkByKeyword,
+    getAllProcedures,
+    getProcedureBySlug,
   };
 }
