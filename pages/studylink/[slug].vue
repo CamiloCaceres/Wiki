@@ -37,6 +37,9 @@ onMounted(async () => {
         studylink.value = await getStudylinkBySlug(slug);
     } finally {
         loading.value = false;
+        useHead({
+            title: studylink.value?.name
+        })
     }
 });
 
