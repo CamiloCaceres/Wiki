@@ -27,7 +27,7 @@
 
   //TODO: use the composable, ensure we are also searching by keywords
   const props = defineProps<{
-    processes: any[];
+    processes: any;
   }>();
   
   const router = useRouter();
