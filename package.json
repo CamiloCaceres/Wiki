@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@pinia/nuxt": "^0.5.1",
+    "@tanstack/vue-query": "^5.59.1",
     "@vueuse/motion": "^2.2.5",
     "pocketbase": "^0.21.5",
     "zod": "^3.22.5"
