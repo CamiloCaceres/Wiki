@@ -13,7 +13,7 @@ Thank you for your assistance with this student's application. Unfortunately, we
  Kind regards,
   
 ${userName}`,
-    process: "Generic",
+    process: "Assessment",
     category: "Email",
     isInternal: false,
     requiredParams: ["userName"],
@@ -27,7 +27,7 @@ Thanks for confirming. We have declined the offer.
   
 Kind regards,
 ${userName}`,
-    process: "Generic",
+    process: "Assessment",
     category: "Email",
     isInternal: false,
     requiredParams: ["userName"],
@@ -41,7 +41,7 @@ Please seek approval to issue the OL with a release condition.
   
 Best regards,
 ${userName}`,
-    process: "Generic",
+    process: "Assessment",
     category: "Email",
     isInternal: false,
     requiredParams: ["userName"],
@@ -57,12 +57,24 @@ Based on the assessment, the student does not meet the course entry requirements
   
 Kind Regards,
 ${userName}`,
-    process: "Generic",
+    process: "Assessment",
     category: "Email",
     isInternal: false,
     requiredParams: ["userName"],
   },
-
+  {
+    title: "Academic Alternative Entry AP",
+    slug: "academic-alternative-entry-ap",
+    content: ({ userName }: TemplateParams) => `Dear team,
+This student's qualifications are not equivalent to a Bachelor in Australia. Therefore, they are looking for an Alternative Entry. The documents have been submitted (form and cv).
+Thanks in advance,
+Kind regards,
+${userName}`,
+    process: "Assessment",
+    category: "AP",
+    isInternal: true,
+    requiredParams: ["userName"],
+  },
   {
     title: "GSR condition",
     slug: "gsr-condition",
@@ -74,7 +86,7 @@ ${userName}`,
   •	Source of income- e.g. employment contracts, tax return or pay slip - this must show the evidence of where the funds have come from.    
   
 Upon successful completion of GSR screening the student can then progress to payment of the deposit`,
-    process: "Generic",
+    process: "Assessment",
     category: "Email",
     isInternal: false,
     requiredParams: ["userName"],
@@ -94,7 +106,7 @@ We appreciate your help with this, and I look forward to receiving the updated d
   
 Kind regards,
 ${userName}`,
-    process: "Generic",
+    process: "CoE",
     category: "Email",
     isInternal: false,
     requiredParams: ["userName"],
@@ -211,6 +223,21 @@ ${userName}`,
       "program",
       "userName",
     ],
+  },
+  {
+    title: "Offer Letter Confirmation Request",
+    slug: "offer-letter-confirmation-request",
+    content: (params: TemplateParams) => `Hello ${params.recipient},
+I hope this message finds you well. Please find the new application for ${params.location}.
+Kindly confirm if we can issue the offer letter for this applicant for ${params.intake}.
+  
+Best regards,
+${params.userName}
+    `,
+    process: "Recruitment",
+    category: "Email",
+    isInternal: true,
+    requiredParams: ["recipient", "location", "intake"],
   },
 ];
 // Utility Functions
