@@ -225,19 +225,19 @@ ${userName}`,
     ],
   },
   {
-    title: "Offer Letter Confirmation Request",
-    slug: "offer-letter-confirmation-request",
-    content: (params: TemplateParams) => `Hello ${params.recipient},
-I hope this message finds you well. Please find the new application for ${params.location}.
-Kindly confirm if we can issue the offer letter for this applicant for ${params.intake}.
+    title: "Offshore New Application",
+    slug: "offshore-new-application",
+    content: (params: TemplateParams) => `Hello team,
+I hope this message finds you well. Please find the new Offshore application for T1, 2025.
+Kindly confirm if we can issue the offer letter for this applicant.
   
 Best regards,
 ${params.userName}
     `,
-    process: "Recruitment",
-    category: "Email",
+    process: "Assessment",
+    category: "AP",
     isInternal: true,
-    requiredParams: ["recipient", "location", "intake"],
+    requiredParams: ["userName"],
   },
 ];
 // Utility Functions
