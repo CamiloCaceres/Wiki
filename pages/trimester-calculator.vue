@@ -72,15 +72,15 @@ const copyToClipboard = () => {
 const options = [
   {
     value: 5,
-    label: "DoN - 5 Trimesters",
+    label: "Dip Nurse - 5 Trimesters",
   },
   {
     value: 6,
-    label: "PG - 6 Trimesters",
+    label: "Masters - 6 Trimesters",
   },
   {
     value: 9,
-    label: "UG - 9 trimesters",
+    label: "Bachelor - 9 trimesters",
   },
 ];
 

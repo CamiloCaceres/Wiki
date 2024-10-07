@@ -8,7 +8,7 @@
     block
     @click="isOpen = true"
   />
-  <UModal v-model="isOpen">
+  <UModal v-model="isOpen" :fullscreen="$device.isMobile">
     <UCommandPalette
       ref="commandPaletteRef"
       :groups="groups"
