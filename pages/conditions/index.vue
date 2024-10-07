@@ -67,7 +67,7 @@
   <div class="grid grid-cols-4 gap-4 mb-4">
     <div
       v-for="condition in conditions.filter(
-        (condition) => !condition.isNursing
+        (condition: Condition) => !condition.isNursing
       )"
     >
       <Condition
@@ -80,7 +80,7 @@
   <h2 class="font-bold text-lg mb-4">Nursing Conditions:</h2>
   <div class="grid grid-cols-4 gap-4">
     <div
-      v-for="condition in conditions.filter((condition) => condition.isNursing)"
+      v-for="condition in conditions.filter((condition: Condition) => condition.isNursing)"
     >
       <Condition
         v-bind="condition"
@@ -102,23 +102,23 @@ const { copy, copied } = useClipboard();
 const conditions = reactive(conditionsFile);
 
 const selectedConditions = computed(() =>
-  conditions.filter((condition) => condition.isSelected)
+  conditions.filter((condition: Condition) => condition.isSelected)
 );
 const conditionsList = computed(() =>
-  selectedConditions.value.map((condition) => `- ${condition.text}`).join("\n")
+  selectedConditions.value.map((condition: Condition) => `- ${condition.text}`).join("\n")
 );
 const outputText = computed(
   () => `This offer is conditional upon:\n ${conditionsList.value}`
 );
 
 const toggleSelect = (conditionId: number) => {
-  const condition = conditions.find((c) => c.id === conditionId);
+  const condition = conditions.find((c: Condition) => c.id === conditionId);
   if (condition) {
     condition.isSelected = !condition.isSelected;
   }
 };
 const deselectAllConditions = () => {
-  conditions.forEach((condition) => {
+  conditions.forEach((condition: Condition) => {
     condition.isSelected = false;
   });
 };
@@ -131,7 +131,7 @@ const addBNConditions = () => {
     "Complete DoN",
     "Credits",
   ];
-  conditions.forEach((condition) => {
+  conditions.forEach((condition: Condition) => {
     if (bnConditionNames.includes(condition.name)) {
       condition.isSelected = true;
     }
@@ -144,7 +144,7 @@ const addDoNConditions = () => {
     "capacity",
     "LLN",
   ];
-  conditions.forEach((condition) => {
+  conditions.forEach((condition: Condition) => {
     if (DoNConditionNames.includes(condition.name)) {
       condition.isSelected = true;
     }
