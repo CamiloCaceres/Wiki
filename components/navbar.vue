@@ -34,18 +34,19 @@
     </div>
     <USlideover v-model="isSidebarOpen" :overlay="true" side="left">
       <UCard
-        class="flex flex-col flex-1"
+        class="flex flex-col h-full"
         :ui="{
-          body: { base: 'flex-1' },
+          body: { base: 'flex-1 overflow-y-auto' },
           ring: '',
-          divide: 'divide-y divide-gray-100 dark:divide-gray-800',
+          divide: 'divide-y divide-gray-200 dark:divide-gray-700',
         }"
       >
         <template #header>
-          <div class="flex items-center justify-between">
+          <div class="flex items-center justify-between p-4">
             <NuxtLink
-              class="text-gray-800 dark:text-gray-200 text-xl sm:text-2xl font-bold"
+              class="text-gray-800 dark:text-gray-200 text-2xl font-bold"
               to="/"
+              @click="toggleSidebar"
             >
               🦘 AdmissionsWiki
             </NuxtLink>
@@ -53,27 +54,43 @@
               @click="toggleSidebar"
               icon="i-heroicons-x-mark"
               size="lg"
-              color="primary"
+              color="gray"
               square
               variant="ghost"
             />
           </div>
         </template>
 
-        <ul class="mt-8">
-          <li v-for="link in links" :key="link.text" class="py-2 px-4">
-            <NuxtLink
-              :to="link.to"
-              @click="toggleSidebar"
-              class="text-gray-700 hover:text-gray-900 dark:text-gray-200 pl-4 hover:underline transition block"
-            >
-              {{ link.text }}
-            </NuxtLink>
-          </li>
-        </ul>
+        <div class="p-4">
+          <h2 class="text-lg font-semibold mb-2 text-gray-800 dark:text-gray-200">Main Menu</h2>
+          <ul class="space-y-2">
+            <li v-for="item in mainItems" :key="item.text">
+              <NuxtLink
+                :to="item.to"
+                @click="toggleSidebar"
+                class="block py-2 px-4 rounded-lg text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700 transition"
+              >
+                {{ item.text }}
+              </NuxtLink>
+            </li>
+          </ul>
+        </div>
 
-        <template #footer>
-        </template>
+        <div class="p-4">
+          <h2 class="text-md font-medium mb-2 text-gray-600 dark:text-gray-400">Additional Resources</h2>
+          <ul class="space-y-1">
+            <li v-for="item in menuItems" :key="item.text">
+              <NuxtLink
+                :to="item.to"
+                @click="toggleSidebar"
+                class="block py-1.5 px-4 rounded-md text-sm text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-gray-800 transition"
+              >
+                {{ item.text }}
+              </NuxtLink>
+            </li>
+          </ul>
+        </div>
+
       </UCard>
     </USlideover>
   </nav>
@@ -84,15 +101,18 @@ import { ref } from "vue";
 
 const isSidebarOpen = ref(false);
 
-const links = [
-  { text: "Home", to: "/" },
-  { text: "Conditions", to: "/conditions" },
+const mainItems = [
   { text: "Templates", to: "/email-templates" },
   { text: "Procedures", to: "/procedures" },
   { text: "Studylink processes", to: "/studylink" },
+  { text: "Notes", to: "/notes" },
+];
+
+const menuItems = [
+  { text: "Conditions", to: "/conditions" },
   { text: "Useful links", to: "/useful-links" },
   { text: "Trimester calculator", to: "/trimester-calculator" },
-  { text: "Notes", to: "/notes" },
+  { text: "COE", to: "/coe" },
 ];
 
 const toggleSidebar = () => {
