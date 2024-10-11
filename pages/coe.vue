@@ -28,12 +28,12 @@ const { copy } = useClipboard();
 const computedMessage = computed(() => {
   let message = "Course tuition fees are current as of 2024. Tuition fees are subject to change and may increase each calendar year by no more than 10%. Please refer to terms and conditions on offer letter for more information.";
   
-  if (scholarship.value) {
-    message += ` ${scholarship.value}% scholarship granted.`;
-  }
-  
-  if (creditPoints.value) {
-    message += ` ${creditPoints.value} credit points granted.`;
+  if (scholarship.value && creditPoints.value) {
+    message = `Student granted with ${scholarship.value}% scholarship and ${creditPoints.value} credit points. ${message}`;
+  } else if (scholarship.value) {
+    message = `Student granted with ${scholarship.value}% scholarship. ${message}`;
+  } else if (creditPoints.value) {
+    message = `Student granted with ${creditPoints.value} credit points. ${message}`;
   }
   
   return message;

@@ -22,10 +22,10 @@
     </div>
     <div class="flex flex-col space-y-6">
       <div v-for="template in filteredTemplates" :key="template.slug">
-        <div class="rounded-md p-4 flex items-center justify-between border-2">
+        <div class="rounded-md p-4 flex items-center justify-between border-2 dark:border-gray-700 dark:bg-gray-800">
           <div>
             <h3 class="font-semibold text-lg mb-2">{{ template.title }}</h3>
-            <p class="text-sm text-gray-600">{{ template.process }} | {{ template.category }}</p>
+            <p class="text-sm text-gray-600 dark:text-gray-400">{{ template.process }} | {{ template.category }}</p>
           </div>
           <UButton 
             color="primary" 

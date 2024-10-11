@@ -23,7 +23,7 @@
       v-for="procedure in data"
       :key="procedure.id"
       @click="router.push(`/procedures/${procedure.slug}`)"
-      class="p-4 flex justify-between items-center cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-800 rounded-md mt-4"
+      class="p-4 flex justify-between items-center cursor-pointer dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-md mt-4"
     >
       <div class="flex flex-col gap-2">
         <h2 class="text-xl font-bold">{{ procedure.name }}</h2>
