@@ -7,10 +7,11 @@ export const templates: Template[] = [
     slug: "generic-rejection",
     content: ({ userName }: TemplateParams) => `Dear Team,
   
-Thank you for your assistance with this student's application. Unfortunately, we are unable to proceed further due to an unsuccessful GSR Assessment.
- Should you have any questions regarding this decision, please feel free to contact us.
+Thank you for your support with the application for this student. I regret to inform you that we will not be taking the application further due to unsuccessful GSR  Assessment.
+
+If you have any questions regarding this case, please don’t hesitate to contact us.
   
- Kind regards,
+Kind regards,
   
 ${userName}`,
     process: "Assessment",
@@ -37,7 +38,7 @@ ${userName}`,
     slug: "release-required",
     content: ({ userName }: TemplateParams) => `Dear team,
 We have noticed that this student has an active CoE with a start date less than 6 months away from the requested course. 
-Please seek approval to issue the OL with a release condition.
+Please seek Petra's approval to issue the OL with a release condition.
   
 Best regards,
 ${userName}`,
@@ -49,13 +50,14 @@ ${userName}`,
   {
     title: "Academic Alternative Entry",
     slug: "academic-alternative-entry",
-    content: ({ userName }: TemplateParams) => `Dear team,
-  
-Thank you for your application to Torrens University Australia. 
-  
-Based on the assessment, the student does not meet the course entry requirements. If the student is willing to seek Special Entry, please kindly provide the completed Work/Life Experience Form together with a CV for further assessment. 
-  
-Kind Regards,
+    content: ({
+      userName,
+    }: TemplateParams) => `Dear team,
+Thanks for the application. Upon reviewing student documents, the Bachelor's award certificate is equivalent to an associate degree in Australia. To proceed we need to raise a special entry request to the Program Director, please provide the following:
+    •	CV
+    •	Work experience letters
+    •	Attached form fully completed and signed
+
 ${userName}`,
     process: "Assessment",
     category: "Email",
@@ -166,7 +168,7 @@ ${userName}`,
     slug: "credit-transfer-rejected",
     content: ({ userName }: TemplateParams) => `Dear team,
         
-The Credit Transfer request has been rejected; therefore, the offer letter will remain without credits.
+The Credit Transfer request has not been approved; therefore, the offer letter will remain without credits.
         
 Best regards,
 ${userName}`,
@@ -180,7 +182,7 @@ ${userName}`,
     slug: "approved-credit-transfer",
     content: ({ userName }: TemplateParams) => `Hi team,
   
-The Credit Transfer request was approved. Attached to this email you will find the revised offer letter with credits and the duration revised.
+The Credit Transfer request is approved. Please find attached the revised offer letter with credits and the duration revised.
   
 Please let us know if there is anything else we can assist you with,
   
