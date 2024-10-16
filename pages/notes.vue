@@ -1,6 +1,6 @@
 <template>
   <div>
-    <UCard class="px-8">
+    <UCard class="px-8 dark:bg-gray-800">
       <template #header>
         <h1 class="font-bold text-2xl mb-4">Notes</h1>
       </template>
@@ -105,7 +105,7 @@
             />
           </div>
         </div>
-        <UTextarea :rows="6" v-model="note" class="w-full py-2" />
+        <UTextarea resize :rows="6" v-model="note" class="w-full py-2" />
 
         <div class="flex justify-end gap-2">
           <UButton
