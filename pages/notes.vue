@@ -21,19 +21,30 @@
         >
           <h2 class="font-semibold text-lg">Academic Transcript</h2>
           <div class="flex items-center gap-6 justify-center">
-            <UFormGroup name="received"  v-motion-fade-visible>
+            <UFormGroup name="received" v-motion-fade-visible>
               <UCheckbox
-                v-model="formState.academicTranscript.received" label="Received"
+                v-model="formState.academicTranscript.received"
+                label="Received"
               />
             </UFormGroup>
-            <UFormGroup v-if="formState.academicTranscript.received" label="Certified" name="certified" v-motion-fade-visible>
+            <UFormGroup
+              v-if="formState.academicTranscript.received"
+              label="Certified"
+              name="certified"
+              v-motion-fade-visible
+            >
               <UToggle
                 v-model="formState.academicTranscript.certified"
                 label="Certified"
                 color="green"
               />
             </UFormGroup>
-            <UFormGroup v-if="formState.academicTranscript.received" label="Meets" name="meets" v-motion-fade-visible>
+            <UFormGroup
+              v-if="formState.academicTranscript.received"
+              label="Meets"
+              name="meets"
+              v-motion-fade-visible
+            >
               <UToggle
                 v-model="formState.academicTranscript.meets"
                 label="Meets"
@@ -49,10 +60,22 @@
           <h2 class="font-semibold text-lg">English</h2>
           <div class="flex items-center gap-6">
             <UFormGroup name="received" v-motion-slide-right>
-              <UCheckbox v-model="formState.english.received" label="Received" />
+              <UCheckbox
+                v-model="formState.english.received"
+                label="Received"
+              />
             </UFormGroup>
-            <UFormGroup v-if="formState.english.received" label="Meets" name="meets" v-motion-fade-visible>
-              <UToggle  v-model="formState.english.meets" label="Meets" color="green" />
+            <UFormGroup
+              v-if="formState.english.received"
+              label="Meets"
+              name="meets"
+              v-motion-fade-visible
+            >
+              <UToggle
+                v-model="formState.english.meets"
+                label="Meets"
+                color="green"
+              />
             </UFormGroup>
           </div>
         </div>
@@ -63,15 +86,29 @@
           <h2 class="font-semibold text-lg">Passport</h2>
           <div class="flex items-center gap-6">
             <UFormGroup name="received" v-motion-slide-right>
-              <UCheckbox v-model="formState.passport.received" label="Received" />
+              <UCheckbox
+                v-model="formState.passport.received"
+                label="Received"
+              />
             </UFormGroup>
-            <UFormGroup v-if="formState.passport.received" label="Certified" name="certified" v-motion-fade-visible>
-              <UToggle v-model="formState.passport.certified" label="Certified" color="green" />
+            <UFormGroup
+              v-if="formState.passport.received"
+              label="Certified"
+              name="certified"
+              v-motion-fade-visible
+            >
+              <UToggle
+                v-model="formState.passport.certified"
+                label="Certified"
+                color="green"
+              />
             </UFormGroup>
           </div>
         </div>
 
-        <div class="flex flex-col items-start gap-y-4 md:flex-row md:justify-between md:items-center border-b border-gray-200 pb-2">
+        <div
+          class="flex flex-col items-start gap-y-4 md:flex-row md:justify-between md:items-center border-b border-gray-200 pb-2"
+        >
           <h2 class="font-semibold text-lg">Visa</h2>
 
           <div class="flex gap-2">
@@ -95,10 +132,26 @@
         <div
           class="flex flex-col items-start gap-y-4 md:flex-row md:justify-between md:items-center border-b border-t border-gray-200 py-2"
         >
-          <h2 class="font-semibold text-lg">Others</h2>
+          <h2 class="font-semibold text-lg">Forms</h2>
           <div class="flex items-center gap-2">
             <UCheckbox v-model="formState.gsr.formA" label="GSR form part A" />
             <UCheckbox v-model="formState.gsr.formB" label="GSR form part B" />
+            <UCheckbox
+              v-model="formState.finalDeclaration"
+              label="Final Declaration"
+            />
+
+          </div>
+        </div>
+        <div
+          class="flex flex-col items-start gap-y-4 md:flex-row md:justify-between md:items-center border-b border-t border-gray-200 py-2"
+        >
+          <h2 class="font-semibold text-lg">Others</h2>
+          <div class="flex items-center gap-2">
+            <UCheckbox
+              v-model="formState.requestedCT"
+              label="Requested Credits"
+            />
             <UCheckbox
               v-model="formState.releaseCondition"
               label="Release required"
@@ -152,8 +205,9 @@ const formState = reactive({
     formA: false,
     formB: false,
   },
-
+  finalDeclaration: false,
   releaseCondition: false,
+  requestedCT: false,
 });
 
 const note = computed(() => {
@@ -162,23 +216,53 @@ const note = computed(() => {
 
 📄 DOCUMENT CHECKLIST:
 ----------------------
-📜 Academic Transcript:  ${formState.academicTranscript.received ? '✅ Received' : '❌ Not Received'}${formState.academicTranscript.received ? `  ${formState.academicTranscript.certified ? '✅ Certified' : '❌ Not Certified'}  ${formState.academicTranscript.meets ? '✅ Meets' : '❌ Does not meet'}` : ''}
-🔤 English Proficiency:  ${formState.english.received ? '✅ Received' : '❌ Not Received'}${formState.english.received ? `  ${formState.english.meets ? '✅ Meets' : '❌ Does not meet'}` : ''}
-🛂 Passport:             ${formState.passport.received ? '✅ Received' : '❌ Not Received'}${formState.passport.received ? `  ${formState.passport.certified ? '✅ Certified' : '❌ Not Certified'}` : ''}
+📜 Academic Transcript:  ${
+    formState.academicTranscript.received ? "✅ Received" : "❌ Not Received"
+  }${
+    formState.academicTranscript.received
+      ? `  ${
+          formState.academicTranscript.certified
+            ? "✅ Certified"
+            : "❌ Not Certified"
+        }  ${
+          formState.academicTranscript.meets ? "✅ Meets" : "❌ Does not meet"
+        }`
+      : ""
+  }
+🔤 English Proficiency:  ${
+    formState.english.received ? "✅ Received" : "❌ Not Received"
+  }${
+    formState.english.received
+      ? `  ${formState.english.meets ? "✅ Meets" : "❌ Does not meet"}`
+      : ""
+  }
+🛂 Passport:             ${
+    formState.passport.received ? "✅ Received" : "❌ Not Received"
+  }${
+    formState.passport.received
+      ? `  ${
+          formState.passport.certified ? "✅ Certified" : "❌ Not Certified"
+        }`
+      : ""
+  }
 
 🛄 VISA INFORMATION:
 --------------------
 Type: ${formState.visaType}
-${formState.visaExpiryDate ? `Expiry: ${formState.visaExpiryDate}` : ''}
+${formState.visaExpiryDate ? `Expiry: ${formState.visaExpiryDate}` : ""}
 
 📝 GSR FORM:
 ------------
-Part A: ${formState.gsr.formA ? '✅ Received' : '⏳ Awaiting'}
-Part B: ${formState.gsr.formB ? '✅ Accepted' : '⏳ Pending'}
+Final Declaration: ${formState.finalDeclaration ? "✅ Received" : "⏳ Pending"}
+Part A: ${formState.gsr.formA ? "✅ Received" : "⏳ Awaiting"}
+Part B: ${formState.gsr.formB ? "✅ Accepted" : "⏳ Pending"}
+${formState.requestedCT ? "✅ Requested Credits" : ""}
 
-⚠️ ACTION REQUIRED:
--------------------
-${formState.releaseCondition ? '[ ] Approval to issue OL with release condition' : '✅ No action required'}`;
+${
+  formState.releaseCondition
+    ? "[ ] Approval to issue OL with release condition"
+    : ""
+}`;
 
   return note;
 });
