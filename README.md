@@ -1,75 +1,41 @@
-# Nuxt UI Minimal Starter
+# AdmissionsWiki
 
-Look at [Nuxt docs](https://nuxt.com/docs/getting-started/introduction) and [Nuxt UI docs](https://ui.nuxt.com) to learn more.
+AdmissionsWiki is an internal wiki application designed to streamline the admissions process. It provides easy access to templates, procedures, and other essential resources for admissions staff.
 
-## Setup
+## Features
 
-Make sure to install the dependencies:
+- **Templates**: Access and manage templates for various admissions documents.
+- **Procedures**: View and update admissions procedures.
+- **Studylink Processes**: Access information and tools related to Studylink processes.
+- **Notes**: Maintain and retrieve important notes and information.
+- **Additional Resources**: 
+  - Conditions
+  - Useful links
+  - Trimester calculator
+  - COE (Confirmation of Enrollment) tools
+  - Keyboard shortcuts
 
-```bash
-# npm
-npm install
+## Tech Stack
 
-# pnpm
-pnpm install
+- [Nuxt.js](https://nuxtjs.org/) - Vue.js framework for server-side rendering and static site generation
+- [Nuxt UI](https://ui.nuxtjs.org/) - UI component library for Nuxt
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- [TypeScript](https://www.typescriptlang.org/) - Typed superset of JavaScript
+- [PocketBase](https://pocketbase.io/) - Open source backend
 
-# yarn
-yarn install
+## Usage
 
-# bun
-bun install
-```
+This application is for internal use only. Access and usage are restricted to authorized personnel within our organization.
 
-## Development Server
+## License
 
-Start the development server on `http://localhost:3000`:
+Copyright © 2024 [Camilo Caceres](https://github.com/CamiloCaceres) . All rights reserved.
 
-```bash
-# npm
-npm run dev
+This software and its associated documentation are proprietary and confidential. 
+Unauthorized copying, distribution, modification, public display, or public performance of this software, or any portion of it, is strictly prohibited. 
+This software is provided by the copyright holders and contributors "as is" and any express or implied warranties, including, but not limited to, 
+the implied warranties of merchantability and fitness for a particular purpose are disclaimed.
 
-# pnpm
-pnpm run dev
+## Contact
 
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+For any inquiries regarding this software, please contact Camilo Caceres at [camiloac97@gmail.com](mailto:camiloac97@gmail.com).
