@@ -39,3 +39,11 @@ the implied warranties of merchantability and fitness for a particular purpose a
 ## Contact
 
 For any inquiries regarding this software, please contact Camilo Caceres at [camiloac97@gmail.com](mailto:camiloac97@gmail.com).
+
+## Changelog
+
+### 1.0.1 (2024-07-24)
+
+- Added "Visa and CoE history" section with separate buttons for Visa History and CoE History
+- Implemented "Requested Credits" checkbox feature
+- Added "Final Declaration" checkbox feature
