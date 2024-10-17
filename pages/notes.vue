@@ -1,6 +1,6 @@
 <template>
   <div>
-    <UCard class="px-8 dark:bg-gray-800">
+    <UCard class="px-4 dark:bg-gray-800">
       <template #header>
         <h1 class="font-bold text-2xl mb-4">Notes</h1>
       </template>
@@ -130,7 +130,7 @@
         </div>
 
         <div
-          class="flex flex-col items-start gap-y-4 md:flex-row md:justify-between md:items-center border-b border-t border-gray-200 py-2"
+          class="flex flex-col items-start gap-y-4 md:flex-row md:justify-between md:items-center border-b border-gray-200 py-2"
         >
           <h2 class="font-semibold text-lg">Forms</h2>
           <div class="flex items-center gap-2">
@@ -140,11 +140,10 @@
               v-model="formState.finalDeclaration"
               label="Final Declaration"
             />
-
           </div>
         </div>
         <div
-          class="flex flex-col items-start gap-y-4 md:flex-row md:justify-between md:items-center border-b border-t border-gray-200 py-2"
+          class="flex flex-col items-start gap-y-4 md:flex-row md:justify-between md:items-center border-b border-gray-200 py-2"
         >
           <h2 class="font-semibold text-lg">Others</h2>
           <div class="flex items-center gap-2">
@@ -156,9 +155,20 @@
               v-model="formState.releaseCondition"
               label="Release required"
             />
+
+          </div>
+    
+        </div>
+        <div class="flex justify-between gap-2">
+          <h2 class="font-semibold text-lg">Visa and CoE history</h2>
+          <div class="flex items-center gap-2">
+            <UButton color="blue" variant="outline" icon="i-heroicons-plus" @click="openVisaModal">Visa History</UButton>
+            <UButton color="blue" variant="outline" icon="i-heroicons-plus" @click="openCoEModal">CoE History</UButton>
           </div>
         </div>
-        <UTextarea resize :rows="6" v-model="note" class="w-full py-2" />
+
+
+          <UTextarea resize :rows="6" v-model="note" class="w-full py-2" />
 
         <div class="flex justify-end gap-2">
           <UButton
@@ -180,12 +190,150 @@
       </UForm>
     </UCard>
   </div>
+
+  <!-- visa modal -->
+  <UModal
+    v-model="visaModal"
+    title="Visa and CoE history"
+    :fullscreen="$device.isMobile"
+  >
+    <UCard>
+      <template #header>
+        <h1 class="font-bold text-2xl mb-4">Visa and CoE history</h1>
+      </template>
+      <div>
+        <div class="flex flex-col gap-2">
+          <h2 class="font-bold text-lg">Visa history</h2>
+          <div
+            v-for="visa in formState.visaHistory"
+            :key="visa.type"
+            class="flex items-center gap-4"
+          >
+            <UFormGroup label="Visa type" name="visaType">
+              <USelect
+                v-model="visa.type"
+                :options="['500', '408', '485', '600', 'Other']"
+              />
+            </UFormGroup>
+            <UFormGroup label="Visa expiry date" name="visaExpiryDate">
+              <UInput v-model="visa.expiryDate" type="text" />
+            </UFormGroup>
+            <UButton
+              class="self-end"
+              icon="i-heroicons-trash"
+              variant="ghost"
+              color="red"
+              @click="removeVisaHistory(visa)"
+              >Remove</UButton
+            >
+          </div>
+          <UButton
+            class="place-self-start"
+            icon="i-heroicons-plus"
+            variant="outline"
+            @click="addVisaHistory"
+            >Add Visa</UButton
+          >
+        </div>
+      </div>
+      <template #footer>
+        <div class="flex justify-end">
+          <UButton variant="ghost" color="green" @click="visaModal = false"
+            >Save</UButton
+          >
+        </div>
+      </template>
+    </UCard>
+  </UModal>
+
+  <!-- coe modal -->
+  <UModal v-model="coeModal" title="Add CoE" :fullscreen="$device.isMobile">
+    <UCard>
+      <template #header>
+        <h1 class="font-bold text-2xl mb-4">Add CoE</h1>
+      </template>
+      <div class="flex flex-col gap-2">
+        <h2 class="font-bold text-lg">CoE history</h2>
+        <div
+          v-for="coe in formState.coeHistory"
+          :key="coe.course"
+          class="flex items-center gap-4 border-b border-gray-200 pb-2"
+        >
+          <div>
+            <UFormGroup label="Course name" name="coeCourse">
+              <UInput v-model="coe.course" />
+            </UFormGroup>
+            <UFormGroup label="CoE start date" name="coeStartDate">
+              <UInput v-model="coe.startDate" />
+            </UFormGroup>
+          </div>
+          <div>
+            <UFormGroup label="Institution" name="coeInstitution">
+              <UInput v-model="coe.institution" />
+            </UFormGroup>
+            <UFormGroup label="CoE end date" name="coeEndDate">
+              <UInput v-model="coe.endDate" />
+            </UFormGroup>
+          </div>
+          <UButton
+            icon="i-heroicons-trash"
+            variant="ghost"
+            color="red"
+            @click="removeCoEHistory(coe)"
+            >Remove</UButton
+          >
+        </div>
+
+        <UButton
+          class="place-self-start"
+          icon="i-heroicons-plus"
+          variant="outline"
+          @click="addCoEHistory"
+          >Add CoE</UButton
+        >
+      </div>
+
+      <template #footer>
+        <div class="flex justify-end">
+          <UButton variant="ghost" color="green" @click="coeModal = false"
+            >Save</UButton
+          >
+        </div>
+      </template>
+    </UCard>
+  </UModal>
 </template>
 
 <script setup lang="ts">
 import { useClipboard } from "@vueuse/core";
+type visaHistory = {
+  type: string;
+  expiryDate: string;
+};
+
+type coeHistory = {
+  course: string;
+  institution: string;
+  startDate: string;
+  endDate: string;
+};
+
+onMounted(() => {
+  formState.id = crypto.randomUUID();
+});
+
+const visaModal = ref(false);
+function openVisaModal() {
+  visaModal.value = true;
+}
+
+const coeModal = ref(false);
+function openCoEModal() {
+  coeModal.value = true;
+}
 
 const formState = reactive({
+  id: "",
   academicTranscript: {
     received: false,
     certified: false,
@@ -199,7 +347,7 @@ const formState = reactive({
     received: false,
     certified: false,
   },
-  visaType: "500",
+  visaType: "",
   visaExpiryDate: "",
   gsr: {
     formA: false,
@@ -208,6 +356,8 @@ const formState = reactive({
   finalDeclaration: false,
   releaseCondition: false,
   requestedCT: false,
+  visaHistory: [] as visaHistory[],
+  coeHistory: [] as coeHistory[],
 });
 
 const note = computed(() => {
@@ -251,21 +401,65 @@ const note = computed(() => {
 Type: ${formState.visaType}
 ${formState.visaExpiryDate ? `Expiry: ${formState.visaExpiryDate}` : ""}
 
-📝 GSR FORM:
+📝 FORMS AND DOCUMENTS:
 ------------
 Final Declaration: ${formState.finalDeclaration ? "✅ Received" : "⏳ Pending"}
 Part A: ${formState.gsr.formA ? "✅ Received" : "⏳ Awaiting"}
 Part B: ${formState.gsr.formB ? "✅ Accepted" : "⏳ Pending"}
-${formState.requestedCT ? "✅ Requested Credits" : ""}
+${formState.requestedCT ? "🟠 Requested Credits" : ""}
 
 ${
   formState.releaseCondition
     ? "[ ] Approval to issue OL with release condition"
     : ""
-}`;
+}
+${
+  formState.coeHistory.length > 0
+    ? "📜 CoE History: " +
+      formState.coeHistory
+        .map(
+          (coe) =>
+            `${coe.course} at ${coe.institution} from ${coe.startDate} to ${coe.endDate}`
+        )
+        .join("\n")
+    : ""
+}
+${
+  formState.visaHistory.length > 0
+    ? "📜 Visa History: " +
+      formState.visaHistory
+        .map((visa) => `Type: ${visa.type}, Expiry: ${visa.expiryDate}`)
+        .join("\n")
+    : ""
+}
+`;
 
   return note;
 });
+
+function addVisaHistory() {
+  formState.visaHistory.push({
+    type: "",
+    expiryDate: "",
+  });
+}
+
+function addCoEHistory() {
+  formState.coeHistory.push({
+    course: "",
+    institution: "",
+    startDate: "",
+    endDate: "",
+  });
+}
+
+function removeVisaHistory(visa: visaHistory) {
+  formState.visaHistory = formState.visaHistory.filter((v) => v !== visa);
+}
+
+function removeCoEHistory(coe: coeHistory) {
+  formState.coeHistory = formState.coeHistory.filter((c) => c !== coe);
+}
 
 const { copy } = useClipboard();
 const toast = useToast();
@@ -377,6 +571,10 @@ function resetForm() {
     visaExpiryDate: "",
     gsr: { formA: false, formB: false },
     releaseCondition: false,
+    visaHistory: [],
+    coeHistory: [],
+    finalDeclaration: false,
+    requestedCT: false,
   });
 }
 </script>
