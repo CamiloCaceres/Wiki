@@ -11,7 +11,7 @@
     <div v-else-if="isError">
       <h1 class="text-2xl font-bold">Error: {{ error?.message }}</h1>
     </div>
-    <div v-else-if="data">
+    <div v-else-if="data" class="bg-white dark:bg-gray-800 rounded-lg p-4">
       <h1 class="text-3xl font-extrabold">{{ data.name }}</h1>
       <p class="text-gray-500 mt-2 mb-4">{{ data.description }}</p>
       <div v-html="data.content" class="prose md:prose-lg dark:prose-invert p-2"></div>
