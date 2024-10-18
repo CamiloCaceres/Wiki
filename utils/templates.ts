@@ -457,6 +457,24 @@ ${userName}`,
   category: "Email",
   isInternal: false,
   requiredParams: ["intake", "userName"]
+},
+{
+  title: "U18 AP submitted email",
+  slug: "u18-ap-submitted-email",
+  content: ({ userName }: TemplateParams) => `Dear Team,
+
+Thank you for your application. We are pleased to inform you that the student has met the requirements for a conditional offer letter.
+
+However, as the student is under 18 years of age, an academic process has been initiated for the entry assessment. As soon as we receive approval, we will send the offer letter.
+
+We appreciate your patience during this process.
+
+Best regards,
+${userName}`,
+  process: "U18",
+  category: "Email",
+  isInternal: false,
+  requiredParams: ["userName"]
 }
 ];
 // Utility Functions
