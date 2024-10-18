@@ -378,6 +378,20 @@ ${userName}`,
   category: "Email",
   isInternal: false,
   requiredParams: ["userName"]
+},
+{
+  title: "Received refund documents - agents",
+  slug: "received-refund-documents-agents",
+  content: ({ userName }: TemplateParams) => `Hi team,
+
+Thank you for sending those through to us. Please be advised that we've forwarded them to our refund team.
+
+Best regards,
+${userName}`,
+  process: "Refund",
+  category: "Email",
+  isInternal: false,
+  requiredParams: ["userName"]
 }
 ];
 // Utility Functions
