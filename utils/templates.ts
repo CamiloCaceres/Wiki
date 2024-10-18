@@ -406,6 +406,20 @@ ${userName}`,
   category: "Email",
   isInternal: true,
   requiredParams: ["userName"]
+},
+{
+  title: "Awaiting CoE deposit",
+  slug: "awaiting-coe-deposit",
+  content: ({ userName }: TemplateParams) => `Hi team,
+
+We're waiting for the deposit to be reflected in our banking system to process the COE.
+
+Best regards,
+${userName}`,
+  process: "CoE",
+  category: "Email",
+  isInternal: false,
+  requiredParams: ["userName"]
 }
 ];
 // Utility Functions
