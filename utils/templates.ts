@@ -503,10 +503,10 @@ Kindly confirm if the student wants to be added to our waitlist.
   
 Best regards,
 ${userName}`,
-    process: "Assessment",
+    process: "Nursing",
     category: "Email",
     isInternal: false,
-    requiredParams: ["waitlist", "userName"]
+    requiredParams: ["waitlist", "userName"],
   },
   {
     title: "New HDR Application",
@@ -520,12 +520,16 @@ ${userName}`,
     process: "Assessment",
     category: "Email",
     isInternal: true,
-    requiredParams: ["course", "userName"]
+    requiredParams: ["course", "userName"],
   },
   {
     title: "Double Agent",
     slug: "double-agent",
-    content: ({ firstApplication, secondApplication, userName }: TemplateParams) => `Hi team,
+    content: ({
+      firstApplication,
+      secondApplication,
+      userName,
+    }: TemplateParams) => `Hi team,
   
 We have received a double agent case.
   
@@ -539,8 +543,30 @@ ${userName}`,
     process: "Assessment",
     category: "Email",
     isInternal: true,
-    requiredParams: ["firstApplication", "secondApplication", "userName"]
-  }
+    requiredParams: ["firstApplication", "secondApplication", "userName"],
+  },
+  {
+    title: "GAP nursing - internal",
+    slug: "gap-nursing-internal",
+    content: ({ completionDate, intake, userName }: TemplateParams) => `Hi team,
+
+The student applied for Diploma of Nursing, which will be completed on ${completionDate}.
+
+We received an application for Bachelor of Nursing - ${intake} intake.
+
+As there will be more than 8 weeks of gap, please provide us with:
+  1. The study plan
+  2. Approval for the English course
+
+Thank you for your assistance.
+
+Best regards,
+${userName}`,
+    process: "Assessment",
+    category: "Email",
+    isInternal: true,
+    requiredParams: ["completionDate", "intake", "userName"],
+  },
 ];
 // Utility Functions
 export function renderTemplate(
