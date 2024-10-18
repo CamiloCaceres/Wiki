@@ -1,17 +1,28 @@
 <template>
   <UContainer v-if="template" class="py-8 max-w-4xl">
-    <UCard  :ui="{
-      divide: 'dark:divide-gray-700',
-      background: 'bg-gray-100 dark:bg-gray-800',
-    }">
+    <UCard
+      :ui="{
+        divide: 'dark:divide-gray-700',
+        background: 'bg-gray-100 dark:bg-gray-800',
+      }"
+    >
       <template #header>
         <h1 class="text-2xl font-bold capitalize">{{ template.title }}</h1>
       </template>
+
       <pre
         class="whitespace-pre-wrap font-sans p-4 rounded-lg overflow-x-auto"
         >{{ renderedContent }}</pre
       >
-
+      <!-- Dynamic parameter inputs -->
+      <div v-if="dynamicParams.length > 0" class="mb-4 space-y-4 border-t border-gray-300 pt-4">
+        <h1 class="text-lg font-bold">Fill in the required information:</h1>
+        <div v-for="param in dynamicParams" :key="param" class="flex flex-col">
+          <UFormGroup required :label="param" :name="param" class="capitalize">
+            <UInput :id="param" v-model="paramValues[param]" />
+          </UFormGroup>
+        </div>
+      </div>
       <template #footer>
         <div class="flex justify-between items-center">
           <div class="space-y-4 flex flex-col text-sm">
@@ -30,7 +41,7 @@
           <UButton
             icon="i-heroicons-clipboard"
             color="primary"
-            @click="copyToClipboard(renderedContent)"
+            @click="copyToClipboard(renderedContent as string)"
           >
             Copy Template
           </UButton>
@@ -50,9 +61,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import { useRoute } from "vue-router";
-import type { Template } from "@/types/template";
+import type { Template, TemplateParams } from "@/types/template";
 import { templates, renderTemplate } from "@/utils/templates";
 import { useClipboard } from "@vueuse/core";
 
@@ -65,9 +76,41 @@ const template = ref<Template | undefined>(
 
 const { userName } = useUsername();
 
+// Dynamic parameters handling
+const dynamicParams = computed(() =>
+  template.value
+    ? template.value.requiredParams.filter((param: string) => param !== "userName")
+    : []
+);
+
+const paramValues = ref<Record<string, string>>({});
+
+// Initialize paramValues with empty strings for each required parameter
+watch(
+  template,
+  (newTemplate) => {
+    if (newTemplate) {
+      paramValues.value = Object.fromEntries(
+        newTemplate.requiredParams
+          .filter((param: string) => param !== "userName")
+          .map((param: string) => [param, ""])
+      );
+    }
+  },
+  { immediate: true }
+);
+
 const renderedContent = computed(() => {
   if (template.value) {
-    return renderTemplate(template.value, { userName: userName.value });
+    const params = {
+      userName: userName.value,
+      ...paramValues.value,
+    };
+    try {
+      return renderTemplate(template.value, params);
+    } catch (error) {
+      return `Error: ${error}`;
+    }
   }
   return "";
 });
