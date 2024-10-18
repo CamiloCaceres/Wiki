@@ -304,6 +304,20 @@ ${userName}`,
     category: "Email",
     isInternal: false,
     requiredParams: ["userName"],
+  },
+  {
+    title: "Gap justification",
+    slug: "gap-justification",
+    content: ({ years, userName }: TemplateParams) => `Hi Team,
+  
+Hope this email finds you well. Upon verifying the information sent, we see that there's a gap between ${years}. To continue with the application, please send us a document that justifies that gap (Work experience letter, study certificates, etc.). Please note that the gap should only be for 1 year.
+  
+Best regards,
+${userName}`,
+    process: "Assessment",
+    category: "Email",
+    isInternal: false,
+    requiredParams: ["years", "userName"]
   }
 ];
 // Utility Functions
