@@ -215,7 +215,7 @@
           <div
             v-for="visa in formState.visaHistory"
             :key="visa.type"
-            class="flex items-center gap-4"
+            class="flex flex-col md:flex-row md:items-center md:gap-4"
           >
             <UFormGroup label="Visa type" name="visaType">
               <USelect
@@ -225,6 +225,9 @@
             </UFormGroup>
             <UFormGroup label="Visa expiry date" name="visaExpiryDate">
               <UInput v-model="visa.expiryDate" type="text" />
+            </UFormGroup>
+            <UFormGroup label="Visa grant date" name="visaGrantDate">
+              <UInput v-model="visa.grantDate" type="text" />
             </UFormGroup>
             <UButton
               class="self-end"
@@ -314,18 +317,8 @@
 
 <script setup lang="ts">
 import { useClipboard } from "@vueuse/core";
-type visaHistory = {
-  type: string;
-  expiryDate: string;
-};
-
-type coeHistory = {
-  course: string;
-  institution: string;
-  startDate: string;
-  endDate: string;
-};
-
+import type { VisaHistory, CoEHistory } from "@/types/notes";
+import NoteModal from "~/components/Modals/NoteModal.vue";
 onMounted(() => {
   formState.id = crypto.randomUUID();
 });
@@ -364,8 +357,8 @@ const formState = reactive({
   finalDeclaration: false,
   releaseCondition: false,
   requestedCT: false,
-  visaHistory: [] as visaHistory[],
-  coeHistory: [] as coeHistory[],
+  visaHistory: [] as VisaHistory[],
+  coeHistory: [] as CoEHistory[],
 });
 
 const note = computed(() => {
@@ -414,11 +407,16 @@ ${formState.visaExpiryDate ? `Expiry: ${formState.visaExpiryDate}` : ""}
 Final Declaration: ${formState.finalDeclaration ? "✅ Received" : "⏳ Pending"}
 Part A: ${formState.gsr.formA ? "✅ Received" : "⏳ Awaiting"}
 Part B: ${formState.gsr.formB ? "✅ Accepted" : "⏳ Pending"}
-${formState.requestedCT ? "🟠 Requested Credits" : ""}
+${
+  formState.requestedCT
+    ? `---------------------    
+🟠 Requested Credits`
+    : ""
+}
 
 ${
   formState.releaseCondition
-    ? "[ ] Approval to issue OL with release condition"
+    ? "❗ Requires approval to issue OL with release condition"
     : ""
 }
 ${
@@ -456,6 +454,7 @@ function addVisaHistory() {
   formState.visaHistory.push({
     type: "",
     expiryDate: "",
+    grantDate: "",
   });
 }
 
@@ -468,11 +467,11 @@ function addCoEHistory() {
   });
 }
 
-function removeVisaHistory(visa: visaHistory) {
+function removeVisaHistory(visa: VisaHistory) {
   formState.visaHistory = formState.visaHistory.filter((v) => v !== visa);
 }
 
-function removeCoEHistory(coe: coeHistory) {
+function removeCoEHistory(coe: CoEHistory) {
   formState.coeHistory = formState.coeHistory.filter((c) => c !== coe);
 }
 
