@@ -46,4 +46,8 @@ const generateTemplate = () => {
 const copyMessage = () => {
   copy(computedMessage.value);
 };
+
+useHead({
+  title: "COE template",
+});
 </script>
