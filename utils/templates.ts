@@ -492,6 +492,22 @@ ${userName}`,
     isInternal: false,
     requiredParams: ["userName"],
   },
+  {
+    title: "Nursing intake full",
+    slug: "nursing-intake-full",
+    content: ({ waitlist, userName }: TemplateParams) => `Hi team,
+  
+The requested intake is full, and there is currently a waitlist of ${waitlist} students.
+  
+Kindly confirm if the student wants to be added to our waitlist.
+  
+Best regards,
+${userName}`,
+    process: "Assessment",
+    category: "Email",
+    isInternal: false,
+    requiredParams: ["waitlist", "userName"]
+  }
 ];
 // Utility Functions
 export function renderTemplate(
