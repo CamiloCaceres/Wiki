@@ -1,6 +1,6 @@
 <template>
   <UButton icon="i-heroicons-eye" variant="outline" color="gray" @click="isOpen = true">Preview Note</UButton>
-  <UModal v-model="isOpen" :ui="{ width: 'max-w-2xl' }">
+  <UModal v-model="isOpen" :ui="{ container: 'flex min-h-full items-center justify-center text-center' }">
     <UCard>
       <template #header>
         <div class="flex items-center justify-between">
