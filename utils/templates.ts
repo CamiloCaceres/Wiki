@@ -420,6 +420,24 @@ ${userName}`,
   category: "Email",
   isInternal: false,
   requiredParams: ["userName"]
+},
+{
+  title: "COE Shortfall",
+  slug: "coe-shortfall",
+  content: ({ balance, shortfall, userName }: TemplateParams) => `Hi team,
+
+Thank you for the student documents. Upon reviewing the student account, the balance is ${balance}. There's a shortfall of ${shortfall}. 
+
+To proceed with the CoE, please:
+  1. Make the additional payment
+  2. Provide certified student documents
+
+Best regards,
+${userName}`,
+  process: "CoE",
+  category: "Email",
+  isInternal: false,
+  requiredParams: ["balance", "shortfall", "userName"]
 }
 ];
 // Utility Functions
