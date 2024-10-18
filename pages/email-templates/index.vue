@@ -2,7 +2,7 @@
   <div>
     <h2 class="font-semibold text-3xl mb-4">Browse Templates</h2>
     <div class="flex space-x-4 mb-4">
-      <SearchTemplates @search="handleSearch" />
+      <SearchTemplates />
     </div>
     <div class="flex items-center space-x-6 my-4">
       <div class="font-semibold self-start mr-4">Filter by:</div>
@@ -42,8 +42,9 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
-import { templates, advancedSearchTemplates } from '~/utils/templates';
-import type { Template } from '~/types/template';
+import { templates, advancedSearchTemplates } from '@/utils/templates';
+import type { Template } from '@/types/template';
+import SearchTemplates from '~/components/SearchTemplates.vue';
 
 const router = useRouter();
 
@@ -74,9 +75,7 @@ const filteredTemplates = computed(() => {
   });
 });
 
-const handleSearch = (query: string) => {
-  searchQuery.value = query;
-};
+
 
 useHead({
   title: "Email Templates",
