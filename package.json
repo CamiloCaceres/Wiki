@@ -15,8 +15,7 @@
     "@nuxt/image": "^1.7.0",
     "@nuxt/ui": "^2.13.0",
     "@nuxtjs/device": "^3.2.4",
-    "nuxt": "^3.10.1",
-    "nuxt-tiptap-editor": "^1.1.1"
+    "nuxt": "^3.10.1"
   },
   "dependencies": {
     "@pinia/nuxt": "^0.5.1",
