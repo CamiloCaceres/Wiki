@@ -333,6 +333,21 @@ ${userName}`,
     isInternal: false,
     requiredParams: ["userName"],
   },
+  {
+    title: "Refund request – To refund team",
+    slug: "refund-request",
+    content: ({ studentName, userName }: TemplateParams) => `Hi Team,
+  
+Please see the attached refund application for ${studentName}, due to visa refusal. Be advised that the CoE has already been cancelled.
+  
+Best regards,
+${userName}`,
+    process: "Refund",
+    category: "Email",
+    isInternal: true,
+    requiredParams: ["studentName", "userName"]
+  },
+  
 ];
 // Utility Functions
 export function renderTemplate(
