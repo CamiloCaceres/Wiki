@@ -155,35 +155,43 @@
               v-model="formState.releaseCondition"
               label="Release required"
             />
-
           </div>
-    
         </div>
-        <div class="flex justify-between gap-2">
+        <div
+          class="flex flex-col items-start gap-y-4 md:flex-row md:justify-between md:items-center border-b border-gray-200 py-2"
+        >
           <h2 class="font-semibold text-lg">Visa and CoE history</h2>
           <div class="flex items-center gap-2">
-            <UButton color="blue" variant="outline" icon="i-heroicons-plus" @click="openVisaModal">Visa History</UButton>
-            <UButton color="blue" variant="outline" icon="i-heroicons-plus" @click="openCoEModal">CoE History</UButton>
+            <UButton
+              color="blue"
+              variant="outline"
+              icon="i-heroicons-plus"
+              @click="openVisaModal"
+              >Visa History</UButton
+            >
+            <UButton
+              color="blue"
+              variant="outline"
+              icon="i-heroicons-plus"
+              @click="openCoEModal"
+              >CoE History</UButton
+            >
           </div>
         </div>
 
+        <UTextarea resize :rows="6" v-model="note" class="w-full py-2" />
 
-          <UTextarea resize :rows="6" v-model="note" class="w-full py-2" />
-
-        <div class="flex justify-end gap-2">
+        <div class="flex flex-col md:flex-row justify-end gap-2">
           <UButton
-            class="mt-2"
             icon="i-heroicons-arrow-path"
-            color="gray"
+            color="red"
+            variant="ghost"
             @click="resetForm"
           >
             Reset
           </UButton>
-          <UButton
-            class="mt-2"
-            icon="i-heroicons-clipboard"
-            @click="copyToClipboard"
-          >
+          <NoteModal v-model="note" />
+          <UButton icon="i-heroicons-clipboard" @click="copyToClipboard">
             Copy to Clipboard
           </UButton>
         </div>
@@ -395,14 +403,14 @@ const note = computed(() => {
         }`
       : ""
   }
-
+---------------------    
 🛄 VISA INFORMATION:
 --------------------
 Type: ${formState.visaType}
 ${formState.visaExpiryDate ? `Expiry: ${formState.visaExpiryDate}` : ""}
-
+---------------------    
 📝 FORMS AND DOCUMENTS:
-------------
+----------------------
 Final Declaration: ${formState.finalDeclaration ? "✅ Received" : "⏳ Pending"}
 Part A: ${formState.gsr.formA ? "✅ Received" : "⏳ Awaiting"}
 Part B: ${formState.gsr.formB ? "✅ Accepted" : "⏳ Pending"}
@@ -415,24 +423,31 @@ ${
 }
 ${
   formState.coeHistory.length > 0
-    ? "📜 CoE History: " +
-      formState.coeHistory
-        .map(
-          (coe) =>
-            `${coe.course} at ${coe.institution} from ${coe.startDate} to ${coe.endDate}`
-        )
-        .join("\n")
+    ? `
+---------------------    
+📜 COE HISTORY: 
+---------------------
+${formState.coeHistory
+  .map(
+    (coe) =>
+      `${coe.course} at ${coe.institution} from ${coe.startDate} to ${coe.endDate}`
+  )
+  .join("\n")}`
     : ""
 }
 ${
   formState.visaHistory.length > 0
-    ? "📜 Visa History: " +
-      formState.visaHistory
-        .map((visa) => `Type: ${visa.type}, Expiry: ${visa.expiryDate}`)
-        .join("\n")
+    ? `
+---------------------    
+📜 VISA HISTORY:
+---------------------
+${formState.visaHistory
+  .map((visa) => `Type: ${visa.type}, Expiry: ${visa.expiryDate}`)
+  .join("\n")}`
     : ""
-}
-`;
+}`
+    .trim()
+    .replace(/^\s*[\r\n]/gm, "");
 
   return note;
 });
