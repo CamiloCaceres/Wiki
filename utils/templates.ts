@@ -506,7 +506,7 @@ ${userName}`,
     process: "Assessment",
     category: "Email",
     isInternal: false,
-    requiredParams: ["waitlist", "userName"],
+    requiredParams: ["waitlist", "userName"]
   },
   {
     title: "New HDR Application",
@@ -520,8 +520,27 @@ ${userName}`,
     process: "Assessment",
     category: "Email",
     isInternal: true,
-    requiredParams: ["course", "userName"],
+    requiredParams: ["course", "userName"]
   },
+  {
+    title: "Double Agent",
+    slug: "double-agent",
+    content: ({ firstApplication, secondApplication, userName }: TemplateParams) => `Hi team,
+  
+We have received a double agent case.
+  
+The first application was ${firstApplication}.
+The second application we received was ${secondApplication}.
+  
+Kindly confirm the agency with which the student wants to proceed and seek Petra's approval if needed.
+  
+Best regards,
+${userName}`,
+    process: "Assessment",
+    category: "Email",
+    isInternal: true,
+    requiredParams: ["firstApplication", "secondApplication", "userName"]
+  }
 ];
 // Utility Functions
 export function renderTemplate(
