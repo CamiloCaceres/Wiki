@@ -317,7 +317,7 @@ ${userName}`,
     process: "Assessment",
     category: "Email",
     isInternal: false,
-    requiredParams: ["years", "userName"]
+    requiredParams: ["years", "userName"],
   },
   {
     title: "Illegible scan documents",
@@ -345,26 +345,26 @@ ${userName}`,
     process: "Refund",
     category: "Email",
     isInternal: true,
-    requiredParams: ["studentName", "userName"]
+    requiredParams: ["studentName", "userName"],
   },
   {
-  title: "Refund request – Student Services",
-  slug: "refund-request-student-services",
-  content: ({ studentName, userName }: TemplateParams) => `Hi Team,
+    title: "Refund request – Student Services",
+    slug: "refund-request-student-services",
+    content: ({ studentName, userName }: TemplateParams) => `Hi Team,
 
 Hope you're doing well. Please see the attached withdrawal form for ${studentName} due to visa refusal. Be advised that the CoE has already been cancelled and the refund request has been forwarded to the Refund team.
 
 Best regards,
 ${userName}`,
-  process: "Refund",
-  category: "Email",
-  isInternal: true,
-  requiredParams: ["studentName", "userName"]
-},
-{
-  title: "Refund follow up to agent",
-  slug: "refund-follow-up-agent",
-  content: ({ userName }: TemplateParams) => `Hi team,
+    process: "Refund",
+    category: "Email",
+    isInternal: true,
+    requiredParams: ["studentName", "userName"],
+  },
+  {
+    title: "Refund follow up to agent",
+    slug: "refund-follow-up-agent",
+    content: ({ userName }: TemplateParams) => `Hi team,
 
 Hope you're doing well.
 
@@ -374,57 +374,57 @@ Please feel free to contact our refund team (refund-enquiries@torrens.edu.au) di
 
 Best regards,
 ${userName}`,
-  process: "Refund",
-  category: "Email",
-  isInternal: false,
-  requiredParams: ["userName"]
-},
-{
-  title: "Received refund documents - agents",
-  slug: "received-refund-documents-agents",
-  content: ({ userName }: TemplateParams) => `Hi team,
+    process: "Refund",
+    category: "Email",
+    isInternal: false,
+    requiredParams: ["userName"],
+  },
+  {
+    title: "Received refund documents - agents",
+    slug: "received-refund-documents-agents",
+    content: ({ userName }: TemplateParams) => `Hi team,
 
 Thank you for sending those through to us. Please be advised that we've forwarded them to our refund team.
 
 Best regards,
 ${userName}`,
-  process: "Refund",
-  category: "Email",
-  isInternal: false,
-  requiredParams: ["userName"]
-},
-{
-  title: "Refund follow up internal",
-  slug: "refund-follow-up-internal",
-  content: ({ userName }: TemplateParams) => `Dear team,
+    process: "Refund",
+    category: "Email",
+    isInternal: false,
+    requiredParams: ["userName"],
+  },
+  {
+    title: "Refund follow up internal",
+    slug: "refund-follow-up-internal",
+    content: ({ userName }: TemplateParams) => `Dear team,
 
 Could you please provide an update on the refund application status for the above-mentioned student?
 
 Best regards,
 ${userName}`,
-  process: "Refund",
-  category: "Email",
-  isInternal: true,
-  requiredParams: ["userName"]
-},
-{
-  title: "Awaiting CoE deposit",
-  slug: "awaiting-coe-deposit",
-  content: ({ userName }: TemplateParams) => `Hi team,
+    process: "Refund",
+    category: "Email",
+    isInternal: true,
+    requiredParams: ["userName"],
+  },
+  {
+    title: "Awaiting CoE deposit",
+    slug: "awaiting-coe-deposit",
+    content: ({ userName }: TemplateParams) => `Hi team,
 
 We're waiting for the deposit to be reflected in our banking system to process the COE.
 
 Best regards,
 ${userName}`,
-  process: "CoE",
-  category: "Email",
-  isInternal: false,
-  requiredParams: ["userName"]
-},
-{
-  title: "COE Shortfall",
-  slug: "coe-shortfall",
-  content: ({ balance, shortfall, userName }: TemplateParams) => `Hi team,
+    process: "CoE",
+    category: "Email",
+    isInternal: false,
+    requiredParams: ["userName"],
+  },
+  {
+    title: "COE Shortfall",
+    slug: "coe-shortfall",
+    content: ({ balance, shortfall, userName }: TemplateParams) => `Hi team,
 
 Thank you for the student documents. Upon reviewing the student account, the balance is ${balance}. There's a shortfall of ${shortfall}. 
 
@@ -434,15 +434,15 @@ To proceed with the CoE, please:
 
 Best regards,
 ${userName}`,
-  process: "CoE",
-  category: "Email",
-  isInternal: false,
-  requiredParams: ["balance", "shortfall", "userName"]
-},
-{
-  title: "Offer letter for CoE Deferral",
-  slug: "coe-deferral-offer-letter",
-  content: ({ intake, userName }: TemplateParams) => `Hi team,
+    process: "CoE",
+    category: "Email",
+    isInternal: false,
+    requiredParams: ["balance", "shortfall", "userName"],
+  },
+  {
+    title: "Offer letter for CoE Deferral",
+    slug: "coe-deferral-offer-letter",
+    content: ({ intake, userName }: TemplateParams) => `Hi team,
 
 Please find attached the deferred offer letter for the ${intake} intake. Kindly:
 1. Sign where indicated
@@ -453,15 +453,15 @@ This is required to issue a new CoE. Please be aware that the current CoE has be
 
 Best regards,
 ${userName}`,
-  process: "CoE",
-  category: "Email",
-  isInternal: false,
-  requiredParams: ["intake", "userName"]
-},
-{
-  title: "U18 AP submitted email",
-  slug: "u18-ap-submitted-email",
-  content: ({ userName }: TemplateParams) => `Dear Team,
+    process: "CoE",
+    category: "Email",
+    isInternal: false,
+    requiredParams: ["intake", "userName"],
+  },
+  {
+    title: "U18 AP submitted email",
+    slug: "u18-ap-submitted-email",
+    content: ({ userName }: TemplateParams) => `Dear Team,
 
 Thank you for your application. We are pleased to inform you that the student has met the requirements for a conditional offer letter.
 
@@ -471,11 +471,27 @@ We appreciate your patience during this process.
 
 Best regards,
 ${userName}`,
-  process: "U18",
-  category: "Email",
-  isInternal: false,
-  requiredParams: ["userName"]
-}
+    process: "U18",
+    category: "Email",
+    isInternal: false,
+    requiredParams: ["userName"],
+  },
+  {
+    title: "Financials done",
+    slug: "financials-done",
+    content: ({ userName }: TemplateParams) => `Dear Team,
+
+Thank you for sending through those documents. Please be advised that this application has been forwarded to our GSR team for further assessment.
+
+We'll get back to you once we have an outcome.
+
+Best regards,
+${userName}`,
+    process: "Financials",
+    category: "Email",
+    isInternal: false,
+    requiredParams: ["userName"],
+  },
 ];
 // Utility Functions
 export function renderTemplate(
