@@ -360,6 +360,24 @@ ${userName}`,
   category: "Email",
   isInternal: true,
   requiredParams: ["studentName", "userName"]
+},
+{
+  title: "Refund follow up to agent",
+  slug: "refund-follow-up-agent",
+  content: ({ userName }: TemplateParams) => `Hi team,
+
+Hope you're doing well.
+
+Please be advised that we've forwarded the student's refund application form to our refund team, but it appears to still be under review. We've followed up with the refund team, and hopefully they will get back to you soon.
+
+Please feel free to contact our refund team (refund-enquiries@torrens.edu.au) directly for any further inquiries.
+
+Best regards,
+${userName}`,
+  process: "Refund",
+  category: "Email",
+  isInternal: false,
+  requiredParams: ["userName"]
 }
 ];
 // Utility Functions
