@@ -267,6 +267,44 @@ ${userName}`,
     isInternal: true,
     requiredParams: ["courses", "userName"],
   },
+  {
+    title: "U18 Homestay",
+    slug: "u18-homestay",
+    content: ({ userName }: TemplateParams) => `Dear Team,
+  
+AWP indicated homestay & guardian are arranged. Can you please send through the following documents to confirm the arrangements for us to issue COE and CAAW:
+  
+• Homestay contract with AHN and proof of payment to AHN
+• ISA's confirmation regarding the guardianship arrangement (if you could send through the proof of payment to ISA that would be great)
+  
+We are unable to issue COE & CAAW until these arrangements have been made.
+  
+Best regards,
+${userName}`,
+    process: "U18",
+    category: "Email",
+    isInternal: false,
+    requiredParams: ["userName"],
+  },
+  {
+    title: "U18: Guardian Documents",
+    slug: "u18-guardian-documents",
+    content: ({ userName }: TemplateParams) => `Dear Team,
+  
+AWP indicates that the student will stay with a guardian. Please provide evidence of the relationship between the guardian & student in file. I would be grateful if you could provide solid evidence to establish the relationship between the guardian & student.
+  
+Required documents:
+• Birth certificate of the guardian
+• Birth certificate of one of the parents for whom the guardian is related to
+• Student's birth certificate
+  
+Kind regards,
+${userName}`,
+    process: "U18",
+    category: "Email",
+    isInternal: false,
+    requiredParams: ["userName"],
+  }
 ];
 // Utility Functions
 export function renderTemplate(
