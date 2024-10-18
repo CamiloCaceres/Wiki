@@ -506,8 +506,22 @@ ${userName}`,
     process: "Assessment",
     category: "Email",
     isInternal: false,
-    requiredParams: ["waitlist", "userName"]
-  }
+    requiredParams: ["waitlist", "userName"],
+  },
+  {
+    title: "New HDR Application",
+    slug: "new-hdr-application",
+    content: ({ course, userName }: TemplateParams) => `Hi Laurent,
+  
+We have received a new application for ${course}. Please find the assessment below and relevant documents attached.
+
+Best regards,
+${userName}`,
+    process: "Assessment",
+    category: "Email",
+    isInternal: true,
+    requiredParams: ["course", "userName"],
+  },
 ];
 // Utility Functions
 export function renderTemplate(
