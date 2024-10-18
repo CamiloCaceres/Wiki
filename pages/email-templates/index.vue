@@ -77,4 +77,8 @@ const filteredTemplates = computed(() => {
 const handleSearch = (query: string) => {
   searchQuery.value = query;
 };
+
+useHead({
+  title: "Email Templates",
+});
 </script>
