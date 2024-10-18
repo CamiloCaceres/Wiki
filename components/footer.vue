@@ -11,7 +11,7 @@
             <a href="#" class="text-sm text-gray-600 hover:text-gray-800">Employee Portal</a>
           </div> -->
           <div class="text-xs text-gray-500">
-            App Version 1.0.0
+            App Version 1.0.1
           </div>
         </div>
       </div>
