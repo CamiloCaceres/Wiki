@@ -438,6 +438,25 @@ ${userName}`,
   category: "Email",
   isInternal: false,
   requiredParams: ["balance", "shortfall", "userName"]
+},
+{
+  title: "Offer letter for CoE Deferral",
+  slug: "coe-deferral-offer-letter",
+  content: ({ intake, userName }: TemplateParams) => `Hi team,
+
+Please find attached the deferred offer letter for the ${intake} intake. Kindly:
+1. Sign where indicated
+2. Scan the entire document
+3. Return the scanned document to us as one attachment
+
+This is required to issue a new CoE. Please be aware that the current CoE has been cancelled.
+
+Best regards,
+${userName}`,
+  process: "CoE",
+  category: "Email",
+  isInternal: false,
+  requiredParams: ["intake", "userName"]
 }
 ];
 // Utility Functions
