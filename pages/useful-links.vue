@@ -48,4 +48,8 @@ const links = reactive([
     link: "https://oars.acer.edu.au/torrens-university-australia-limited",
   },
 ]);
+
+useHead({
+  title: "Useful links",
+});
 </script>

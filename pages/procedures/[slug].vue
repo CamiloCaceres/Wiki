@@ -48,4 +48,8 @@
   definePageMeta({
     layout: 'studylink'
   });
+
+  useHead({
+    title: data.value?.name ?? "Procedures",
+  });
   </script>

@@ -48,4 +48,7 @@ const { getAllStudylink } = usePocketbase();
 
 const { isPending, isError, data, error } = useQuery({ queryKey: ['getAllStudylink'], queryFn: getAllStudylink })
 
+useHead({
+  title: "Studylink processes",
+});
 </script>

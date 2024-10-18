@@ -43,7 +43,7 @@ const { isPending, isError, data, error } = useQuery({
 
 
 useHead({
-  title: data.value?.name,
+  title: data.value?.name ?? "Studylink",
 });
 
 definePageMeta({

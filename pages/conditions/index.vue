@@ -154,4 +154,8 @@ const addDoNConditions = () => {
 const copyToClipboard = () => {
   copy(outputText.value);
 };
+
+useHead({
+  title: "Conditions",
+});
 </script>

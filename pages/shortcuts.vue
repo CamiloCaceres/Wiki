@@ -79,4 +79,8 @@
     }
     return key
   }
+
+  useHead({
+    title: "Keyboard shortcuts",
+  });
   </script>

@@ -33,7 +33,7 @@
   <UTabs :items="items">
     <template #item="{ item }">
       <div class="grid grid-cols-3 gap-x-12 gap-y-4">
-        <div v-for="trimesterTab in item.content" :key="trimesterTab.code">
+        <div v-for="trimesterTab in JSON.parse(item.content)" :key="trimesterTab.code">
           <div
             class="border-2 border-orange-500 transition rounded-xl flex flex-col items-center py-2 px-4 w-full cursor-pointer"
             @click="getCourseEndDate(trimesterTab.code)"
@@ -61,7 +61,7 @@ import { useClipboard } from "@vueuse/core";
 
 const items = trimestersByYear.map(({ label, trimestersInfo }) => ({
   label: label.toString(),
-  content: trimestersInfo,
+  content: JSON.stringify(trimestersInfo), // Convert to string
 }));
 const { copy, copied } = useClipboard();
 
@@ -112,4 +112,8 @@ function getCourseEndDate(startTrimesterCode: string) {
     outputTrimester.value = "Trimester not found";
   }
 }
+
+useHead({
+  title: "Trimester calculator",
+});
 </script>

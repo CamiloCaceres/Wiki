@@ -75,4 +75,8 @@ const getIcon = (text) => {
   };
   return iconMap[text] || "i-heroicons-book-open";
 };
+
+useHead({
+  title: "Admissions Wiki",
+});
 </script>

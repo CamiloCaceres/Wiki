@@ -595,4 +595,8 @@ function resetForm() {
     requestedCT: false,
   });
 }
+
+useHead({
+  title: "Assessment Notes",
+});
 </script>

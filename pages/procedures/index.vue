@@ -47,4 +47,8 @@ const router = useRouter();
 const { getAllProcedures } = usePocketbase();
 
 const { isPending, isError, data, error } = useQuery({ queryKey: ['getAllProcedures'], queryFn: getAllProcedures })
+
+useHead({
+  title: "Procedures",
+});
 </script>
