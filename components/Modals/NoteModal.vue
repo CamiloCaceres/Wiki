@@ -4,7 +4,7 @@
     <UCard>
       <template #header>
         <div class="flex items-center justify-between">
-        <h3 class="text-lg font-medium text-gray-900">Full Note</h3>
+        <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">Full Note</h3>
         <UButton
           icon="i-heroicons-x-mark"
           variant="ghost"
