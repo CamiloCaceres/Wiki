@@ -50,9 +50,7 @@ ${userName}`,
   {
     title: "Academic Alternative Entry",
     slug: "academic-alternative-entry",
-    content: ({
-      userName,
-    }: TemplateParams) => `Dear team,
+    content: ({ userName }: TemplateParams) => `Dear team,
 Thanks for the application. Upon reviewing student documents, the Bachelor's award certificate is equivalent to an associate degree in Australia. To proceed we need to raise a special entry request to the Program Director, please provide the following:
     •	CV
     •	Work experience letters
@@ -236,6 +234,20 @@ Kindly confirm if we can issue the offer letter for this applicant.
 Best regards,
 ${params.userName}
     `,
+    process: "Assessment",
+    category: "AP",
+    isInternal: true,
+    requiredParams: ["userName"],
+  },
+  {
+    title: "AP: Special Entry - Accounting",
+    slug: "special-entry-accounting",
+    content: ({ userName }: TemplateParams) => `Hi Ajay,
+This student didn't study Maths in Year 12 so we are seeking special entry.
+Please let us know if we can proceed with this case.
+
+Best regards,
+${userName}`,
     process: "Assessment",
     category: "AP",
     isInternal: true,
