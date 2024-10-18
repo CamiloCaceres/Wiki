@@ -4,20 +4,20 @@
     <UCard>
       <template #header>
         <div class="flex items-center justify-between">
-        <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">Full Note</h3>
-        <UButton
-          icon="i-heroicons-x-mark"
-          variant="ghost"
-          @click="isOpen = false"
-        />
-      </div>
-    </template>
-    <UTextarea 
-    autoresize  
-    resize 
-      :model-value="modelValue" 
-      @update:model-value="$emit('update:modelValue', $event)"
-      class="w-full py-2" 
+          <h3 class="text-lg font-medium text-gray-900 dark:text-gray-100">Full Note</h3>
+          <UButton
+            icon="i-heroicons-x-mark"
+            variant="ghost"
+            @click="isOpen = false"
+          />
+        </div>
+      </template>
+      <UTextarea 
+        autoresize  
+        resize 
+        :model-value="modelValue" 
+        @update:model-value="updateModelValue"
+        class="w-full py-2" 
       />
       <template #footer> 
         <UButton @click="copyNote">Copy Note</UButton>
@@ -42,6 +42,10 @@ const emit = defineEmits<{
   (e: 'update:modelValue', value: string): void;
 }>();
 
+function updateModelValue(value: string) {
+  emit('update:modelValue', value);
+}
+
 async function copyNote() {
   const { copy, copied, isSupported } = useClipboard();
   await copy(props.modelValue);
@@ -52,6 +56,5 @@ async function copyNote() {
       color: 'green',
     });
   }
-  
 }
 </script>
