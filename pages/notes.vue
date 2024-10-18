@@ -17,11 +17,12 @@
 
       <UForm :state="formState" class="space-y-4 mt-2">
         <div
+        
           class="flex flex-col items-start gap-y-4 md:flex-row md:justify-between md:items-center border-b border-gray-200 pb-2"
         >
           <h2 class="font-semibold text-lg">Academic Transcript</h2>
-          <div class="flex items-center gap-6 justify-center">
-            <UFormGroup name="received" v-motion-fade-visible>
+          <div v-auto-animate class="flex items-center gap-6 justify-center">
+            <UFormGroup name="received" >
               <UCheckbox
                 v-model="formState.academicTranscript.received"
                 label="Received"
@@ -31,7 +32,6 @@
               v-if="formState.academicTranscript.received"
               label="Certified"
               name="certified"
-              v-motion-fade-visible
             >
               <UToggle
                 v-model="formState.academicTranscript.certified"
@@ -43,7 +43,6 @@
               v-if="formState.academicTranscript.received"
               label="Meets"
               name="meets"
-              v-motion-fade-visible
             >
               <UToggle
                 v-model="formState.academicTranscript.meets"
@@ -58,8 +57,8 @@
           class="flex flex-col items-start gap-y-4 md:flex-row md:justify-between md:items-center border-b border-gray-200 pb-2"
         >
           <h2 class="font-semibold text-lg">English</h2>
-          <div class="flex items-center gap-6">
-            <UFormGroup name="received" v-motion-slide-right>
+          <div v-auto-animate class="flex items-center gap-6">
+            <UFormGroup name="received" >
               <UCheckbox
                 v-model="formState.english.received"
                 label="Received"
@@ -69,7 +68,6 @@
               v-if="formState.english.received"
               label="Meets"
               name="meets"
-              v-motion-fade-visible
             >
               <UToggle
                 v-model="formState.english.meets"
@@ -84,8 +82,8 @@
           class="flex flex-col items-start gap-y-4 md:flex-row md:justify-between md:items-center border-b border-gray-200 pb-2"
         >
           <h2 class="font-semibold text-lg">Passport</h2>
-          <div class="flex items-center gap-6">
-            <UFormGroup name="received" v-motion-slide-right>
+          <div v-auto-animate class="flex items-center gap-6">
+            <UFormGroup name="received" >
               <UCheckbox
                 v-model="formState.passport.received"
                 label="Received"
@@ -95,7 +93,6 @@
               v-if="formState.passport.received"
               label="Certified"
               name="certified"
-              v-motion-fade-visible
             >
               <UToggle
                 v-model="formState.passport.certified"
@@ -210,11 +207,11 @@
         <h1 class="font-bold text-2xl mb-4">Visa and CoE history</h1>
       </template>
       <div>
-        <div class="flex flex-col gap-2">
+        <div class="flex flex-col gap-2" v-auto-animate>
           <h2 class="font-bold text-lg">Visa history</h2>
           <div
             v-for="visa in formState.visaHistory"
-            :key="visa.type"
+            :key="visa.id"
             class="flex flex-col md:flex-row md:items-center md:gap-4"
           >
             <UFormGroup label="Visa type" name="visaType">
@@ -263,12 +260,13 @@
       <template #header>
         <h1 class="font-bold text-2xl mb-4">Add CoE</h1>
       </template>
-      <div class="flex flex-col gap-2">
+      <div class="flex flex-col gap-2" v-auto-animate>
         <h2 class="font-bold text-lg">CoE history</h2>
         <div
           v-for="coe in formState.coeHistory"
-          :key="coe.course"
+          :key="coe.id"
           class="flex items-center gap-4 border-b border-gray-200 pb-2"
+        
         >
           <div>
             <UFormGroup label="Course name" name="coeCourse">
@@ -452,6 +450,7 @@ ${formState.visaHistory
 
 function addVisaHistory() {
   formState.visaHistory.push({
+    id: crypto.randomUUID(),
     type: "",
     expiryDate: "",
     grantDate: "",
@@ -460,6 +459,7 @@ function addVisaHistory() {
 
 function addCoEHistory() {
   formState.coeHistory.push({
+    id: crypto.randomUUID(),
     course: "",
     institution: "",
     startDate: "",

@@ -2,6 +2,7 @@ export type VisaHistory = {
     type: string;
     grantDate: string;
     expiryDate: string;
+    id?: string;
   };
   
 export type CoEHistory = {
@@ -9,5 +10,6 @@ export type CoEHistory = {
     institution: string;
     startDate: string;
     endDate: string;
+    id?: string;
   };
   

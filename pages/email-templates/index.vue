@@ -20,7 +20,7 @@
       />
     </UFormGroup>
     </div>
-    <div class="flex flex-col space-y-6">
+    <div v-auto-animate class="flex flex-col space-y-6">
       <div v-for="template in filteredTemplates" :key="template.slug">
         <div class="rounded-md p-4 flex items-center justify-between border-2 dark:border-gray-700 dark:bg-gray-800">
           <div>
