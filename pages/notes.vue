@@ -427,7 +427,7 @@ ${
 ---------------------
 ${formState.coeHistory
   .map(
-    (coe) =>
+    (coe: CoEHistory) =>
       `${coe.course} at ${coe.institution} from ${coe.startDate} to ${coe.endDate}`
   )
   .join("\n")}`
@@ -440,7 +440,7 @@ ${
 📜 VISA HISTORY:
 ---------------------
 ${formState.visaHistory
-  .map((visa) => `Type: ${visa.type}, Expiry: ${visa.expiryDate}`)
+  .map((visa: VisaHistory) => `Type: ${visa.type}, Expiry: ${visa.expiryDate}`)
   .join("\n")}`
     : ""
 }`
@@ -468,11 +468,15 @@ function addCoEHistory() {
 }
 
 function removeVisaHistory(visa: VisaHistory) {
-  formState.visaHistory = formState.visaHistory.filter((v) => v !== visa);
+  formState.visaHistory = formState.visaHistory.filter(
+    (v: VisaHistory) => v !== visa
+  );
 }
 
 function removeCoEHistory(coe: CoEHistory) {
-  formState.coeHistory = formState.coeHistory.filter((c) => c !== coe);
+  formState.coeHistory = formState.coeHistory.filter(
+    (c: CoEHistory) => c !== coe
+  );
 }
 
 const { copy } = useClipboard();
