@@ -318,7 +318,21 @@ ${userName}`,
     category: "Email",
     isInternal: false,
     requiredParams: ["years", "userName"]
-  }
+  },
+  {
+    title: "Illegible scan documents",
+    slug: "illegible-scan-documents",
+    content: ({ userName }: TemplateParams) => `Hi Team,
+  
+Hope this email finds you well. Upon reviewing the documents, we notice that they are not scanned properly. Please send more legible copies so that we can process the application.
+  
+Best regards,
+${userName}`,
+    process: "Assessment",
+    category: "Email",
+    isInternal: false,
+    requiredParams: ["userName"],
+  },
 ];
 // Utility Functions
 export function renderTemplate(
