@@ -392,6 +392,20 @@ ${userName}`,
   category: "Email",
   isInternal: false,
   requiredParams: ["userName"]
+},
+{
+  title: "Refund follow up internal",
+  slug: "refund-follow-up-internal",
+  content: ({ userName }: TemplateParams) => `Dear team,
+
+Could you please provide an update on the refund application status for the above-mentioned student?
+
+Best regards,
+${userName}`,
+  process: "Refund",
+  category: "Email",
+  isInternal: true,
+  requiredParams: ["userName"]
 }
 ];
 // Utility Functions
