@@ -1,17 +1,19 @@
 <template>
   <UContainer v-if="template" class="py-8 max-w-4xl">
-    <UCard>
+    <UCard  :ui="{
+      divide: 'dark:divide-gray-700',
+      background: 'bg-gray-100 dark:bg-gray-800',
+    }">
       <template #header>
         <h1 class="text-2xl font-bold capitalize">{{ template.title }}</h1>
       </template>
-
       <pre
-        class="whitespace-pre-wrap font-sans dark:bg-gray-800 p-4 rounded-lg overflow-x-auto"
+        class="whitespace-pre-wrap font-sans p-4 rounded-lg overflow-x-auto"
         >{{ renderedContent }}</pre
       >
 
       <template #footer>
-        <div class="flex  justify-between items-center">
+        <div class="flex justify-between items-center">
           <div class="space-y-4 flex flex-col text-sm">
             <div>
               <UIcon name="i-heroicons-cog-6-tooth" class="mr-2" />
