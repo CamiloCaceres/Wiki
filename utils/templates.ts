@@ -253,6 +253,20 @@ ${userName}`,
     isInternal: true,
     requiredParams: ["userName"],
   },
+  {
+    title: "TULC request study plan - internal - email",
+    slug: "tulc-request-study-plan",
+    content: ({ courses, userName }: TemplateParams) => `Hi team,
+  
+This student requests an ELICOS package ${courses}. Please find attached the PTE certificate and if it's approved, kindly provide the study plan recommendation.
+  
+Best regards,
+${userName}`,
+    process: "Assessment",
+    category: "Email",
+    isInternal: true,
+    requiredParams: ["courses", "userName"],
+  },
 ];
 // Utility Functions
 export function renderTemplate(
