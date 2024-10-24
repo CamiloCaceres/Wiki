@@ -12,4 +12,30 @@ export type CoEHistory = {
     endDate: string;
     id?: string;
   };
-  
+  export interface FormState {
+    id: string;
+    academicTranscript: {
+      received: boolean;
+      certified: boolean;
+      meets: boolean;
+    };
+    english: {
+      received: boolean;
+      meets: boolean;
+    };
+    passport: {
+      received: boolean;
+      certified: boolean;
+    };
+    visaType: string;
+    visaExpiryDate: string;
+    gsr: {
+      formA: boolean;
+      formB: boolean;
+    };
+    finalDeclaration: boolean;
+    releaseCondition: boolean;
+    requestedCT: boolean;
+    visaHistory: VisaHistory[];
+    coeHistory: CoEHistory[];
+  }
