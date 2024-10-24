@@ -225,6 +225,8 @@ import NoteModal from "~/components/Modals/NoteModal.vue";
 // Constants
 const T4_START_DATE = new Date(2024, 10, 4); // November 4, 2024
 const T1_START_DATE = new Date(2025, 1, 17); // February 17, 2025
+const STORAGE_KEY = 'assessment-form-state';
+
 
 // Form state
 const formState = reactive<FormState>({
@@ -256,6 +258,38 @@ const formState = reactive<FormState>({
   visaHistory: [] as VisaHistory[],
   coeHistory: [] as CoEHistory[],
 });
+// Save form state to sessionStorage
+function saveFormState() {
+  try {
+    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(formState));
+    console.log('Form state saved to sessionStorage');
+  } catch (error) {
+    console.error('Error saving form state:', error);
+  }
+}
+
+// Load form state from sessionStorage
+function loadFormState() {
+  try {
+    const savedState = sessionStorage.getItem(STORAGE_KEY);
+    if (savedState) {
+      const parsedState = JSON.parse(savedState);
+      Object.assign(formState, parsedState);
+    }
+  } catch (error) {
+    console.error('Error loading form state:', error);
+  }
+}
+
+// Watch for changes in form state and save to sessionStorage
+watch(
+  formState,
+  () => {
+    saveFormState();
+  },
+  { deep: true }
+);
+
 
 // Computed properties
 const note = computed(() => generateNote(formState));
@@ -347,11 +381,13 @@ function resetForm() {
     requestedCT: false,
   });
   editableNote.value = note.value;
+  sessionStorage.removeItem(STORAGE_KEY);
 }
 
 // Lifecycle hooks
 onMounted(() => {
   formState.id = crypto.randomUUID();
+  loadFormState();
 });
 
 useHead({
