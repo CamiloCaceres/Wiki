@@ -7,7 +7,10 @@
       }"
     >
       <template #header>
-        <h1 class="text-2xl font-bold capitalize">{{ template.title }}</h1>
+        <div class="flex items-center justify-between">
+          <h1 class="text-2xl font-bold capitalize">{{ template.title }}</h1>
+          <UButton icon="i-heroicons-arrow-left" variant="outline" color="gray" @click="$router.back()">Back</UButton>
+        </div>
       </template>
 
       <pre
