@@ -14,6 +14,8 @@ export type CoEHistory = {
   };
   export interface FormState {
     id: string;
+    isOnshore: boolean;
+    isU18: boolean;
     academicTranscript: {
       received: boolean;
       certified: boolean;

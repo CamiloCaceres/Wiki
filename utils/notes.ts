@@ -29,7 +29,7 @@ function generateDocumentSection(formState: FormState): string {
 }
 
 function generateVisaSection(formState: FormState): string {
-  if (!formState.visaType) return '';
+  if (!formState.visaType || !formState.isOnshore) return '';
   
   return `---------------------    
 🛄 VISA INFORMATION:
@@ -56,6 +56,9 @@ Part B: ${formState.gsr.formB ? '✅ Accepted' : '⏳ Pending'}`
 
   if (formState.releaseCondition) {
     sections.push('❗ Requires approval to issue OL with release condition');
+  }
+  if(formState.isU18) {
+    sections.push('❗ Student is under 18');
   }
 
   return sections.join('\n\n');

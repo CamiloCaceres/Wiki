@@ -20,7 +20,7 @@
         class="mb-4"
       />
 
-      <UForm :state="formState" class="space-y-4 mt-2">
+      <UForm :state="formState" class="space-y-4 mt-2" v-auto-animate>
         <!-- Academic Transcript Section -->
         <div
           class="flex flex-col items-start gap-y-4 md:flex-row md:justify-between md:items-center border-b border-gray-200 pb-2"
@@ -111,7 +111,8 @@
         </div>
 
         <!-- Visa Section -->
-        <div
+        <div 
+          v-if="formState.isOnshore"
           class="flex flex-col items-start gap-y-4 md:flex-row md:justify-between md:items-center border-b border-gray-200 pb-2"
         >
           <h2 class="font-semibold text-lg">Visa</h2>
@@ -160,6 +161,10 @@
             <UCheckbox
               v-model="formState.releaseCondition"
               label="Release required"
+            />
+            <UCheckbox
+              v-model="formState.isU18"
+              label="Under 18"
             />
           </div>
         </div>
@@ -225,6 +230,7 @@ const T1_START_DATE = new Date(2025, 1, 17); // February 17, 2025
 const formState = reactive<FormState>({
   id: "",
   isOnshore: false,
+  isU18: false,
   academicTranscript: {
     received: false,
     certified: false,
