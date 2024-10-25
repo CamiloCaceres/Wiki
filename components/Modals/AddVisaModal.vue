@@ -1,24 +1,3 @@
-<script setup lang="ts">
-import type { VisaHistory } from "@/types/notes";
-const isOpen = ref(false);
-const props = defineProps<{
-  visaHistory: VisaHistory[];
-}>();
-
-const emit = defineEmits<{
-  (e: 'add-visa'): void;
-  (e: 'remove-visa', visa: VisaHistory): void;
-}>();
-
-const addVisaHistory = () => {
-  emit('add-visa');
-};
-
-const removeVisaHistory = (visa: VisaHistory) => {
-  emit('remove-visa', visa);
-};
-</script>
-
 <template>
     <UButton variant="outline" color="blue" icon="i-heroicons-plus" @click="isOpen = true">Add Visa</UButton>
   <UModal 
@@ -84,3 +63,25 @@ const removeVisaHistory = (visa: VisaHistory) => {
     </UCard>
   </UModal>
 </template>
+
+<script setup lang="ts">
+import type { VisaHistory } from "@/types/notes";
+const isOpen = ref(false);
+const props = defineProps<{
+  visaHistory: VisaHistory[];
+}>();
+
+const emit = defineEmits<{
+  (e: 'add-visa'): void;
+  (e: 'remove-visa', visa: VisaHistory): void;
+}>();
+
+const addVisaHistory = () => {
+  emit('add-visa');
+};
+
+const removeVisaHistory = (visa: VisaHistory) => {
+  emit('remove-visa', visa);
+};
+</script>
+

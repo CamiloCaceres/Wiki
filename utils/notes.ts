@@ -1,20 +1,26 @@
 // utils/noteUtils.ts
 
-import type { FormState, VisaHistory, CoEHistory } from '@/types/notes';
+import type {
+  FormState,
+  VisaHistory,
+  CoEHistory,
+  WorkHistory,
+  AcademicHistory,
+} from "@/types/notes";
 
 export function generateNote(formState: FormState): string {
   const sections = [
     generateDocumentSection(formState),
     generateVisaSection(formState),
     generateFormsSection(formState),
-    generateHistorySection(formState)
+    generateHistorySection(formState),
   ];
 
   return sections
     .filter(Boolean) // Remove empty sections
-    .join('\n\n')
+    .join("\n\n")
     .trim()
-    .replace(/^\s*[\r\n]/gm, '');
+    .replace(/^\s*[\r\n]/gm, "");
 }
 
 function generateDocumentSection(formState: FormState): string {
@@ -29,13 +35,13 @@ function generateDocumentSection(formState: FormState): string {
 }
 
 function generateVisaSection(formState: FormState): string {
-  if (!formState.visaType || !formState.isOnshore) return '';
-  
+  if (!formState.visaType || !formState.isOnshore) return "";
+
   return `---------------------    
 🛄 VISA INFORMATION:
 --------------------
 Type: ${formState.visaType}${
-    formState.visaExpiryDate ? `\nExpiry: ${formState.visaExpiryDate}` : ''
+    formState.visaExpiryDate ? `\nExpiry: ${formState.visaExpiryDate}` : ""
   }`;
 }
 
@@ -44,9 +50,9 @@ function generateFormsSection(formState: FormState): string {
     `---------------------    
 📝 FORMS AND DOCUMENTS:
 ----------------------
-Final Declaration: ${formState.finalDeclaration ? '✅ Received' : '⏳ Pending'}
-Part A: ${formState.gsr.formA ? '✅ Received' : '⏳ Awaiting'}
-Part B: ${formState.gsr.formB ? '✅ Accepted' : '⏳ Pending'}`
+Final Declaration: ${formState.finalDeclaration ? "✅ Received" : "⏳ Pending"}
+Part A: ${formState.gsr.formA ? "✅ Received" : "⏳ Awaiting"}
+Part B: ${formState.gsr.formB ? "✅ Accepted" : "⏳ Pending"}`,
   ];
 
   if (formState.requestedCT) {
@@ -55,13 +61,13 @@ Part B: ${formState.gsr.formB ? '✅ Accepted' : '⏳ Pending'}`
   }
 
   if (formState.releaseCondition) {
-    sections.push('❗ Requires approval to issue OL with release condition');
+    sections.push("❗ Requires approval to issue OL with release condition");
   }
-  if(formState.isU18) {
-    sections.push('❗ Student is under 18');
+  if (formState.isU18) {
+    sections.push("❗ Student is under 18");
   }
 
-  return sections.join('\n\n');
+  return sections.join("\n\n");
 }
 
 function generateHistorySection(formState: FormState): string {
@@ -76,7 +82,7 @@ ${formState.coeHistory
     (coe: CoEHistory) =>
       `${coe.course} at ${coe.institution} from ${coe.startDate} to ${coe.endDate}`
   )
-  .join('\n')}`);
+  .join("\n")}`);
   }
 
   if (formState.visaHistory.length > 0) {
@@ -85,13 +91,39 @@ ${formState.coeHistory
 ---------------------
 ${formState.visaHistory
   .map((visa: VisaHistory) => `Type: ${visa.type}, Expiry: ${visa.expiryDate}`)
-  .join('\n')}`);
+  .join("\n")}`);
+  }
+  if (formState.workHistory.length > 0) {
+    sections.push(`---------------------    
+💼 WORK HISTORY:
+---------------------
+${formState.workHistory
+  .map(
+    (work: WorkHistory) =>
+      `${work.company} - ${work.position} from ${work.startDate} to ${work.endDate}`
+  )
+  .join("\n")}`);
+  }
+  if (formState.academicHistory.length > 0) {
+    sections.push(`---------------------    
+📜 ACADEMIC HISTORY:
+---------------------
+${formState.academicHistory
+  .map(
+    (academic: AcademicHistory) =>
+      `${academic.course} at ${academic.institution} from ${academic.startDate} to ${academic.endDate}`
+  )
+  .join("\n")}`);
   }
 
-  return sections.join('\n\n');
+  return sections.join("\n\n");
 }
 
-function formatTranscriptStatus(transcript: { received: boolean; certified: boolean; meets: boolean }): string {
+function formatTranscriptStatus(transcript: {
+  received: boolean;
+  certified: boolean;
+  meets: boolean;
+}): string {
   return `${transcript.received ? "✅ Received" : "❌ Not Received"}${
     transcript.received
       ? `  ${transcript.certified ? "✅ Certified" : "❌ Not Certified"}  ${
@@ -101,7 +133,10 @@ function formatTranscriptStatus(transcript: { received: boolean; certified: bool
   }`;
 }
 
-function formatEnglishStatus(english: { received: boolean; meets: boolean }): string {
+function formatEnglishStatus(english: {
+  received: boolean;
+  meets: boolean;
+}): string {
   return `${english.received ? "✅ Received" : "❌ Not Received"}${
     english.received
       ? `  ${english.meets ? "✅ Meets" : "❌ Does not meet"}`
@@ -109,7 +144,10 @@ function formatEnglishStatus(english: { received: boolean; meets: boolean }): st
   }`;
 }
 
-function formatPassportStatus(passport: { received: boolean; certified: boolean }): string {
+function formatPassportStatus(passport: {
+  received: boolean;
+  certified: boolean;
+}): string {
   return `${passport.received ? "✅ Received" : "❌ Not Received"}${
     passport.received
       ? `  ${passport.certified ? "✅ Certified" : "❌ Not Certified"}`

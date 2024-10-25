@@ -1,21 +1,9 @@
-export type VisaHistory = {
-    type: string;
-    grantDate: string;
-    expiryDate: string;
-    id?: string;
-  };
-  
-export type CoEHistory = {
-    course: string;
-    institution: string;
-    startDate: string;
-    endDate: string;
-    id?: string;
-  };
+
   export interface FormState {
     id: string;
     isOnshore: boolean;
     isU18: boolean;
+    requestedOSHC: boolean;
     academicTranscript: {
       received: boolean;
       certified: boolean;
@@ -40,4 +28,34 @@ export type CoEHistory = {
     requestedCT: boolean;
     visaHistory: VisaHistory[];
     coeHistory: CoEHistory[];
+    workHistory: WorkHistory[];
+    academicHistory: AcademicHistory[];
   }
+  export type VisaHistory = {
+    type: string;
+    grantDate: string;
+    expiryDate: string;
+    id?: string;
+  };
+  
+export type CoEHistory = {
+    course: string;
+    institution: string;
+    startDate: string;
+    endDate: string;
+    id?: string;
+  };
+  export type AcademicHistory = {
+    course: string;
+    institution: string;
+    startDate: string;
+    endDate: string;
+    id?: string;
+  };
+  export type WorkHistory = {
+    company: string;
+    position?: string;
+    startDate: string;
+    endDate: string;
+    id?: string;
+  };
