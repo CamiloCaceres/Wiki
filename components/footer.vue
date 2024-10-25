@@ -11,7 +11,7 @@
             <a href="#" class="text-sm text-gray-600 hover:text-gray-800">Employee Portal</a>
           </div> -->
           <div class="text-xs text-gray-500">
-            App Version 1.0.1
+            App Version {{ version }}
           </div>
         </div>
       </div>
@@ -20,4 +20,5 @@
   
   <script setup>
   const currentYear = new Date().getFullYear();
-  </script>
+  const version = import.meta.env.VITE_APP_VERSION;
+</script>
