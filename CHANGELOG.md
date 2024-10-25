@@ -2,6 +2,16 @@
 
 ## 1.0.2 
 
+#### New Features
+- Added Onshore check to notes
+- Added Under 18 check to notes
+- Added Academic History section to notes
+- Added Work History section to notes
+- General UI changes in Notes page
+- Notes are now saved while the tab is opened 
+#### 🛑 WARNING: Use reset button to clear the note for every new application
+#### 💡 Tip: If you cannot see the changes, please refresh the page
+
 #### Bugfixes
 - Fixed the "Copy to Clipboard" button to copy edited notes
 
