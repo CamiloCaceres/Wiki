@@ -4,8 +4,11 @@
       <template #header>
         <div class="flex items-center justify-between">
           <h1 class="font-bold text-2xl mb-4">Notes</h1>
-          <UFormGroup :label="formState.isOnshore ? 'Onshore' : 'Offshore'" name="isOnshore">
-          <UToggle v-model="formState.isOnshore" color="green" />
+          <UFormGroup
+            :label="formState.isOnshore ? 'Onshore' : 'Offshore'"
+            name="isOnshore"
+          >
+            <UToggle v-model="formState.isOnshore" color="green" />
           </UFormGroup>
         </div>
       </template>
@@ -111,7 +114,7 @@
         </div>
 
         <!-- Visa Section -->
-        <div 
+        <div
           v-if="formState.isOnshore"
           class="flex flex-col items-start gap-y-4 md:flex-row md:justify-between md:items-center border-b border-gray-200 pb-2"
         >
@@ -133,14 +136,14 @@
           </div>
         </div>
 
-
-        
         <!-- Forms Section -->
         <div
           class="flex flex-col items-start gap-y-4 md:flex-row md:justify-between md:items-center border-b border-gray-200 py-2"
         >
           <h2 class="font-semibold text-lg">Forms</h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-2 w-full md:w-auto">
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-2 w-full md:w-auto"
+          >
             <UCheckbox v-model="formState.gsr.formA" label="GSR form part A" />
             <UCheckbox v-model="formState.gsr.formB" label="GSR form part B" />
             <UCheckbox
@@ -150,58 +153,77 @@
           </div>
         </div>
 
-        <!-- Others Section -->
-        <div
-          class="flex flex-col items-start gap-y-4 md:flex-row md:justify-between md:items-center border-b border-gray-200 py-2"
-        >
-          <h2 class="font-semibold text-lg">Others</h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-2 w-full md:w-auto">
-            <UCheckbox
-              v-model="formState.requestedCT"
-              label="Requested Credits"
-            />
-            <UCheckbox
-              v-model="formState.releaseCondition"
-              label="Release required"
-            />
-            <UCheckbox
-              v-model="formState.isU18"
-              label="Under 18"
-            />
-            <UCheckbox
-              v-model="formState.requestedOSHC"
-              label="Requested OSHC"
-            />
+        <!-- Toggle Section -->
+        <div v-auto-animate class="flex flex-col gap-4">
+          <div class="flex items-center justify-between">
+            <h1 class="font-semibold text-lg">Full Assessment</h1>
+            <UButton
+            
+              class="transition-all duration-300 w-28"
+              variant="outline"
+              square
+              color="gray"
+              :icon="showFullAssessment ? 'i-heroicons-chevron-up' : 'i-heroicons-chevron-down'"
+              @click="toggleFullAssessment"
+              >{{ showFullAssessment ? 'Show less' : 'Show all ' }}</UButton
+            >
           </div>
-        </div>
+          <div v-if="showFullAssessment">
+            <!-- Others Section -->
+            <div
+            class="flex flex-col items-start gap-y-4 md:flex-row md:justify-between md:items-center border-b border-gray-200 py-2"
+          >
+            <h2 class="font-semibold text-lg">Others</h2>
+            <div
+              class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-2 w-full md:w-auto"
+            >
+              <UCheckbox
+                v-model="formState.requestedCT"
+                label="Requested Credits"
+              />
+              <UCheckbox
+                v-model="formState.releaseCondition"
+                label="Release required"
+              />
+              <UCheckbox v-model="formState.isU18" label="Under 18" />
+              <UCheckbox
+                v-model="formState.requestedOSHC"
+                label="Requested OSHC"
+              />
+            </div>
+          </div>
 
-        <!-- Visa and CoE History Section -->
-        <div
-          class="flex flex-col items-start gap-y-4 md:flex-row md:justify-between md:items-center border-b border-gray-200 py-2"
-        >
-          <h2 class="font-semibold text-lg">Visa and CoE history</h2>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-2 w-full md:w-auto">
-            <AddVisaModal
-              :visa-history="formState.visaHistory"
-              @add-visa="addVisaHistory"
-              @remove-visa="removeVisaHistory"
-            />
+          <!-- Visa and CoE History Section -->
+          <div
+            class="flex flex-col items-start gap-y-4 md:flex-row md:justify-between md:items-center border-b border-gray-200 py-2"
+          >
+            <h2 class="font-semibold text-lg">Visa and CoE history</h2>
+            <div
+              class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-2 w-full md:w-auto"
+            >
+              <AddVisaModal
+                :visa-history="formState.visaHistory"
+                @add-visa="addVisaHistory"
+                @remove-visa="removeVisaHistory"
+              />
 
-            <AddCoeModal
-              :coe-history="formState.coeHistory"
-              @add-coe="addCoEHistory"
-              @remove-coe="removeCoEHistory"
-            />
-            <AddAcademicHistoryModal
-              :academic-history="formState.academicHistory"
-              @add-academic="addAcademicHistory"
-              @remove-academic="removeAcademicHistory"
-            />
-            <AddWorkHistoryModal
-              :work-history="formState.workHistory"
-              @add-work="addWorkHistory"
-              @remove-work="removeWorkHistory"
-            />
+              <AddCoeModal
+                :coe-history="formState.coeHistory"
+                @add-coe="addCoEHistory"
+                @remove-coe="removeCoEHistory"
+              />
+              <AddAcademicHistoryModal
+                :academic-history="formState.academicHistory"
+                @add-academic="addAcademicHistory"
+                @remove-academic="removeAcademicHistory"
+              />
+              <AddWorkHistoryModal
+                :work-history="formState.workHistory"
+                @add-work="addWorkHistory"
+                @remove-work="removeWorkHistory"
+              />
+            </div>
+          </div>
           </div>
         </div>
 
@@ -233,7 +255,13 @@
 <script setup lang="ts">
 import { useClipboard } from "@vueuse/core";
 import { ref, reactive, computed, watch, onMounted } from "vue";
-import type { VisaHistory, CoEHistory, FormState, WorkHistory, AcademicHistory } from "@/types/notes";
+import type {
+  VisaHistory,
+  CoEHistory,
+  FormState,
+  WorkHistory,
+  AcademicHistory,
+} from "@/types/notes";
 import AddVisaModal from "~/components/Modals/AddVisaModal.vue";
 import AddCoeModal from "~/components/Modals/AddCoeModal.vue";
 import NoteModal from "~/components/Modals/NoteModal.vue";
@@ -243,8 +271,7 @@ import AddWorkHistoryModal from "~/components/Modals/AddWorkHistoryModal.vue";
 // Constants
 const T4_START_DATE = new Date(2024, 10, 4); // November 4, 2024
 const T1_START_DATE = new Date(2025, 1, 17); // February 17, 2025
-const STORAGE_KEY = 'assessment-form-state';
-
+const STORAGE_KEY = "assessment-form-state";
 
 // Form state
 const formState = reactive<FormState>({
@@ -283,9 +310,9 @@ const formState = reactive<FormState>({
 function saveFormState() {
   try {
     sessionStorage.setItem(STORAGE_KEY, JSON.stringify(formState));
-    console.log('Form state saved to sessionStorage');
+    console.log("Form state saved to sessionStorage");
   } catch (error) {
-    console.error('Error saving form state:', error);
+    console.error("Error saving form state:", error);
   }
 }
 
@@ -298,7 +325,7 @@ function loadFormState() {
       Object.assign(formState, parsedState);
     }
   } catch (error) {
-    console.error('Error loading form state:', error);
+    console.error("Error loading form state:", error);
   }
 }
 
@@ -310,7 +337,6 @@ watch(
   },
   { deep: true }
 );
-
 
 // Computed properties
 const note = computed(() => generateNote(formState));
@@ -334,6 +360,12 @@ watch(
   },
   { immediate: true }
 );
+
+const showFullAssessment = ref(false);
+
+function toggleFullAssessment() {
+  showFullAssessment.value = !showFullAssessment.value;
+}
 
 function addVisaHistory() {
   formState.visaHistory.push({
@@ -383,7 +415,9 @@ function removeCoEHistory(coe: CoEHistory) {
 }
 
 function removeAcademicHistory(academic: AcademicHistory) {
-  formState.academicHistory = formState.academicHistory.filter((a) => a !== academic);
+  formState.academicHistory = formState.academicHistory.filter(
+    (a) => a !== academic
+  );
 }
 
 function removeWorkHistory(work: WorkHistory) {
