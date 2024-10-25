@@ -8,7 +8,7 @@ export function checkVisaExpiry(
       return { showAlert: false, messages: [] };
     }
   
-    const expiryDate = parseDate(visaExpiryDate);
+    const expiryDate = parseDate(visaExpiryDate.trim());
     if (!expiryDate) {
       return { showAlert: false, messages: [] };
     }
