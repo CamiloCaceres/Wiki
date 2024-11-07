@@ -80,6 +80,12 @@ export function usePocketbase() {
     }
   };
 
+  // notifications
+  const getAllNotifications = async () => {
+    const records = await pb.collection("notifications").getFullList();
+    return records;
+  };
+
   // others
   const getImageUrl = (item: any) => {
     if (item && item.image) {
@@ -98,5 +104,6 @@ export function usePocketbase() {
     searchStudylinkByKeyword,
     getAllProcedures,
     getProcedureBySlug,
+    getAllNotifications,
   };
 }

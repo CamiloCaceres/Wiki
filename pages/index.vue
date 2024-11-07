@@ -25,9 +25,14 @@
         </div>
       </section>
 
+      <!-- Notifications Section -->
+      <section>
+        <NotificationsList />
+      </section>
+
       <!-- Menu Items Section -->
       <section>
-        <h2 class="text-xl font-bold mb-4 text-gray-900 dark:text-white">Additional Resources</h2>
+        <h2 class="text-xl font-bold my-4 text-gray-900 dark:text-white">Additional Resources</h2>
         <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           <NuxtLink 
             v-for="item in menuItems" 
