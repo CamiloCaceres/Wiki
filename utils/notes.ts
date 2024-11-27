@@ -1,5 +1,3 @@
-// utils/noteUtils.ts
-
 import type {
   FormState,
   VisaHistory,
@@ -8,74 +6,92 @@ import type {
   AcademicHistory,
 } from "@/types/notes";
 
-export function generateNote(formState: FormState): string {
+interface FormatOptions {
+  useEmojis?: boolean;
+}
+
+export function generateNote(formState: FormState, options: FormatOptions = { useEmojis: true }): string {
   const sections = [
-    generateDocumentSection(formState),
-    generateVisaSection(formState),
-    generateFormsSection(formState),
-    generateHistorySection(formState),
+    generateDocumentSection(formState, options),
+    generateVisaSection(formState, options),
+    generateFormsSection(formState, options),
+    generateHistorySection(formState, options),
   ];
 
   return sections
-    .filter(Boolean) // Remove empty sections
+    .filter(Boolean)
     .join("\n\n")
     .trim()
     .replace(/^\s*[\r\n]/gm, "");
 }
 
-function generateDocumentSection(formState: FormState): string {
-  return `📋 STUDENT APPLICATION STATUS
+function generateDocumentSection(formState: FormState, { useEmojis }: FormatOptions): string {
+  const prefix = useEmojis ? "📋 " : "";
+  const docPrefix = useEmojis ? "📄 " : "";
+  const transcriptPrefix = useEmojis ? "📜 " : "";
+  const englishPrefix = useEmojis ? "🔤 " : "";
+  const passportPrefix = useEmojis ? "🛂 " : "";
+
+  return `${prefix}STUDENT APPLICATION STATUS
 ==============================
 
-📄 DOCUMENT CHECKLIST:
+${docPrefix}DOCUMENT CHECKLIST:
 ----------------------
-📜 Academic Transcript:  ${formatTranscriptStatus(formState.academicTranscript)}
-🔤 English Proficiency:  ${formatEnglishStatus(formState.english)}
-🛂 Passport:             ${formatPassportStatus(formState.passport)}`;
+${transcriptPrefix}Academic Transcript:  ${formatTranscriptStatus(formState.academicTranscript, { useEmojis })}
+${englishPrefix}English Proficiency:  ${formatEnglishStatus(formState.english, { useEmojis })}
+${passportPrefix}Passport:             ${formatPassportStatus(formState.passport, { useEmojis })}`;
 }
 
-function generateVisaSection(formState: FormState): string {
+function generateVisaSection(formState: FormState, { useEmojis }: FormatOptions): string {
   if (!formState.visaType || !formState.isOnshore) return "";
 
+  const prefix = useEmojis ? "🛄 " : "";
+
   return `---------------------    
-🛄 VISA INFORMATION:
+${prefix}VISA INFORMATION:
 --------------------
 Type: ${formState.visaType}${
     formState.visaExpiryDate ? `\nExpiry: ${formState.visaExpiryDate}` : ""
   }`;
 }
 
-function generateFormsSection(formState: FormState): string {
+function generateFormsSection(formState: FormState, { useEmojis }: FormatOptions): string {
+  const formPrefix = useEmojis ? "📝 " : "";
+  const warningPrefix = useEmojis ? "❗ " : "! ";
+  const creditPrefix = useEmojis ? "🟠 " : "";
+
   const sections = [
     `---------------------    
-📝 FORMS AND DOCUMENTS:
+${formPrefix}FORMS AND DOCUMENTS:
 ----------------------
-Final Declaration: ${formState.finalDeclaration ? "✅ Received" : "⏳ Pending"}
-Part A: ${formState.gsr.formA ? "✅ Received" : "⏳ Awaiting"}
-Part B: ${formState.gsr.formB ? "✅ Accepted" : "⏳ Pending"}`,
+Final Declaration: ${formatStatus(formState.finalDeclaration, { useEmojis })}
+Part A: ${formatStatus(formState.gsr.formA, { useEmojis })}
+Part B: ${formatStatus(formState.gsr.formB, { useEmojis })}`,
   ];
 
   if (formState.requestedCT) {
     sections.push(`---------------------    
-🟠 Requested Credits`);
+${creditPrefix}Requested Credits`);
   }
 
   if (formState.releaseCondition) {
-    sections.push("❗ Requires approval to issue OL with release condition");
+    sections.push(`${warningPrefix}Requires approval to issue OL with release condition`);
   }
   if (formState.isU18) {
-    sections.push("❗ Student is under 18");
+    sections.push(`${warningPrefix}Student is under 18`);
   }
 
   return sections.join("\n\n");
 }
 
-function generateHistorySection(formState: FormState): string {
+function generateHistorySection(formState: FormState, { useEmojis }: FormatOptions): string {
   const sections: string[] = [];
+  const historyPrefix = useEmojis ? "📜 " : "";
+  const workPrefix = useEmojis ? "💼 " : "";
 
   if (formState.coeHistory.length > 0) {
     sections.push(`---------------------    
-📜 COE HISTORY: 
+${historyPrefix}COE HISTORY: 
 ---------------------
 ${formState.coeHistory
   .map(
@@ -87,7 +103,7 @@ ${formState.coeHistory
 
   if (formState.visaHistory.length > 0) {
     sections.push(`---------------------    
-📜 VISA HISTORY:
+${historyPrefix}VISA HISTORY:
 ---------------------
 ${formState.visaHistory
   .map((visa: VisaHistory) => `Type: ${visa.type}, Expiry: ${visa.expiryDate}`)
@@ -95,7 +111,7 @@ ${formState.visaHistory
   }
   if (formState.workHistory.length > 0) {
     sections.push(`---------------------    
-💼 WORK HISTORY:
+${workPrefix}WORK HISTORY:
 ---------------------
 ${formState.workHistory
   .map(
@@ -106,7 +122,7 @@ ${formState.workHistory
   }
   if (formState.academicHistory.length > 0) {
     sections.push(`---------------------    
-📜 ACADEMIC HISTORY:
+${historyPrefix}ACADEMIC HISTORY:
 ---------------------
 ${formState.academicHistory
   .map(
@@ -119,38 +135,63 @@ ${formState.academicHistory
   return sections.join("\n\n");
 }
 
-function formatTranscriptStatus(transcript: {
-  received: boolean;
-  certified: boolean;
-  meets: boolean;
-}): string {
-  return `${transcript.received ? "✅ Received" : "❌ Not Received"}${
+function formatStatus(status: boolean, { useEmojis }: FormatOptions): string {
+  if (useEmojis) {
+    return status ? "✅ Received" : "⏳ Pending";
+  }
+  return status ? "[X] Received" : "[ ] Pending";
+}
+
+function formatTranscriptStatus(
+  transcript: {
+    received: boolean;
+    certified: boolean;
+    meets: boolean;
+  },
+  { useEmojis }: FormatOptions
+): string {
+  const check = useEmojis ? "✅" : "[X]";
+  const cross = useEmojis ? "❌" : "[ ]";
+
+  return `${transcript.received ? `${check} Received` : `${cross} Not Received`}${
     transcript.received
-      ? `  ${transcript.certified ? "✅ Certified" : "❌ Not Certified"}  ${
-          transcript.meets ? "✅ Meets" : "❌ Does not meet"
+      ? `  ${transcript.certified ? `${check} Certified` : `${cross} Not Certified`}  ${
+          transcript.meets ? `${check} Meets` : `${cross} Does not meet`
         }`
       : ""
   }`;
 }
 
-function formatEnglishStatus(english: {
-  received: boolean;
-  meets: boolean;
-}): string {
-  return `${english.received ? "✅ Received" : "❌ Not Received"}${
+function formatEnglishStatus(
+  english: {
+    received: boolean;
+    meets: boolean;
+  },
+  { useEmojis }: FormatOptions
+): string {
+  const check = useEmojis ? "✅" : "[X]";
+  const cross = useEmojis ? "❌" : "[ ]";
+
+  return `${english.received ? `${check} Received` : `${cross} Not Received`}${
     english.received
-      ? `  ${english.meets ? "✅ Meets" : "❌ Does not meet"}`
+      ? `  ${english.meets ? `${check} Meets` : `${cross} Does not meet`}`
       : ""
   }`;
 }
 
-function formatPassportStatus(passport: {
-  received: boolean;
-  certified: boolean;
-}): string {
-  return `${passport.received ? "✅ Received" : "❌ Not Received"}${
+function formatPassportStatus(
+  passport: {
+    received: boolean;
+    certified: boolean;
+  },
+  { useEmojis }: FormatOptions
+): string {
+  const check = useEmojis ? "✅" : "[X]";
+  const cross = useEmojis ? "❌" : "[ ]";
+
+  return `${passport.received ? `${check} Received` : `${cross} Not Received`}${
     passport.received
-      ? `  ${passport.certified ? "✅ Certified" : "❌ Not Certified"}`
+      ? `  ${passport.certified ? `${check} Certified` : `${cross} Not Certified`}`
       : ""
   }`;
 }

@@ -3,7 +3,10 @@
     <UCard class="px-4 dark:bg-gray-800">
       <template #header>
         <div class="flex items-center justify-between">
-          <h1 class="font-bold text-2xl mb-4">Notes</h1>
+          <div class="flex flex-col items-start gap-y-2">
+            <h1 class="font-bold text-2xl mb-4">Notes</h1>
+            <UCheckbox v-model="useEmojis" label="Use Emojis" />
+          </div>
           <UFormGroup
             :label="formState.isOnshore ? 'Onshore' : 'Offshore'"
             name="isOnshore"
@@ -339,7 +342,8 @@ watch(
 );
 
 // Computed properties
-const note = computed(() => generateNote(formState));
+const useEmojis = ref(true);
+const note = computed(() => generateNote(formState, { useEmojis: useEmojis.value }));
 
 const visaExpiryCheck = computed(() =>
   checkVisaExpiry(formState.visaExpiryDate, T4_START_DATE, T1_START_DATE)
