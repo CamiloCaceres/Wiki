@@ -3,7 +3,9 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   runtimeConfig: {
     public: {
-      pocketbaseUrl: process.env.POCKETBASE_URL
+      pocketbaseUrl: process.env.POCKETBASE_URL,
+      querySecretKey: process.env.QUERY_SECRET_KEY
+      
     }
   },
   modules: [

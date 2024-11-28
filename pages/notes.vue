@@ -380,14 +380,18 @@ function addVisaHistory() {
   });
 }
 
-function addCoEHistory() {
-  formState.coeHistory.push({
-    id: crypto.randomUUID(),
-    course: "",
-    institution: "",
-    startDate: "",
-    endDate: "",
-  });
+function addCoEHistory(coe?: CoEHistory) {
+  if (coe) {
+    formState.coeHistory.push(coe);
+  } else {
+    formState.coeHistory.push({
+      id: crypto.randomUUID(),
+      course: "",
+      institution: "",
+      startDate: "",
+      endDate: "",
+    });
+  }
 }
 
 function addAcademicHistory() {
