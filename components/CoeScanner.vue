@@ -30,6 +30,8 @@ const emit = defineEmits<{
   "scan-complete": [coeData: any]; // Type this based on your API response
 }>();
 
+const fastApiUrl = useRuntimeConfig().public.fastApiUrl;
+
 const uploadFile = async () => {
   if (!selectedFile.value) return;
 
@@ -37,7 +39,7 @@ const uploadFile = async () => {
   formData.append("file", selectedFile.value);
 
   try {
-    const data = await $fetch("http://localhost:8000/parse-coe", {
+    const data = await $fetch(`${fastApiUrl}/parse-coe`, {
       method: "POST",
       body: formData,
       query: { token: token },
