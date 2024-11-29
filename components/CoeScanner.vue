@@ -8,10 +8,10 @@
       <div
         ref="dropZoneRef"
         class="border-2 border-dashed border-gray-300 p-4 flex justify-center items-center gap-2"
-        :class="{ 'border-green-500 bg-green-50': isOverDropZone, 'border-blue-500 bg-blue-50': filesData.length > 0 }"
+        :class="{ 'border-green-500 bg-green-50 dark:bg-green-950': isOverDropZone, 'border-blue-500 bg-blue-50 dark:bg-blue-950': filesData.length > 0 }"
       >
         <div v-if="filesData.length > 0 && !isLoading" class="flex items-center justify-around gap-2 w-full">
-          <p>Files: {{ filesData.map((file) => file.name).join(", ") }}</p>
+          <p class="text-blue-700 dark:text-blue-300">Files: {{ filesData.map((file) => file.name).join(", ") }}</p>
 
           <!-- Reset Button -->
           <UButton

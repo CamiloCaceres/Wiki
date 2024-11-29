@@ -57,8 +57,9 @@
           icon="i-heroicons-plus"
           variant="outline"
           @click="addCoEHistory"
+          block
         >
-          Add CoE
+          Add CoE Manually
         </UButton>
       </div>
       <template #footer>
