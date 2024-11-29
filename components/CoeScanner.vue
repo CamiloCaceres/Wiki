@@ -132,7 +132,7 @@ async function uploadFile() {
   formData.append("file", selectedFile.value);
 
   try {
-    const data = await $fetch(`${fastApiUrl}/parse-coe`, {
+    const data = await $fetch(`${fastApiUrl}/extract/coe`, {
       method: "POST",
       body: formData,
       query: { token },
