@@ -10,7 +10,7 @@
         class="border-2 border-dashed border-gray-300 p-4 flex justify-center items-center gap-2"
         :class="{ 'border-green-500 bg-green-50': isOverDropZone, 'border-blue-500 bg-blue-50': filesData.length > 0 }"
       >
-        <div v-if="filesData.length > 0" class="flex items-center justify-around gap-2 w-full">
+        <div v-if="filesData.length > 0 && !isLoading" class="flex items-center justify-around gap-2 w-full">
           <p>Files: {{ filesData.map((file) => file.name).join(", ") }}</p>
 
           <!-- Reset Button -->
@@ -21,14 +21,15 @@
             @click="reset"
           />
         </div>
-        <UButton v-else color="blue" variant="link" @click="open">{{
+        <UButton v-else :loading="isLoading" color="blue" variant="link" @click="open">{{
           isOverDropZone ? "Drop it!" : "Select or drop your CoE"
         }}</UButton>
       </div>
 
       <!-- Submit Button -->
-      <UButton block @click="handleSubmit" :disabled="!selectedFile">
-        Scan CoE
+      <UButton block @click="handleSubmit" :disabled="!selectedFile" :loading="isLoading">
+        <span v-if="isLoading">Scanning...</span>
+        <span v-else>Scan CoE</span>
       </UButton>
     </div>
   </div>
@@ -52,6 +53,7 @@ const dropZoneRef = ref<HTMLDivElement>();
 const filesData = ref<FileData[]>([]);
 const selectedFile = ref<File | null>(null);
 const result = ref();
+const isLoading = ref(false);
 
 // Config
 const token = useRuntimeConfig().public.querySecretKey;
@@ -124,6 +126,8 @@ function reset() {
 async function uploadFile() {
   if (!selectedFile.value) return;
 
+  isLoading.value = true;
+
   const formData = new FormData();
   formData.append("file", selectedFile.value);
 
@@ -140,6 +144,8 @@ async function uploadFile() {
     emit("scan-complete", result.value);
   } catch (error) {
     console.error("Error uploading file:", error);
+  } finally {
+    isLoading.value = false;
   }
 }
 
