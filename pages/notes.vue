@@ -161,72 +161,75 @@
           <div class="flex items-center justify-between">
             <h1 class="font-semibold text-lg">Full Assessment</h1>
             <UButton
-            
               class="transition-all duration-300 w-28"
               variant="outline"
               square
               color="gray"
-              :icon="showFullAssessment ? 'i-heroicons-chevron-up' : 'i-heroicons-chevron-down'"
+              :icon="
+                showFullAssessment
+                  ? 'i-heroicons-chevron-up'
+                  : 'i-heroicons-chevron-down'
+              "
               @click="toggleFullAssessment"
-              >{{ showFullAssessment ? 'Show less' : 'Show all ' }}</UButton
+              >{{ showFullAssessment ? "Show less" : "Show all " }}</UButton
             >
           </div>
           <div v-if="showFullAssessment">
             <!-- Others Section -->
             <div
-            class="flex flex-col items-start gap-y-4 md:flex-row md:justify-between md:items-center border-b border-gray-200 py-2"
-          >
-            <h2 class="font-semibold text-lg">Others</h2>
-            <div
-              class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-2 w-full md:w-auto"
+              class="flex flex-col items-start gap-y-4 md:flex-row md:justify-between md:items-center border-b border-gray-200 py-2"
             >
-              <UCheckbox
-                v-model="formState.requestedCT"
-                label="Requested Credits"
-              />
-              <UCheckbox
-                v-model="formState.releaseCondition"
-                label="Release required"
-              />
-              <UCheckbox v-model="formState.isU18" label="Under 18" />
-              <UCheckbox
-                v-model="formState.requestedOSHC"
-                label="Requested OSHC"
-              />
+              <h2 class="font-semibold text-lg">Others</h2>
+              <div
+                class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-2 w-full md:w-auto"
+              >
+                <UCheckbox
+                  v-model="formState.requestedCT"
+                  label="Requested Credits"
+                />
+                <UCheckbox
+                  v-model="formState.releaseCondition"
+                  label="Release required"
+                />
+                <UCheckbox v-model="formState.isU18" label="Under 18" />
+                <UCheckbox
+                  v-model="formState.requestedOSHC"
+                  label="Requested OSHC"
+                />
+              </div>
             </div>
-          </div>
 
-          <!-- Visa and CoE History Section -->
-          <div
-            class="flex flex-col items-start gap-y-4 md:flex-row md:justify-between md:items-center border-b border-gray-200 py-2"
-          >
-            <h2 class="font-semibold text-lg">Visa and CoE history</h2>
+            <!-- Visa and CoE History Section -->
             <div
-              class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-2 w-full md:w-auto"
+              class="flex flex-col items-start gap-y-4 md:flex-row md:justify-between md:items-center border-b border-gray-200 py-2"
             >
-              <AddVisaModal
-                :visa-history="formState.visaHistory"
-                @add-visa="addVisaHistory"
-                @remove-visa="removeVisaHistory"
-              />
+              <h2 class="font-semibold text-lg">Visa and CoE history</h2>
+              <div
+                class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-2 w-full md:w-auto"
+              >
+                <AddVisaModal
+                  :visa-history="formState.visaHistory"
+                  @add-visa="addVisaHistory"
+                  @remove-visa="removeVisaHistory"
+                />
 
-              <AddCoeModal
-                :coe-history="formState.coeHistory"
-                @add-coe="addCoEHistory"
-                @remove-coe="removeCoEHistory"
-              />
-              <AddAcademicHistoryModal
-                :academic-history="formState.academicHistory"
-                @add-academic="addAcademicHistory"
-                @remove-academic="removeAcademicHistory"
-              />
-              <AddWorkHistoryModal
-                :work-history="formState.workHistory"
-                @add-work="addWorkHistory"
-                @remove-work="removeWorkHistory"
-              />
+                <AddCoeModal
+                  :coe-history="formState.coeHistory"
+                  @add-coe="addCoEHistory"
+                  @remove-coe="removeCoEHistory"
+                />
+                <AddAcademicHistoryModal
+                  :academic-history="formState.academicHistory"
+                  @add-academic="addAcademicHistory"
+                  @remove-academic="removeAcademicHistory"
+                />
+                <AddWorkHistoryModal
+                  :work-history="formState.workHistory"
+                  @add-work="addWorkHistory"
+                  @remove-work="removeWorkHistory"
+                />
+              </div>
             </div>
-          </div>
           </div>
         </div>
 
@@ -343,7 +346,9 @@ watch(
 
 // Computed properties
 const useEmojis = ref(true);
-const note = computed(() => generateNote(formState, { useEmojis: useEmojis.value }));
+const note = computed(() =>
+  generateNote(formState, { useEmojis: useEmojis.value })
+);
 
 const visaExpiryCheck = computed(() =>
   checkVisaExpiry(formState.visaExpiryDate, T4_START_DATE, T1_START_DATE)
@@ -371,13 +376,17 @@ function toggleFullAssessment() {
   showFullAssessment.value = !showFullAssessment.value;
 }
 
-function addVisaHistory() {
-  formState.visaHistory.push({
-    id: crypto.randomUUID(),
-    type: "",
-    expiryDate: "",
-    grantDate: "",
-  });
+function addVisaHistory(visa?: VisaHistory) {
+  if (visa) {
+    formState.visaHistory.push(visa);
+  } else {
+    formState.visaHistory.push({
+      id: crypto.randomUUID(),
+      type: "",
+      expiryDate: "",
+      grantDate: "",
+    });
+  }
 }
 
 function addCoEHistory(coe?: CoEHistory) {

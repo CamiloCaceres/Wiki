@@ -12,23 +12,19 @@
       <div>
         <div class="flex flex-col gap-2" v-auto-animate>
           <h2 class="font-bold text-lg">Visa history</h2>
+          <VisaScanner @scan-complete="handleScanComplete" />
           <div 
             v-for="visa in props.visaHistory" 
             :key="visa.id" 
             class="flex flex-col md:flex-row md:items-center md:gap-4"
           >
             <UFormGroup label="Visa type" name="visaType">
-              <USelect 
-                v-model="visa.type" 
-                :options="['500', '408', '485', '600', 'Other']" 
-              />
+              <UInput v-model="visa.type" type="text" />
             </UFormGroup>
             <UFormGroup label="Visa expiry date" name="visaExpiryDate">
               <UInput v-model="visa.expiryDate" type="text" />
             </UFormGroup>
-            <UFormGroup label="Visa grant date" name="visaGrantDate">
-              <UInput v-model="visa.grantDate" type="text" />
-            </UFormGroup>
+
             <UButton 
               class="self-end" 
               icon="i-heroicons-trash" 
@@ -71,17 +67,32 @@ const props = defineProps<{
   visaHistory: VisaHistory[];
 }>();
 
+const localVisaHistory = ref<VisaHistory[]>([]);
+
 const emit = defineEmits<{
-  (e: 'add-visa'): void;
+  (e: 'add-visa', visa: VisaHistory): void;
   (e: 'remove-visa', visa: VisaHistory): void;
 }>();
 
 const addVisaHistory = () => {
-  emit('add-visa');
+  emit('add-visa', {} as VisaHistory);
 };
 
 const removeVisaHistory = (visa: VisaHistory) => {
   emit('remove-visa', visa);
+};
+
+const handleScanComplete = (data: any) => {
+ 
+  const newVisa: VisaHistory = {
+    id: crypto.randomUUID(),
+    type: data.type ?? "",
+    expiryDate: data.expiry_date ?? "",
+    grantDate: data.grant_date ?? "",
+  };
+  localVisaHistory.value.push(newVisa);
+  emit("add-visa", newVisa);
+  console.log("Emitted new Visa:", newVisa); // Debug log
 };
 </script>
 
